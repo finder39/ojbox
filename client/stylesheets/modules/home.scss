@@ -1,0 +1,30 @@
+.home {
+    min-height: 672px;
+    background: url(icons/logo.svg);
+    background-repeat: no-repeat;
+    background-color: #d1c4e9;
+    background-attachment: fixed;
+    background-position: center;
+
+    form {
+        // center horizontally
+        width: 100%;
+        text-align: center;
+
+        // center vertically
+        height: 10rem;
+        margin: auto;
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+
+        input {
+            font-size: 20px;
+        }
+        button {
+            font-size: 20px;
+        }
+    }
+}
