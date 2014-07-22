@@ -8,6 +8,8 @@ iron-router
 accounts-ui
 accounts-password
 blaze-layout
-collection2
 jquery
 fast-render
+iron-router-progress
+collection2
+streams

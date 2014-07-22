@@ -1,0 +1,144 @@
+.settings {
+    $cancel-button-color: #ff5722;
+    $accept-button-color: $base-accent-color;
+
+    .settings-header {
+        background-color: $base-accent-color;
+        color: $base-background-color;
+        text-align: center;
+        padding: .5rem 0 .5rem 0;
+        margin-bottom: 2rem;
+        font-weight: normal;
+        box-shadow: rem(0.5) rem(0.5) rem(2) $medium-gray;
+    }
+    .settings-form {
+        h4 {
+            margin-bottom: 1rem;
+        }
+        form {
+            box-shadow: rem(0.5) rem(0.5) rem(2) $medium-gray;
+            margin-left: auto;
+            margin-right: auto;
+            @include media($medium-screen-up) {
+                max-width: $medium-screen;
+            }
+            #changePassword {
+                width: 100%;
+                margin: 0;
+                background-color: $base-background-color;
+                color: $medium-gray;
+                border: rem(1.5) solid $base-background-color;
+                &:hover {
+                    color: $base-background-color;
+                    background-color: $med-light-gray;
+                    border: rem(1.5) solid $medium-gray;
+                }
+            }
+            .change-section {
+                display: none;
+                #cancelPassword {
+                    background-color: $cancel-button-color;
+
+                    &:hover {
+                        background-color: darken($cancel-button-color, 15);
+                    }
+                }
+            }
+        }
+    }
+
+    .modal { // overlay
+        $modal-padding: 3em;
+        $modal-background: $base-background-color;
+
+        @include position(fixed, 0px 0px 0px 0px);
+        background: rgba(0,0,0, .85);
+        text-align: left;
+
+        .modal-inner {
+            border-radius: $base-border-radius;
+            background: $modal-background;
+            margin: auto;
+            max-height: 95%;
+            position: relative;
+            overflow: auto;
+            width: 95%;
+            padding: $modal-padding / 2;
+            margin-top: .6em;
+
+            @include media($medium-screen) {
+                padding: $modal-padding;
+                width: 60%;
+                max-height: 60%;
+                margin-top: 10em;
+            }
+
+            @include media($large-screen) {
+                width: 50%;
+                margin-top: 10em;
+            }
+
+            h1 {
+                color: $base-font-color;
+                margin-bottom: .5em;
+                text-align: left;
+                text-transform: capitalize;
+            }
+
+            p {
+                max-width: 100% !important;
+                padding: 0;
+            }
+
+            .error {
+                color: $error-color;
+                font-weight: bold;
+                display: none;
+            }
+
+            .forgot-password {
+                color: $base-link-color;
+                margin-bottom: rem(10);
+                &:hover {
+                    cursor: pointer;
+                }
+            }
+            .reset-password-form {
+                display: none;
+                button {
+                    border: rem(1) solid darken($notice-color, 15);
+                    margin: 0 0 1rem 0;
+                    background-color: $notice-color;
+                    &:hover {
+                        background-color: darken($notice-color, 15);
+                    }
+                }
+            }
+
+            .modal-form {
+                .error-border {
+                    border-color: $error-color;
+                    &:focus {
+                        border-color: $error-color;
+                        box-shadow: 0 0 rem(5) $error-color;
+                    }
+                }
+                .buttonrow {
+                    @include outer-container;
+                    button[type=submit] {
+                        @include span-columns(6);
+                        margin-left: 0;
+                    }
+                    button[type=button] {
+                        background-color: $cancel-button-color;
+                        @include span-columns(6);
+
+                        &:hover {
+                            background-color: darken($cancel-button-color, 15);
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

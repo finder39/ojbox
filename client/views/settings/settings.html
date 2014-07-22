@@ -1,5 +1,50 @@
 <template name="settings">
-  <div>
-    Something here!
+  <div class="settings">
+    {{#if authorized}}
+      <h1 class="settings-header">Configure Jukebox</h1>
+      {{> settingsForm}}
+    {{else}}
+      {{> settingsModal}}
+    {{/if}}
+  </div>
+</template>
+
+<template name="settingsForm">
+  <div class="settings-form">
+    <form>
+      <fieldset>
+        <h4>Password Settings</h4>
+        <button id="changePassword" type="button">{{passwordText}}</button>
+        <div class="change-section">
+          <label>Please enter a password that will be used to access this settings page
+            <input type="PASSWORD" placeholder="Password" />
+          </label>
+          <button id="savePassword" type="submit">Save Password</button>
+          <button id="cancelPassword" type="button">Cancel</button>
+        </div>
+      </fieldset>
+    </form>
+  </div>
+</template>
+
+<template name="settingsModal">
+  <div class="modal">
+    <div class="modal-inner">
+      <h1>Password Required</h1>
+      <p class="body">A password is required to access this page.</p>
+      <p class="error">Incorrect password.</p>
+      <p class="forgot-password">{{forgotPassword}}</p>
+      <form class="reset-password-form">
+        <label>Are you sure? If you're not the one who set the password, you may make some enemies in the office by resetting this!</label>
+        <button>Reset Password</button>
+      </form>
+      <form class="modal-form">
+        <input autofocus type="PASSWORD" placeholder="Password" />
+        <div class="buttonrow">
+          <button type="submit">Accept</button>
+          <button type="button">Cancel</button>
+        </div>
+      </form>
+    </div>
   </div>
 </template>

@@ -1,7 +1,9 @@
 {
   "packages": {
     "iron-router": {},
+    "fast-render": {},
+    "iron-router-progress": {},
     "collection2": {},
-    "fast-render": {}
+    "streams": {}
   }
 }
