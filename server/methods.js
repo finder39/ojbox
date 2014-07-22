@@ -1,6 +1,9 @@
 Meteor.methods({
   checkSettingsPassword: function(password) {
     check(password, String);
+    if (!Settings.findOne()) {
+      return false;
+    }
     if (password === Settings.findOne().password) {
       return true;
     } else {
@@ -8,7 +11,7 @@ Meteor.methods({
     }
   },
   updateSettingsPassword: function(newPass) {
-    return Settings.update(
+    return Settings.upsert(
       {},
       {$set: {password: newPass}}
     );
