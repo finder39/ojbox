@@ -13,7 +13,7 @@
     }
     .settings-form {
         h4 {
-            margin-bottom: 1rem;
+            margin-bottom: 1.5rem;
         }
         form {
             margin-left: auto;
@@ -47,78 +47,86 @@
                 }
             }
 
-            .label-switch {
-                $switch-width: rem(52);
-                $switch-padding: rem(2);
-                $switch-height: rem(32);
-                $switch-radius: $switch-height;
-                $knob-height: $switch-height - ($switch-padding * 2);
-                $knob-width: $knob-height;
-                $knob-radius: $switch-height - ($switch-padding * 2);
-
-                align-self: center;
-                border-radius: $switch-radius;
-                cursor: pointer;
-                display: inline-block;
-                height: $switch-height;
-                position: relative;
-                vertical-align: middle;
-                width: $switch-width;
-                @include box-sizing(border-box);
-
-                input[type="checkbox"] {
+            .player-setting {
+                margin-bottom: 1rem;
+                .saved {
                     display: none;
+                    color: $success-color;
+                    font-weight: bold;
+                }
+                .label-switch {
+                    $switch-width: rem(55);
+                    $switch-padding: rem(2);
+                    $switch-height: rem(30);
+                    $switch-radius: $switch-height;
+                    $knob-height: $switch-height - ($switch-padding * 2);
+                    $knob-width: $knob-height;
+                    $knob-radius: $switch-height - ($switch-padding * 2);
 
-                    + .checkbox {
-                        background: #e5e5e5;
-                        border: none;
-                        border-radius: $switch-radius;
-                        cursor: pointer;
-                        height: $switch-height;
-                        margin: 0;
-                        padding: 0;
-                        position: relative;
-                        width: $switch-width;
-                        z-index: 0;
-                        @include box-sizing(border-box);
-                        @include transition(all 0.3s ease);
+                    align-self: center;
+                    border-radius: $switch-radius;
+                    cursor: pointer;
+                    display: inline-block;
+                    height: $switch-height;
+                    position: relative;
+                    vertical-align: middle;
+                    width: $switch-width;
+                    @include box-sizing(border-box);
 
-                        &:before {
-                            background: white;
-                            border-radius: $switch-radius;
-                            content: ' ';
-                            height: $knob-radius;
-                            width: $switch-width - ($switch-padding * 2);
-                            z-index: 1;
-                            @include box-sizing(border-box);
-                            @include position(absolute, 2px 0 0 2px);
-                            @include transition(all 0.3s ease);
-                            @include transform(scale(1));
-                        }
+                    input[type="checkbox"] {
+                        display: none;
 
-                        &:after {
-                            background: white;
-                            border-radius: $knob-radius;
-                            content: ' ';
-                            height: $knob-height;
-                            width: $knob-width;
-                            z-index: 2;
-                            box-shadow: 0 2px 5px rgba(0,0,0,0.4);
-                            @include position(absolute, 2px 0 0 2px);
-                            @include transition(all 0.3s ease);
-                        }
-                    }
-
-                    &:checked {
                         + .checkbox {
-                            background: $success-color;
+                            background: #e5e5e5;
+                            border: none;
+                            border-radius: $switch-radius;
+                            cursor: pointer;
+                            height: $switch-height;
+                            margin: 0;
+                            padding: 0;
+                            position: relative;
+                            width: $switch-width;
+                            z-index: 0;
+                            @include box-sizing(border-box);
+                            @include transition(all 0.3s ease);
 
                             &:before {
-                                @include transform(scale(0));
+                                background: white;
+                                border-radius: $switch-radius;
+                                content: ' ';
+                                height: $knob-radius;
+                                width: $switch-width - ($switch-padding * 2);
+                                z-index: 1;
+                                @include box-sizing(border-box);
+                                @include position(absolute, 2px 0 0 2px);
+                                @include transition(all 0.3s ease);
+                                @include transform(scale(1));
                             }
 
                             &:after {
-                                left: $switch-width - $knob-width - ($switch-padding);
+                                background: white;
+                                border-radius: $knob-radius;
+                                content: ' ';
+                                height: $knob-height;
+                                width: $knob-width;
+                                z-index: 2;
+                                box-shadow: 0 2px 5px rgba(0,0,0,0.4);
+                                @include position(absolute, 2px 0 0 2px);
+                                @include transition(all 0.3s ease);
+                            }
+                        }
+
+                        &:checked {
+                            + .checkbox {
+                                background: $success-color;
+
+                                &:before {
+                                    @include transform(scale(0));
+                                }
+
+                                &:after {
+                                    left: $switch-width - $knob-width - ($switch-padding);
+                                }
                             }
                         }
                     }

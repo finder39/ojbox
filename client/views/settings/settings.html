@@ -25,16 +25,33 @@
       </fieldset>
       <fieldset>
         <h4>Player Settings</h4>
-        <label>Show who added the song to the playlist</label>
-        <label class="label-switch show-who-added">
-          <input type="checkbox" />
-          <div class="checkbox"></div>
-        </label>
-        <label>Enable a song to be voted off</label>
-        <label class="label-switch able-to-vote-off">
-          <input type="checkbox" />
-          <div class="checkbox"></div>
-        </label>
+        <div class="player-setting show-who-added">
+          <label>Show who added the song to the playlist</label>
+          <p>Switch this on to show the name of the user who added the song next to the song's name.</p>
+          <label class="label-switch">
+            <input type="checkbox" {{showWhoAddedCheckbox}} />
+            <div class="checkbox"></div>
+          </label>
+          <p class="saved">Saved.</p>
+        </div>
+        <div class="player-setting downvotes">
+          <label>Enable down votes</label>
+          <p>If enabled, songs in the playlist can be voted both up and down.</p>
+          <label class="label-switch">
+            <input type="checkbox" {{downvotesCheckbox}} />
+            <div class="checkbox"></div>
+          </label>
+          <p class="saved">Saved.</p>
+        </div>
+        <div class="player-setting able-to-vote-off">
+          <label>Enable a song to be voted off</label>
+          <p>If switched on, a song may be voted off the playlist completely if all users vote a song down. Enabling this option will also enable down votes.</p>
+          <label class="label-switch">
+            <input type="checkbox" {{ableToVoteOffCheckbox}} />
+            <div class="checkbox"></div>
+          </label>
+          <p class="saved">Saved.</p>
+        </div>
       </fieldset>
     </form>
   </div>

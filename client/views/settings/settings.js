@@ -92,6 +92,33 @@ Template.settingsForm.helpers({
     } else {
       return "Change password";
     }
+  },
+  showWhoAddedCheckbox: function() {
+    var setting = Settings.findOne();
+    if (setting) {
+      if (setting.showWhoAdded && setting.showWhoAdded === 1) {
+        return "checked";
+      }
+    }
+    return "";
+  },
+  downvotesCheckbox: function() {
+    var setting = Settings.findOne();
+    if (setting) {
+      if (setting.downvotesAllowed && setting.downvotesAllowed === 1) {
+        return "checked";
+      }
+    }
+    return "";
+  },
+  ableToVoteOffCheckbox: function() {
+    var setting = Settings.findOne();
+    if (setting) {
+      if (setting.ableToVoteOff && setting.ableToVoteOff === 1) {
+        return "checked";
+      }
+    }
+    return "";
   }
 });
 
@@ -121,5 +148,80 @@ Template.settingsForm.events({
       $(".change-section").slideUp(300);
       $("#changePassword").slideDown(600);
     });
-  }
+  },
+  "change .show-who-added input[type=checkbox]": function(event) {
+    event.preventDefault();
+    console.log("show who added changed");
+    var checkbox = $(".show-who-added input[type=checkbox]");
+    var checked = checkbox.prop("checked");
+    var setting = Settings.findOne();
+    if (setting) {
+      if (checked) {
+        Settings.update(setting._id, {$set: {showWhoAdded: 1}});
+      } else {
+        Settings.update(setting._id, {$set: {showWhoAdded: 0}});
+      }
+    } else {
+      if (checked) {
+        Settings.insert({showWhoAdded: 0});
+      } else {
+        Settings.insert({showWhoAdded: 0});
+      }
+    }
+    var saved = $(".show-who-added .saved");
+    saved.fadeIn();
+    Meteor.setTimeout(function() {
+      saved.fadeOut();
+    }, 2000);
+  },
+  "change .downvotes input[type=checkbox]": function(event) {
+    event.preventDefault();
+    console.log("downvotes changed");
+    var checkbox = $(".downvotes input[type=checkbox]");
+    var checked = checkbox.prop("checked");
+    var setting = Settings.findOne();
+    if (setting) {
+      if (checked) {
+        Settings.update(setting._id, {$set: {downvotesAllowed: 1}});
+      } else {
+        Settings.update(setting._id, {$set: {downvotesAllowed: 0}});
+      }
+    } else {
+      if (checked) {
+        Settings.insert({downvotesAllowed: 0});
+      } else {
+        Settings.insert({downvotesAllowed: 0});
+      }
+    }
+    var saved = $(".downvotes .saved");
+    saved.fadeIn();
+    Meteor.setTimeout(function() {
+      saved.fadeOut();
+    }, 2000);
+  },
+  "change .able-to-vote-off input[type=checkbox]": function(event) {
+    event.preventDefault();
+    console.log("able to vote off changed");
+    var checkbox = $(".able-to-vote-off input[type=checkbox]");
+    var checked = checkbox.prop("checked");
+    var setting = Settings.findOne();
+    if (setting) {
+      if (checked) {
+        Settings.update(setting._id, {$set: {ableToVoteOff: 1}});
+      } else {
+        Settings.update(setting._id, {$set: {ableToVoteOff: 0}});
+      }
+    } else {
+      if (checked) {
+        Settings.insert({ableToVoteOff: 0});
+      } else {
+        Settings.insert({ableToVoteOff: 0});
+      }
+    }
+    var saved = $(".able-to-vote-off .saved");
+    saved.fadeIn();
+    Meteor.setTimeout(function() {
+      saved.fadeOut();
+    }, 2000);
+  },
 })
