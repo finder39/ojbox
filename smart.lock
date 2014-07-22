@@ -6,7 +6,8 @@
       "fast-render": {},
       "iron-router-progress": {},
       "collection2": {},
-      "streams": {}
+      "streams": {},
+      "crypto": {}
     },
     "packages": {
       "iron-router": {
@@ -34,6 +35,11 @@
         "tag": "v0.1.17",
         "commit": "9fcbbc9b7bf542827babc92089c19e730892a22f"
       },
+      "crypto": {
+        "git": "https://github.com/peerlibrary/meteor-crypto.git",
+        "tag": "v0.1.1",
+        "commit": "9e7e7096c45bb4de46a62d61d497a23198de463a"
+      },
       "blaze-layout": {
         "git": "https://github.com/EventedMind/blaze-layout.git",
         "tag": "v0.2.4",
@@ -43,6 +49,21 @@
         "git": "https://github.com/aldeed/meteor-simple-schema.git",
         "tag": "v0.6.0",
         "commit": "418ec496612fb2afc853e342f0d2269b6674a2fe"
+      },
+      "assert": {
+        "git": "https://github.com/peerlibrary/meteor-assert.git",
+        "tag": "v0.2.4",
+        "commit": "e81fb4ac29a621eafbd99e63660048a3c827c0fb"
+      },
+      "async": {
+        "git": "https://github.com/peerlibrary/meteor-async.git",
+        "tag": "v0.9.0-1",
+        "commit": "419ddf9711474738cddc6fa3c086a0875be3a5d1"
+      },
+      "blob": {
+        "git": "https://github.com/peerlibrary/meteor-blob.git",
+        "tag": "v0.1.1",
+        "commit": "59d4545bc73325987f4efc6ab74f995da8b2014c"
       }
     }
   }
