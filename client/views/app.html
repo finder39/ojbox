@@ -1,0 +1,7 @@
+<template name="app">
+  {{#if currentUser}}
+    <div>user is logged in!</div>
+  {{else}}
+    {{> login}}
+  {{/if}}
+</template>
