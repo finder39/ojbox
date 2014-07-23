@@ -13,4 +13,5 @@ fast-render
 iron-router-progress
 collection2
 streams
-crypto
+appcache
+user-status
