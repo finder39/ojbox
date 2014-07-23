@@ -10,3 +10,4 @@ Votable queue playlist with songs that can gain priority.
 - Have settings page be a slide out menu instead of it’s own page
 - Home page
 - Player page
+- Make it into a single page app

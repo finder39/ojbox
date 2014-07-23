@@ -178,7 +178,14 @@ Template.settingsForm.events({
     event.preventDefault();
     console.log("downvotes changed");
     var checkbox = $(".downvotes input[type=checkbox]");
+    var ableToVoteOffCheckbox = $(".able-to-vote-off input[type=checkbox]");
     var checked = checkbox.prop("checked");
+    var ableToVoteOffChecked = ableToVoteOffCheckbox.prop("checked");
+    // if turned off, must turn voting off
+    if (!checked && ableToVoteOffChecked) {
+      ableToVoteOffCheckbox.prop("checked", false);
+      ableToVoteOffCheckbox.trigger("change");
+    }
     var setting = Settings.findOne();
     if (setting) {
       if (checked) {
@@ -203,7 +210,14 @@ Template.settingsForm.events({
     event.preventDefault();
     console.log("able to vote off changed");
     var checkbox = $(".able-to-vote-off input[type=checkbox]");
+    var downvoteCheckbox = $(".downvotes input[type=checkbox]");
     var checked = checkbox.prop("checked");
+    var downvoteChecked = downvoteCheckbox.prop("checked");
+    // if turned on, must turn on downvotes too
+    if (checked && !downvoteChecked) {
+      downvoteCheckbox.prop("checked", true);
+      downvoteCheckbox.trigger("change");
+    }
     var setting = Settings.findOne();
     if (setting) {
       if (checked) {

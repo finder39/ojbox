@@ -10,21 +10,27 @@
         // center horizontally
         width: 100%;
         text-align: center;
+        @include media($medium-screen-up) {
+            max-width: $medium-screen;
+        }
+        padding: 0 2rem 0 2rem;
 
         // center vertically
         height: 10rem;
         margin: auto;
-        position: absolute;
+        position: fixed;
         top: 0;
         left: 0;
         right: 0;
         bottom: 0;
 
         input {
-            font-size: 20px;
+            @include span-columns(8);
+            font-size: rem(20);
         }
         button {
-            font-size: 20px;
+            @include span-columns(4);
+            font-size: rem(20);
         }
     }
 }
