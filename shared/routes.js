@@ -1,14 +1,10 @@
 Router.map(function() {
   // home template will be returned for all routes
-  this.route('home', {
+  this.route('app', {
     path: '*',
     waitOn: function() {
-      console.log("home waiton");
+      console.log("app waiton");
       return Meteor.subscribe("settings");
-    },
-    data: function() {
-      console.log("home data");
-      return Settings.findOne();
     },
     onBeforeAction: function() {
       console.log("home onbeforeaction");
