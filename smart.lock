@@ -5,7 +5,6 @@
       "iron-router": {},
       "fast-render": {},
       "iron-router-progress": {},
-      "collection2": {},
       "streams": {},
       "user-status": {}
     },
@@ -25,11 +24,6 @@
         "tag": "v0.4.1",
         "commit": "496fcda9a6ec352b4733725f60c6f280250c3541"
       },
-      "collection2": {
-        "git": "https://github.com/aldeed/meteor-collection2.git",
-        "tag": "v0.4.2",
-        "commit": "4ff4b707bec8be434919730bf101325adb215444"
-      },
       "streams": {
         "git": "https://github.com/arunoda/meteor-streams.git",
         "tag": "v0.1.17",
@@ -44,11 +38,6 @@
         "git": "https://github.com/EventedMind/blaze-layout.git",
         "tag": "v0.2.4",
         "commit": "b40e9b0612329288d75cf52ad14a7da64bb8618f"
-      },
-      "simple-schema": {
-        "git": "https://github.com/aldeed/meteor-simple-schema.git",
-        "tag": "v0.6.0",
-        "commit": "418ec496612fb2afc853e342f0d2269b6674a2fe"
       },
       "timesync": {
         "git": "https://github.com/mizzao/meteor-timesync.git",

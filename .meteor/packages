@@ -5,13 +5,12 @@
 
 standard-app-packages
 iron-router
-accounts-ui
-accounts-password
 blaze-layout
 jquery
 fast-render
 iron-router-progress
-collection2
 streams
 appcache
 user-status
+accounts-base
+accounts-password

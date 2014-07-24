@@ -3,9 +3,9 @@ Playlist = new Meteor.Collection("playlist");
 CurrentSong = new Meteor.Collection("currentSong");
 
 // initial setup
-if (Settings.findOne()) {
+if (!Settings.findOne()) {
   Settings.insert({
-    jukeboxPlayerId: 0,
+    playerId: 0,
   });
 }
 

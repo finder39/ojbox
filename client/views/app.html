@@ -1,6 +1,10 @@
 <template name="app">
   {{#if currentUser}}
-    <div>user is logged in!</div>
+    {{#if playerIsSetup}}
+      {{> player}}
+    {{else}}
+      {{> playerSetup}}
+    {{/if}}
   {{else}}
     {{> login}}
   {{/if}}
