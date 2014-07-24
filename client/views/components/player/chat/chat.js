@@ -2,10 +2,10 @@ Chat = new Meteor.Stream("chat");
 ChatCollection = new Meteor.Collection(null);
 
 Chat.on("chat", function(message, username) {
-  console.log(message + " " + username);
   ChatCollection.insert({
     username: username,
-    message: message
+    message: message,
+    time: moment().format("H:mm")
   });
 });
 
@@ -21,11 +21,21 @@ Template.chat.events({
 
     var user = Meteor.users.findOne(Meteor.userId());
     var message = $(".chat form input");
-  ChatCollection.insert({
-    username: user.username,
-    message: message.val()
-  });
-    Chat.emit("chat", message.val());
-    message.val("");
+    // don't do anything if the message is empty
+    if (message.val()) {
+      ChatCollection.insert({
+        username: user.username,
+        message: message.val(),
+        time: moment().format("H:mm")
+      });
+      Chat.emit("chat", message.val());
+      message.val("");
+    }
   }
 });
+
+Template.chatMessage.helpers({
+  "relativeTime": function() {
+    return moment(this.time).fromNow();
+  }
+})
