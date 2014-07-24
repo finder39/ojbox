@@ -3,11 +3,9 @@
 Votable queue playlist with songs that can gain priority.
 
 ## Todo
-- Add color theme to settings
-- Tooltips on settings
-- Encrypt password
-- Have initial setup be it’s own page, instead of just forwarding to the settings page
-- Have settings page be a slide out menu instead of it’s own page
-- Home page
 - Player page
-- Make it into a single page app
+- Connect a music streaming service API
+- Possible future features:
+** Color theme
+** Settings page, for who knows what settings
+** Ability to toggle sound on/off from different clients
