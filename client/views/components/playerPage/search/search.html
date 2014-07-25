@@ -1,0 +1,14 @@
+<template name="search">
+  <div class="search">
+    <form>
+      <input type="text" placeholder="Search for a song" />
+    </form>
+    <div class="search-results">
+      <ul>
+        {{#each instantResults}}
+        <li>{{title}}</li>
+        {{/each}}
+      </ul>
+    </div>
+  </div>
+</template>
