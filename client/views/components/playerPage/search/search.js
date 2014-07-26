@@ -4,20 +4,27 @@ var waitForSearchResults = false;
 // keypresses happen on keys that don't matter
 var oldQuery = "";
 
+// limit results and instant results
+var maxResults = 20;
+var maxInstantResults = 5;
+
 InstantResults = new Meteor.Collection(null);
 
-var renderInstantResults = function(tracks, query) {
-  // clear the collection
+var processSearchResults = function(tracks, query) {
+  // clear the instant results
   InstantResults.remove({});
+  var count = 0;
   _.each(tracks, function(value, key, list) {
-    if (value.streamable) {
+    if (value.streamable && count < maxInstantResults) {
+      count++;
       InstantResults.insert({
-        title: value.title
+        title: value.title,
+        uri: value.uri.substring(value.uri.indexOf("tracks"))
       });
     }
   });
-  // highlight the search results
-  $(".search-results ul").highlight(query.split());
+  // highlight the instant search results
+  $(".search-results ul").highlight(query.split(" "));
   // allow searching api again
   waitForSearchResults = false;
 }
@@ -28,11 +35,15 @@ var getInstantResults = function(event) {
     oldQuery = query;
     waitForSearchResults = true;
     SC.get("/tracks", {
-      limit: 10,
+      limit: maxResults,
       q: query,
+      // there is a bug in the soundcloud api where the filter option
+      // is ignored when there is a query option. i'm including it
+      // anyway so when it's fixed it'll work
+      filter: {streamable: true},
       duration: {from: 60000, to: 900000}
     }, function(tracks) {
-      renderInstantResults(tracks, query);
+      processSearchResults(tracks, query);
     });
   }
 }
