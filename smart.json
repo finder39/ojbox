@@ -4,6 +4,7 @@
     "fast-render": {},
     "iron-router-progress": {},
     "streams": {},
-    "user-status": {}
+    "user-status": {},
+    "highlight": {}
   }
 }

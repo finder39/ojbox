@@ -6,7 +6,8 @@
       "fast-render": {},
       "iron-router-progress": {},
       "streams": {},
-      "user-status": {}
+      "user-status": {},
+      "highlight": {}
     },
     "packages": {
       "iron-router": {
@@ -33,6 +34,11 @@
         "git": "https://github.com/mizzao/meteor-user-status.git",
         "tag": "v0.6.0",
         "commit": "dba80d742522ac104f2155f1db852922e4249f96"
+      },
+      "highlight": {
+        "git": "https://github.com/apendua/meteor-highlight.git",
+        "tag": "v0.0.1",
+        "commit": "6001457c2982a97cf850c4bbb374ac2840a6ce82"
       },
       "blaze-layout": {
         "git": "https://github.com/EventedMind/blaze-layout.git",
