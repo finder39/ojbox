@@ -9,18 +9,28 @@ var maxResults = 20;
 var maxInstantResults = 5;
 
 InstantResults = new Meteor.Collection(null);
+SearchResults = new Meteor.Collection(null);
 
 var processSearchResults = function(tracks, query) {
-  // clear the instant results
+  // clear the results
+  SearchResults.remove({});
   InstantResults.remove({});
   var count = 0;
   _.each(tracks, function(value, key, list) {
-    if (value.streamable && count < maxInstantResults) {
+    if (value.streamable) {
       count++;
-      InstantResults.insert({
-        title: value.title,
-        uri: value.uri.substring(value.uri.indexOf("tracks"))
-      });
+      // all results
+        SearchResults.insert({
+          title: value.title,
+          uri: value.uri.substring(value.uri.indexOf("tracks"))
+        });
+      // instant results
+      if (count < maxInstantResults) {
+        InstantResults.insert({
+          title: value.title,
+          uri: value.uri.substring(value.uri.indexOf("tracks"))
+        });
+      }
     }
   });
   // highlight the instant search results
@@ -57,4 +67,7 @@ Template.search.helpers({
   instantResults: function() {
     return InstantResults.find();
   },
+  searchResults: function() {
+    return SearchResults.find();
+  }
 });
