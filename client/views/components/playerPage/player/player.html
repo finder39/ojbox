@@ -1,5 +1,28 @@
 <template name="player">
   <div class="player">
-    player!
+    <h1>Player</h1>
+    {{#if mainPlayer}}
+      {{> advancedPlayer}}
+    {{else}}
+      {{> regularPlayer}}
+    {{/if}}
+  </div>
+</template>
+
+<template name="advancedPlayer">
+  {{loadStreaming}}
+  <div class="advancedPlayer">
+    <div class="seek-bar"></div>
+    <div class="seek-time"></div>
+    <div class="player-controls">
+      <i class="fa fa-play playpause"></i>
+      <i class="fa fa-fast-forward"></i>
+    </div>
+  </div>
+</template>
+
+<template name="regularPlayer">
+  <div class="regularPlayer">
+     regular player
   </div>
 </template>

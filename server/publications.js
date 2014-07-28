@@ -1,6 +1,12 @@
 Meteor.publish("settings", function() {
   return Settings.find({}, {limit: 1});
 });
+Meteor.publish("playlist", function() {
+  return Playlist.find();
+});
+Meteor.publish("currentSong", function() {
+  return CurrentSong.find();
+});
 
 // Streams
 Chat = new Meteor.Stream("chat");

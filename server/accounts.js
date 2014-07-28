@@ -30,3 +30,13 @@ UserStatus.events.on("connectionLogout", function(fields) {
     });
   }
 });
+// on a connection login, check whether the player is still active.
+// a page reload may have happened
+UserStatus.events.on("connectionLogin", function(fields) {
+  var settings = Settings.findOne();
+  if (!UserStatus.connections.findOne({_id: settings.playerId})) {
+    Settings.update(settings._id, {
+      $set: {playerId: 0}
+    });
+  }
+});

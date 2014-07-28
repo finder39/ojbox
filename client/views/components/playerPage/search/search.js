@@ -17,24 +17,27 @@ var processSearchResults = function(tracks, query) {
   InstantResults.remove({});
   var count = 0;
   _.each(tracks, function(value, key, list) {
+    // todo: put in addedBy, addedAt
+    // and also update the user collection, incrementing playlistTime with
+    // the duration of the song added
     if (value.streamable) {
       count++;
       // all results
         SearchResults.insert({
           title: value.title,
-          uri: value.uri.substring(value.uri.indexOf("tracks"))
+          uri: value.uri.substring(value.uri.indexOf("/tracks"))
         });
       // instant results
-      if (count < maxInstantResults) {
+      if (count <= maxInstantResults) {
         InstantResults.insert({
           title: value.title,
-          uri: value.uri.substring(value.uri.indexOf("tracks"))
+          uri: value.uri.substring(value.uri.indexOf("/tracks"))
         });
       }
     }
   });
   // highlight the instant search results
-  $(".search-results ul").highlight(query.split(" "));
+  $(".instant-search-results ul").highlight(query.split(" "));
   // allow searching api again
   waitForSearchResults = false;
 }
@@ -59,8 +62,25 @@ var getInstantResults = function(event) {
 }
 
 Template.search.events({
-  // make sure the api call only fires once the user is dnoe typing
-  "keyup .search form input": _.debounce(getInstantResults, 250)
+  // make sure the api call only fires once the user is done typing
+  "keyup .search form input": _.debounce(getInstantResults, 250),
+  "click .add-to-playlist": function(event) {
+    // todo: only add to playlist if it's not in playlist already.
+    // if it is in the playlist, then vote it up once
+    // also, check who is adding it so they don't vote it up
+    // by adding it a bunch of times
+    // todo: put in order, upvotes, downvotes
+    // this means figuring out where to insert the song into the list
+    console.log(this);
+    Playlist.insert({
+      title: this.title,
+      uri: this.uri,
+      addedByUsername: Meteor.users.findOne(Meteor.userId, {
+        fields: {username: 1}
+      }),
+      addedByUserId: Meteor.userId
+    });
+  }
 });
 
 Template.search.helpers({

@@ -1,12 +1,22 @@
 <template name="search">
   <div class="search">
+    <h1>Search</h1>
     <form>
       <input type="text" placeholder="Search for a song" />
     </form>
-    <div class="search-results">
+    <h2>Instant Search Results</h2>
+    <div class="instant-search-results">
       <ul>
         {{#each instantResults}}
           <li>{{title}}</li>
+        {{/each}}
+      </ul>
+    </div>
+    <h2>Search Results</h2>
+    <div class="search-results">
+      <ul>
+        {{#each searchResults}}
+          <li>{{title}} <a class="add-to-playlist">add to playlist</a></li>
         {{/each}}
       </ul>
     </div>

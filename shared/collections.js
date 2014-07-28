@@ -35,7 +35,7 @@ Playlist.allow({
 
 CurrentSong.allow({
   'insert': function(userId, doc) {
-    return false;
+    return true;
   },
   'update': function(userId, doc, fieldNames, modifier) {
     return true;
