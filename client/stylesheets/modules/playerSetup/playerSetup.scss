@@ -1,0 +1,14 @@
+.player-setup {
+    @include outer-container;
+    text-align: center;
+    h1 {
+        margin: 3rem 0 2rem 0;
+    }
+    p {
+        font-size: rem(18);
+    }
+    button {
+        margin-top: 1rem;
+        font-size: rem(20);
+    }
+}
