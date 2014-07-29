@@ -1,0 +1,50 @@
+.player-page {
+
+}
+.top-bar {
+    $top-bar-padding: rem(16);
+    $top-bar-background: $base-accent-color;
+    $top-bar-height: rem(64);
+    $top-bar-height-mobile: rem(56);
+    $horizontal-bar-mode: $large-screen;
+
+    position: fixed;
+    background-color: $top-bar-background;
+    box-shadow: .05rem .05rem .2rem black;
+    height: $top-bar-height-mobile;
+    width: 100%;
+    z-index: 999;
+    padding: rem(16);
+
+    @include media($medium-screen-up) {
+        height: $top-bar-height;
+    }
+
+
+    // Search icon
+    i {
+        color: $base-background-color;
+        text-shadow: .05rem .05rem .2rem $dark-gray;
+        position: relative;
+        &:hover {
+            cursor: pointer;
+        }
+    }
+    .search-icon {
+        float: right;
+    }
+    .i-mobile {
+        margin-top: rem(2);
+        display: inline-block;
+        @include media($medium-screen-up) {
+            display: none;
+        }
+    }
+    .i-tablet-up {
+        display: none;
+        @include media($medium-screen-up) {
+            display: inline-block;
+        }
+    }
+}
+

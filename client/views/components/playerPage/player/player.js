@@ -12,21 +12,25 @@ Template.player.helpers({
 });
 
 Template.player.events({
-  "click .playpause": function(event) {
+  "click .fa-play": function(event) {
     if (!_.isObject(currentSong)) {
       return;
     }
     console.log(currentSong);
-    var playpause = $(".playpause");
-    if (playpause.hasClass('fa-play')) {
+    var playpause = $(".fa-play");
       currentSong.play();
       playpause.removeClass('fa-play');
       playpause.addClass('fa-pause');
-    } else {
-      currentSong.pause();
-      playpause.removeClass('fa-pause');
-      playpause.addClass('fa-play');
+  },
+  "click .fa-pause": function(event) {
+    if (!_.isObject(currentSong)) {
+      return;
     }
+    console.log(currentSong);
+    var playpause = $(".fa-pause");
+    currentSong.pause();
+    playpause.removeClass('fa-pause');
+    playpause.addClass('fa-play');
   },
   "click .fa-fast-forward": function(event) {
     if (!_.isObject(currentSong)) {

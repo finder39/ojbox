@@ -1,6 +1,5 @@
 <template name="player">
   <div class="player">
-    <h1>Player</h1>
     {{#if mainPlayer}}
       {{> advancedPlayer}}
     {{else}}
@@ -15,14 +14,21 @@
     <div class="seek-bar"></div>
     <div class="seek-time"></div>
     <div class="player-controls">
-      <i class="fa fa-play playpause"></i>
-      <i class="fa fa-fast-forward"></i>
+      <i class="fa fa-play fa-fw fa-lg i-mobile"></i>
+      <i class="fa fa-play fa-fw fa-2x i-tablet-up"></i>
+      <i class="fa fa-fast-forward fa-lg i-mobile"></i>
+      <i class="fa fa-fast-forward fa-2x i-tablet-up"></i>
     </div>
   </div>
 </template>
 
 <template name="regularPlayer">
   <div class="regularPlayer">
-     regular player
+    <div class="seek-bar"></div>
+    <div class="seek-time"></div>
+    <div class="player-controls">
+      <i class="fa fa-play playpause fa-fw fa-lg i-mobile"></i>
+      <i class="fa fa-play playpause fa-fw fa-2x i-tablet-up"></i>
+    </div>
   </div>
 </template>

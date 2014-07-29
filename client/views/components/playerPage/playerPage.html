@@ -1,6 +1,18 @@
 <template name="playerPage">
-  {{> chat}}
-  {{> search}}
-  {{> player}}
-  {{> playlist}}
+  <div class="player-page">
+    {{> topBar}}
+    {{> playlist}}
+    {{> search}}
+    {{> chat}}
+  </div>
+</template>
+
+<template name="topBar">
+  <header class="top-bar">
+    {{> player}}
+    <div class="search-icon">
+      <i class="fa fa-search fa-lg i-mobile"></i>
+      <i class="fa fa-search fa-2x i-tablet-up"></i>
+    </div>
+  </header>
 </template>

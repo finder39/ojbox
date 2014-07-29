@@ -3,8 +3,8 @@
 Votable queue playlist with songs that can gain priority.
 
 ## Todo
-- Player page
-- Connect a music streaming service API
+- Add Youtube API support
+- Add Spotify API support (this will require Spotify Premium)
 
 ## Possible future features
 - Color theme
