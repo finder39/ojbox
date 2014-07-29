@@ -7,44 +7,477 @@
     $top-bar-height: rem(64);
     $top-bar-height-mobile: rem(56);
     $horizontal-bar-mode: $large-screen;
+    $flip-transition-time: 0.5s;
 
+    display: inline;
     position: fixed;
     background-color: $top-bar-background;
     box-shadow: .05rem .05rem .2rem black;
     height: $top-bar-height-mobile;
     width: 100%;
-    z-index: 999;
-    padding: rem(16);
+    padding: $top-bar-padding;
 
-    @include media($medium-screen-up) {
-        height: $top-bar-height;
+    // left side contains the player
+    .left-side {
+        position: relative;
+        float: left;
+        display: inline-block;
     }
 
-
-    // Search icon
-    i {
-        color: $base-background-color;
-        text-shadow: .05rem .05rem .2rem $dark-gray;
+    // right side contains icons for chat, playlist, search
+    .right-side {
         position: relative;
+        float: right;
+        display: inline-block;
+        ul {
+            display: inline;
+            li {
+                display: inline-block;
+            }
+
+            // tabs
+            li.tab {
+                border-bottom: rem(3) solid $base-accent-color;
+                // pushes the border to the bottom of the bar
+                padding-bottom: rem(13);
+                &:hover {
+                    cursor: pointer;
+                    border-color: darken($base-secondary-color, 20);
+                }
+                @include media($medium-screen-up) {
+                    display: none;
+                }
+                &.selected {
+                    border-color: $base-secondary-color;
+                }
+            }
+        }
+    }
+
+    // Icons
+    i {
+        color: $base-secondary-color;
+        text-shadow: .05rem .05rem .2rem $dark-gray;
         &:hover {
             cursor: pointer;
         }
     }
+
     .search-icon {
-        float: right;
+        padding-left: $top-bar-padding;
+        &:hover {
+            cursor: pointer;
+        }
+        .not-flipped {
+            @include transform(rotateY(0deg));
+            @include transform-origin(center top);
+            @include transform-style(preserve-3d);
+            @include transition-property(transform);
+            @include transition-duration($flip-transition-time);
+            @include transition-timing-function(linear);
+        }
+        .flipped {
+            @include transform(rotateY(180deg));
+            @include transform-origin(center top);
+            @include transform-style(preserve-3d);
+            @include transition-property(transform);
+            @include transition-duration($flip-transition-time);
+            @include transition-timing-function(linear);
+        }
     }
-    .i-mobile {
-        margin-top: rem(2);
+}
+header.navigation {
+  $navigation-padding: 1em;
+  $navigation-background: $dark-gray;
+  $navigation-color: transparentize(white, 0.3);
+  $navigation-color-hover: white;
+  $navigation-height: 60px;
+  $navigation-nav-button-background: $base-accent-color;
+  $navigation-nav-button-background-hover: lighten($navigation-background, 10);
+  $navigation-nav-button-border: 1px solid lighten($navigation-nav-button-background, 20);
+  $navigation-search-background: lighten($navigation-background, 5);
+  $navigation-search-border: 1px solid darken($navigation-background, 5);
+  $navigation-active-link-color: transparentize(white, 0.5);
+  $navigation-submenu-padding: 1em;
+  $navigation-submenu-width: 12em;
+  $horizontal-bar-mode: $large-screen;
+
+  background-color: $navigation-background;
+  border-bottom: 1px solid darken($navigation-background, 10);
+  height: $navigation-height;
+  width: 100%;
+  z-index: 999;
+  position: fixed;
+
+  .navigation-wrapper {
+    @include clearfix;
+    @include outer-container;
+    max-width: none;
+    position: relative;
+    z-index: 9999;
+  }
+
+  .logo {
+    float: left;
+    max-height: $navigation-height;
+    padding-left: $navigation-padding;
+    padding-right: 2em;
+
+    i {
+      max-height: $navigation-height;
+      padding: rem(20) 0;
+    }
+  }
+
+  // Mobile view
+
+  .navigation-menu-button {
+    color: $navigation-color;
+    display: block;
+    float: right;
+    font-family: $sans-serif;
+    font-weight: 700;
+    line-height: $navigation-height;
+    margin: 0;
+    padding-right: 1em;
+    text-transform: uppercase;
+
+    @include media ($horizontal-bar-mode) {
+      display: none;
+    }
+
+    &:hover {
+      color: $navigation-color-hover;
+    }
+  }
+
+  // Nav menu
+
+  .nav {
+    z-index: 9999999;
+      float: left;
+  }
+
+  ul#navigation-menu {
+    -webkit-transform-style: preserve-3d; // stop webkit flicker
+    clear: both;
+    display: inline;
+    margin: 0 auto;
+    overflow: visible;
+    padding: 0;
+    width: 100%;
+    z-index: 9999;
+
+    @include media ($horizontal-bar-mode) {
+      display: inline;
+      margin: 0;
+      padding: 0;
+    }
+  }
+
+  // The nav items
+
+  ul li {
+    background: $navigation-background;
+    display: inline;
+    line-height: $navigation-height;
+    overflow: hidden;
+    padding-right: .8em;
+    text-align: right;
+    width: 100%;
+    z-index: 9999;
+
+    @include media ($horizontal-bar-mode) {
+      background: transparent;
+      display: inline;
+      line-height: $navigation-height;
+      text-decoration: none;
+      width: auto;
+    }
+
+    a {
+      color: $navigation-color;
+      display: inline-block;
+      font-weight: 400;
+
+      @include media ($horizontal-bar-mode) {
+        padding-right: 1em;
+      }
+
+      &:hover {
+        color: $navigation-color-hover;
+      }
+    }
+  }
+
+  .active-nav-item a {
+    border-bottom: 1px solid $navigation-active-link-color;
+    padding-bottom: 3px;
+  }
+
+  // Sub menus
+
+  li.more.nav-link {
+    > ul > li:first-child a  {
+      padding-top: 1em;
+    }
+
+    a {
+      margin-right: $navigation-submenu-padding;
+    }
+
+    > a {
+      padding-right: 0.6em;
+    }
+
+    > a:after {
+      @include position(absolute, auto -.4em auto auto);
+      content: '\25BE';
+      color: $navigation-color;
+    }
+  }
+
+  li.more {
+    overflow: visible;
+    padding-right: 0;
+
+    a {
+      padding-right: .8em;
+    }
+
+    > a {
+      padding-right: 1.6em;
+      position: relative;
+
+      @include media($large-screen) {
+        margin-right: $navigation-submenu-padding;
+      }
+
+      &:after {
+        content: '⟩';
+        position: absolute;
+        right: $navigation-submenu-padding / 2;
+      }
+    }
+
+    &:hover > .submenu {
+      display: block;
+    }
+
+    @include media($horizontal-bar-mode) {
+      padding-right: .8em;
+      position: relative;
+    }
+  }
+
+  ul.submenu {
+    display: none;
+    padding-left: 0;
+
+    @include media($horizontal-bar-mode) {
+      left: -$navigation-submenu-padding;
+      position: absolute;
+      top: 1.5em;
+    }
+
+    .submenu {
+      @include media($horizontal-bar-mode) {
+        left: $navigation-submenu-width - .2em;
+        top: 0;
+      }
+    }
+
+    li {
+      display: block;
+      padding-right: 0;
+
+      @include media($horizontal-bar-mode) {
+        line-height: $navigation-height / 1.3;
+
+        &:first-child > a {
+          border-top-left-radius: $base-border-radius;
+          border-top-right-radius: $base-border-radius;
+        }
+
+        &:last-child > a {
+          border-bottom-left-radius: $base-border-radius;
+          border-bottom-right-radius: $base-border-radius;
+          padding-bottom: .7em;
+        }
+      }
+
+      a {
+        background-color: darken($navigation-background, 3);
         display: inline-block;
-        @include media($medium-screen-up) {
-            display: none;
+        text-align: right;
+        width: 100%;
+
+        @include media($horizontal-bar-mode) {
+          background-color: $navigation-background;
+          padding-left: $navigation-submenu-padding;
+          text-align: left;
+          width: $navigation-submenu-width;
+        }
+      }
+    }
+  }
+
+  // Elements on the far right
+
+  .navigation-tools {
+    @include clearfix;
+    display: block;
+    padding-right: $navigation-padding;
+    padding-left: $navigation-padding/2;
+    clear: both;
+    background: #505050;
+
+    @include media($large-screen) {
+      background: transparent;
+      float: right;
+      clear: none;
+    }
+  }
+
+  a.sign-up {
+    margin-top: 1.2em;
+    float: right;
+    @include transition (all 0.2s ease-in-out);
+    display: inline;
+    background: $navigation-nav-button-background;
+    border-radius: $base-border-radius;
+    color: white;
+    font-size: .8em;
+    font-weight: 800;
+    text-transform: uppercase;
+    padding: .4em .5em;
+
+    @include media($large-screen) {
+      padding: .5em 1em;
+    }
+
+    &:hover {
+      background: lighten($navigation-nav-button-background, 10);
+    }
+  }
+
+  // Search bar
+
+  .search-bar {
+    $search-bar-border-color: $base-border-color;
+    $search-bar-border: 1px solid $search-bar-border-color;
+    $search-bar-background: lighten($search-bar-border-color, 10);
+
+    float: left;
+    .search-and-submit {
+      position: relative;
+      color: white;
+      ul {
+          @include clearfix;
+      }
+      li {
+          @include media($medium-screen-up) {
+              display: inline-block;
+          }
+      }
+
+      input[type=search] {
+        background: $navigation-search-background;
+        border: $navigation-search-border;
+        padding: .6em .8em;
+        font-size: .9em;
+        font-style: italic;
+        color: $navigation-color;
+        border-radius: $base-border-radius * 2;
+        margin: 0;
+
+        @include media($large-screen) {
+          width: 100%;
+        }
+      }
+
+      button[type=submit] {
+        @include button(simple, lighten($navigation-search-background, 10));
+        position: absolute;
+        top: 0.3em;
+        right: 0.3em;
+        bottom: 0.3em;
+        left: auto;
+        outline: none;
+        padding: 0 15px;
+
+        img {
+          height: 12px;
+          opacity: .7;
+        }
+      }
+    }
+
+    @include media($horizontal-bar-mode) {
+      width: 16em;
+      position: relative;
+      display: inline-block;
+
+      input {
+        @include box-sizing(border-box);
+        display: block;
+      }
+    }
+  }
+}
+
+.accordion-tabs {
+    li.tab-header-and-content {
+        display: inline;
+    }
+
+    li.tab-header-and-content a.tab-link {
+        color: $base-background-color;
+        display: inline-block;
+        border-bottom: rem(2) solid $dark-gray;
+
+        &:hover {
+            color: $base-link-color;
+            border-color: lighten($base-secondary-color, 15);
+        }
+
+        &.is-active {
+            border-color: $base-secondary-color;
         }
     }
-    .i-tablet-up {
-        display: none;
-        @include media($medium-screen-up) {
-            display: inline-block;
-        }
-    }
+
+}
+
+.progress-bar-indication {
+  $progress-meter-color: $base-accent-color;
+  $progress-background: darken($base-secondary-color, 5);
+  $progress-color: white;
+
+  background-color: $progress-background;
+  box-shadow: inset 0 0 3px 0 rgba(darken($progress-background, 50%), 0.15);
+  border-radius: $base-border-radius;
+  margin: 0 auto;
+  width: 100%;
+
+  > span.meter {
+    @include box-sizing(border-box);
+    background-color: $progress-meter-color;
+    background-size: 40px 40px;
+    background-repeat: repeat-x;
+    border-radius: $base-border-radius /1.5;
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+    display: block;
+    height: 100%;
+    width: 60%;
+  }
+
+  p {
+    margin-bottom: 0;
+    padding: .1em .5em;
+    font-weight: 800;
+    color: $progress-color;
+    text-shadow: 0 0 1px black;
+  }
 }
 

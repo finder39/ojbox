@@ -1,3 +1,32 @@
 .player {
-    float: left;
+    $seek-bar-color: $amber;
+    $progress-bar-color: $base-background-color;
+    $seek-bar-height: rem(24);
+    $seek-bar-width: rem(130);
+
+    display: inline;
+    li {
+        display: inline-block;
+    }
+
+    .seek-bar {
+        &:hover {
+            cursor: pointer;
+        }
+        width: $seek-bar-width;
+        height: $seek-bar-height;
+        background-repeat: repeat-x;
+        background-color: $seek-bar-color;
+        .progress-bar {
+            display: block;
+            width: 0%;
+            height: 100%;
+            background-color: $progress-bar-color;
+        }
+    }
+    .song-time {
+        text-align: center;
+        width:$seek-bar-width;
+        color: $base-accent-color;
+    }
 }

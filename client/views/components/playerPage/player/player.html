@@ -1,34 +1,25 @@
 <template name="player">
-  <div class="player">
+  <ul class="player">
     {{#if mainPlayer}}
-      {{> advancedPlayer}}
-    {{else}}
-      {{> regularPlayer}}
+      {{loadStreaming}}
     {{/if}}
-  </div>
-</template>
-
-<template name="advancedPlayer">
-  {{loadStreaming}}
-  <div class="advancedPlayer">
-    <div class="seek-bar"></div>
-    <div class="seek-time"></div>
-    <div class="player-controls">
+    <li class="playpause">
       <i class="fa fa-play fa-fw fa-lg i-mobile"></i>
-      <i class="fa fa-play fa-fw fa-2x i-tablet-up"></i>
-      <i class="fa fa-fast-forward fa-lg i-mobile"></i>
-      <i class="fa fa-fast-forward fa-2x i-tablet-up"></i>
-    </div>
-  </div>
-</template>
-
-<template name="regularPlayer">
-  <div class="regularPlayer">
-    <div class="seek-bar"></div>
-    <div class="seek-time"></div>
-    <div class="player-controls">
-      <i class="fa fa-play playpause fa-fw fa-lg i-mobile"></i>
-      <i class="fa fa-play playpause fa-fw fa-2x i-tablet-up"></i>
-    </div>
-  </div>
+    </li>
+    <li>
+      <div class="seek-bar">
+        <span class="progress-bar">
+          <p class="song-time">0:00</p>
+        </span>
+      </div>
+    </li>
+    {{#if mainPlayer}}
+      <li>
+        <i class="fa fa-fw fa-fast-forward fa-lg i-mobile"></i>
+      </li>
+    {{/if}}
+    <li class="vendor-icon">
+      <i class="fa fa-soundcloud fa-fw fa-lg i-mobile"></i>
+    </li>
+  </ul>
 </template>

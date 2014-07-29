@@ -43,7 +43,7 @@ var processSearchResults = function(tracks, query) {
 }
 
 var getInstantResults = function(event) {
-  var query = $(".search form input").val().trim();
+  var query = $(".search input[type=search]").val().trim();
   if (query && !waitForSearchResults && query != oldQuery) {
     oldQuery = query;
     waitForSearchResults = true;
@@ -63,7 +63,7 @@ var getInstantResults = function(event) {
 
 Template.search.events({
   // make sure the api call only fires once the user is done typing
-  "keyup .search form input": _.debounce(getInstantResults, 250),
+  "keyup .search input[type=search]": _.debounce(getInstantResults, 250),
   "click .add-to-playlist": function(event) {
     // todo: only add to playlist if it's not in playlist already.
     // if it is in the playlist, then vote it up once
