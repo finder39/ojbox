@@ -1,73 +1,29 @@
 <template name="playerPage">
-<div class="player-page">
-  <!--<header class="navigation">-->
-  <!--<div class="navigation-wrapper">-->
-    <!--<div class="nav">-->
-      <!--<ul id="navigation-menu">-->
-        <!--<li class="nav-link"><a href="javascript:void(0)">-->
-          <!--<i class="fa fa-play fa-fw fa-lg i-mobile"></i>-->
-        <!--</a></li>-->
-        <!--<li class="nav-link"><a href="javascript:void(0)">-->
-          <!--<div class="progress-bar-indication">-->
-            <!--<span class="meter" style="width: 60%">-->
-              <!--<p>0:00</p>-->
-            <!--</span>-->
-          <!--</div>-->
-        <!--</a></li>-->
-        <!--<li class="nav-link more"><a href="javascript:void(0)">-->
-          <!--<i class="fa fa-fast-forward fa-lg i-mobile"></i>-->
-        <!--</a>-->
-        <!--</li>-->
-        <!--<li class="nav-link"><a href="javascript:void(0)">-->
-          <!--<i class="fa fa-soundcloud fa-fw fa-lg i-mobile"></i>-->
-        <!--</a></li>-->
-      <!--</ul>-->
-    <!--</div>-->
-    <!--<div class="navigation-tools">-->
-      <!--<div class="search-bar">-->
-        <!--<div class="search-and-submit">-->
-          <!--<ul class="accordion-tabs">-->
-            <!--<li class="tab-header-and-content">-->
-              <!--<i class="fa fa-fw fa-lg fa-bars"></i>-->
-              <!--<a href="#" class="is-active tab-link">Chat</a>-->
-            <!--</li>-->
-            <!--<li class="tab-header-and-content">-->
-              <!--<a href="#" class="tab-link">Playlist</a>-->
-            <!--</li>-->
-          <!--</ul>-->
-        <!--</div>-->
-      <!--</div>-->
-      <!--<a href="javascript:void(0)" class="sign-up">-->
-        <!--<i class="fa fa-search fa-lg .not-flipped i-mobile"></i>-->
-      <!--</a>-->
-    <!--</div>-->
-  <!--</div>-->
-  <!--</header>-->
-
-  {{> topBar}}
-  {{> playlist}}
-  {{> search}}
-  {{> chat}}
-</div>
+  <div class="player-page">
+    {{> topBar}}
+    {{> playlist}}
+    {{> search}}
+    {{> chat}}
+  </div>
 </template>
 
 <template name="topBar">
-<header class="top-bar">
-  <div class="left-side">
-    {{> player}}
-  </div>
-  <div class="right-side">
-    <ul>
-      <li class="tab selected">
-        <i class="fa fa-fw fa-comments-o fa-lg i-mobile"></i>
-      </li>
-      <li class="tab">
-        <i class="fa fa-fw fa-bars fa-lg i-mobile"></i>
-      </li>
-      <li class="search-icon">
-        <i class="fa fa-fw fa-search fa-lg not-flipped i-mobile"></i>
-      </li>
-    </ul>
-  </div>
-</header>
+  <header class="top-bar">
+    <div class="left-side">
+      {{> player}}
+    </div>
+    <div class="right-side">
+      <ul>
+        <li class="tab selected">
+          <i class="fa fa-fw fa-comments-o fa-lg i-mobile"></i>
+        </li>
+        <li class="tab">
+          <i class="fa fa-fw fa-bars fa-lg i-mobile"></i>
+        </li>
+        <li class="search-icon">
+          <i class="fa fa-fw fa-search fa-lg not-flipped i-mobile"></i>
+        </li>
+      </ul>
+    </div>
+  </header>
 </template>
