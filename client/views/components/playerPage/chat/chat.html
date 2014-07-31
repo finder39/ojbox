@@ -1,11 +1,10 @@
 <template name="chat">
   <div class="chat">
-    <h1>Chat</h1>
-    <div class="messages">
+    <ul class="messages">
       {{#each message}}
         {{> chatMessage}}
       {{/each}}
-    </div>
+    </ul>
     <form>
       <input type="text" placeholder="Chat something!" />
     </form>
@@ -13,7 +12,7 @@
 </template>
 
 <template name="chatMessage">
-  <div class="message">
+  <li class="message">
     {{username}} {{time}}: {{message}}
-  </div>
+  </li>
 </template>

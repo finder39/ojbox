@@ -1,3 +1,4 @@
 .playlist {
     @include span-columns(6);
+    @include shift(6);
 }

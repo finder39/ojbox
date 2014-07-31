@@ -14,7 +14,8 @@
     @include transition-duration(0.5s);
     @include transition-property(width);
     @include transition-timing-function(ease);
-    overflow-y: scroll;
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
 
     &.open {
         width: 50%;

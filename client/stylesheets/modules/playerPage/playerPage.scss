@@ -1,14 +1,19 @@
 $top-bar-height: rem(64);
 $top-bar-height-mobile: rem(56);
+html, body {
+    height: 100%;
+}
 .player-page {
     $page-left-right-padding: rem(20);
     width: 100%;
+    height: 100%;
     @include transition-property(all);
     @include transition-timing-function(ease);
     @include transition-duration(0.5s);
     .content {
         @include outer-container;
         max-width: none;
+        height: 100%;
         padding: $top-bar-height-mobile $page-left-right-padding 0;
     }
     &.search-open {
@@ -21,6 +26,7 @@ $top-bar-height-mobile: rem(56);
     $horizontal-bar-mode: $large-screen;
     $flip-transition-time: 0.5s;
 
+    z-index: 10;
     display: inline;
     position: fixed;
     right: 0;
