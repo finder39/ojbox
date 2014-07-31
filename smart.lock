@@ -2,29 +2,15 @@
   "meteor": {},
   "dependencies": {
     "basePackages": {
-      "iron-router": {},
-      "fast-render": {},
-      "iron-router-progress": {},
       "streams": {},
       "user-status": {},
-      "highlight": {}
+      "highlight": {},
+      "jquery-ui": {},
+      "iron-router": {},
+      "iron-router-progress": {},
+      "fast-render": {}
     },
     "packages": {
-      "iron-router": {
-        "git": "https://github.com/EventedMind/iron-router.git",
-        "tag": "v0.7.1",
-        "commit": "d1ffb3f06ea4c112132b030f2eb1a70b81675ecb"
-      },
-      "fast-render": {
-        "git": "https://github.com/arunoda/meteor-fast-render.git",
-        "tag": "v0.2.8",
-        "commit": "149984b1aff3a5642a270aff9bd9006872c8302e"
-      },
-      "iron-router-progress": {
-        "git": "https://github.com/Multiply/iron-router-progress.git",
-        "tag": "v0.4.1",
-        "commit": "496fcda9a6ec352b4733725f60c6f280250c3541"
-      },
       "streams": {
         "git": "https://github.com/arunoda/meteor-streams.git",
         "tag": "v0.1.17",
@@ -40,15 +26,50 @@
         "tag": "v0.0.1",
         "commit": "6001457c2982a97cf850c4bbb374ac2840a6ce82"
       },
-      "blaze-layout": {
-        "git": "https://github.com/EventedMind/blaze-layout.git",
-        "tag": "v0.2.4",
-        "commit": "b40e9b0612329288d75cf52ad14a7da64bb8618f"
+      "jquery-ui": {
+        "git": "https://github.com/TimHeckel/meteor-jquery-ui.git",
+        "tag": "v1.9.2",
+        "commit": "c437d45edcf1367df8d5ffa8bad2867758030bd2"
+      },
+      "iron-router": {
+        "git": "https://github.com/EventedMind/iron-router.git",
+        "tag": "v0.8.1",
+        "commit": "74e867557fd9cb81173e048e5f81cf4a0a1160a8"
+      },
+      "iron-router-progress": {
+        "git": "https://github.com/Multiply/iron-router-progress.git",
+        "tag": "v0.4.1",
+        "commit": "496fcda9a6ec352b4733725f60c6f280250c3541"
+      },
+      "fast-render": {
+        "git": "https://github.com/arunoda/meteor-fast-render.git",
+        "tag": "v0.2.8",
+        "commit": "149984b1aff3a5642a270aff9bd9006872c8302e"
       },
       "timesync": {
         "git": "https://github.com/mizzao/meteor-timesync.git",
         "tag": "v0.2.1",
         "commit": "fa4abd511f4e32a3c5d22795ce2c1e8369428fac"
+      },
+      "iron-layout": {
+        "git": "https://github.com/EventedMind/iron-layout.git",
+        "tag": "v0.2.0",
+        "commit": "4a2d53e35ba036b0c189c7ceca34be494d4c6c97"
+      },
+      "blaze-layout": {
+        "git": "https://github.com/EventedMind/blaze-layout.git",
+        "tag": "v0.2.5",
+        "commit": "273e3ab7d005d91a1a59c71bd224533b4dae2fbd"
+      },
+      "iron-core": {
+        "git": "https://github.com/EventedMind/iron-core.git",
+        "tag": "v0.2.0",
+        "commit": "0e48b5dc50d03f01025b7b900fb5ce2f13d52cad"
+      },
+      "iron-dynamic-template": {
+        "git": "https://github.com/EventedMind/iron-dynamic-template.git",
+        "tag": "v0.2.1",
+        "commit": "4dd1185c4d9d616c9abdb3f33e4a7d5a88db7e18"
       }
     }
   }

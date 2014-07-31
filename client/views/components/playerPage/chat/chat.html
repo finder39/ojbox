@@ -1,14 +1,14 @@
 <template name="chat">
-  <h1>Chat</h1>
   <div class="chat">
-    <form>
-      <input type="text" />
-    </form>
+    <h1>Chat</h1>
     <div class="messages">
       {{#each message}}
         {{> chatMessage}}
       {{/each}}
     </div>
+    <form>
+      <input type="text" placeholder="Chat something!" />
+    </form>
   </div>
 </template>
 

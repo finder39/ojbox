@@ -1,4 +1,3 @@
 .playlist {
-    // to compensate for top bar
-    padding-top: rem(64);
+    @include span-columns(6);
 }

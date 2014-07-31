@@ -1,10 +1,11 @@
 {
   "packages": {
-    "iron-router": {},
-    "fast-render": {},
-    "iron-router-progress": {},
     "streams": {},
     "user-status": {},
-    "highlight": {}
+    "highlight": {},
+    "jquery-ui": {},
+    "iron-router": {},
+    "iron-router-progress": {},
+    "fast-render": {}
   }
 }

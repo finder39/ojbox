@@ -1,19 +1,14 @@
-// to ensure that we're not polling the api too many consecutive times
-var waitForSearchResults = false;
 // makes sure that search only happens on new strings, because
 // keypresses happen on keys that don't matter
 var oldQuery = "";
 
 // limit results and instant results
 var maxResults = 20;
-var maxInstantResults = 5;
 
 InstantResults = new Meteor.Collection(null);
-SearchResults = new Meteor.Collection(null);
 
 var processSearchResults = function(tracks, query) {
   // clear the results
-  SearchResults.remove({});
   InstantResults.remove({});
   var count = 0;
   _.each(tracks, function(value, key, list) {
@@ -21,32 +16,22 @@ var processSearchResults = function(tracks, query) {
     // and also update the user collection, incrementing playlistTime with
     // the duration of the song added
     if (value.streamable) {
-      count++;
-      // all results
-        SearchResults.insert({
-          title: value.title,
-          uri: value.uri.substring(value.uri.indexOf("/tracks"))
-        });
       // instant results
-      if (count <= maxInstantResults) {
-        InstantResults.insert({
-          title: value.title,
-          uri: value.uri.substring(value.uri.indexOf("/tracks"))
-        });
-      }
+      InstantResults.insert({
+        title: value.title,
+        uri: value.uri.substring(value.uri.indexOf("/tracks"))
+      });
     }
   });
   // highlight the instant search results
   $(".instant-search-results ul").highlight(query.split(" "));
   // allow searching api again
-  waitForSearchResults = false;
 }
 
 var getInstantResults = function(event) {
   var query = $(".search input[type=search]").val().trim();
-  if (query && !waitForSearchResults && query != oldQuery) {
+  if (query && query != oldQuery) {
     oldQuery = query;
-    waitForSearchResults = true;
     SC.get("/tracks", {
       limit: maxResults,
       q: query,
@@ -87,7 +72,4 @@ Template.search.helpers({
   instantResults: function() {
     return InstantResults.find();
   },
-  searchResults: function() {
-    return SearchResults.find();
-  }
 });

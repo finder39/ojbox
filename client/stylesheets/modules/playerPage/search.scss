@@ -1,0 +1,22 @@
+.search {
+    $sliding-menu-border-color: $dark-gray;
+    $sliding-menu-background: lighten($sliding-menu-border-color, 5);
+    $sliding-menu-color: #fff;
+    $sliding-menu-border: 1px solid $sliding-menu-border-color;
+    $sliding-menu-background-hover: $base-accent-color;
+    $sliding-menu-color-hover: #fff;
+    $sliding-menu-size-large: rem(680);
+    $sliding-menu-size-medium: $sliding-menu-size-large * 0.8;
+    $sliding-menu-size-small: $sliding-menu-size-large * 0.5;
+    @include position(fixed, 0 0 null null);
+    width: 0;
+    height: 100%;
+    @include transition-duration(0.5s);
+    @include transition-property(width);
+    @include transition-timing-function(ease);
+    overflow-y: scroll;
+
+    &.open {
+        width: 50%;
+    }
+}

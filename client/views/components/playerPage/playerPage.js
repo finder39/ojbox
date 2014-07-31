@@ -2,13 +2,10 @@ Template.topBar.events({
   "click .search-icon": function(event) {
     // flip the search icon when the search panel is open
     var iconDiv = $(".search-icon i");
-    if (iconDiv.hasClass("flipped")) {
-      iconDiv.removeClass("flipped");
-      iconDiv.addClass("not-flipped");
-    } else {
-      iconDiv.removeClass("not-flipped");
-      iconDiv.addClass("flipped");
-    }
+    $(".search").toggleClass("open");
+    $(".player-page").toggleClass("search-open");
+    iconDiv.toggleClass("flipped");
+    iconDiv.toggleClass("not-flipped");
   },
   "click .tab": function(event) {
     var tab = $(event.currentTarget);
@@ -20,4 +17,4 @@ Template.topBar.events({
       tab.addClass("selected");
     }
   }
-})
+});

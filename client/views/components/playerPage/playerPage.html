@@ -1,10 +1,12 @@
 <template name="playerPage">
   <div class="player-page">
     {{> topBar}}
-    {{> playlist}}
-    {{> search}}
-    {{> chat}}
+    <div class="content">
+      {{> chat}}
+      {{> playlist}}
+    </div>
   </div>
+  {{> search}}
 </template>
 
 <template name="topBar">
@@ -20,7 +22,7 @@
         <li class="tab">
           <i class="fa fa-fw fa-bars fa-lg i-mobile"></i>
         </li>
-        <li class="search-icon">
+        <li class="search-icon js-menu-trigger sliding-menu-button">
           <i class="fa fa-fw fa-search fa-lg not-flipped i-mobile"></i>
         </li>
       </ul>

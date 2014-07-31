@@ -1,16 +1,29 @@
+$top-bar-height: rem(64);
+$top-bar-height-mobile: rem(56);
 .player-page {
-
+    $page-left-right-padding: rem(20);
+    width: 100%;
+    @include transition-property(all);
+    @include transition-timing-function(ease);
+    @include transition-duration(0.5s);
+    .content {
+        @include outer-container;
+        max-width: none;
+        padding: $top-bar-height-mobile $page-left-right-padding 0;
+    }
+    &.search-open {
+        @include transform(translateX(-50%));
+    }
 }
 .top-bar {
     $top-bar-padding: rem(16);
     $top-bar-background: $base-accent-color;
-    $top-bar-height: rem(64);
-    $top-bar-height-mobile: rem(56);
     $horizontal-bar-mode: $large-screen;
     $flip-transition-time: 0.5s;
 
     display: inline;
     position: fixed;
+    right: 0;
     background-color: $top-bar-background;
     box-shadow: .05rem .05rem .2rem black;
     height: $top-bar-height-mobile;
@@ -19,15 +32,14 @@
 
     // left side contains the player
     .left-side {
-        position: relative;
-        float: left;
+        position: absolute;
         display: inline-block;
     }
 
     // right side contains icons for chat, playlist, search
     .right-side {
-        position: relative;
-        float: right;
+        position: absolute;
+        right: $top-bar-padding;
         display: inline-block;
         ul {
             display: inline;
@@ -64,7 +76,6 @@
     }
 
     .search-icon {
-        padding-left: $top-bar-padding;
         &:hover {
             cursor: pointer;
         }

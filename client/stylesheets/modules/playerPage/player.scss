@@ -2,7 +2,9 @@
     $seek-bar-color: $amber;
     $progress-bar-color: $base-background-color;
     $seek-bar-height: rem(24);
-    $seek-bar-width: rem(130);
+    $seek-bar-width-small: rem(80);
+    $seek-bar-width-medium: rem(200);
+    $seek-bar-width-large: rem(300);
 
     display: inline;
     li {
@@ -13,7 +15,13 @@
         &:hover {
             cursor: pointer;
         }
-        width: $seek-bar-width;
+        width: $seek-bar-width-small;
+        @include media($medium-screen) {
+            width: $seek-bar-width-medium;
+        }
+        @include media($large-screen) {
+            width: $seek-bar-width-large;
+        }
         height: $seek-bar-height;
         background-repeat: repeat-x;
         background-color: $seek-bar-color;
@@ -26,7 +34,13 @@
     }
     .song-time {
         text-align: center;
-        width:$seek-bar-width;
+        width:$seek-bar-width-small;
+        @include media($medium-screen) {
+            width: $seek-bar-width-medium;
+        }
+        @include media($large-screen) {
+            width: $seek-bar-width-large;
+        }
         color: $base-accent-color;
     }
 }
