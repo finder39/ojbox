@@ -1,3 +1,6 @@
+// max number of chat messages to show
+var maxChats = 200;
+
 Chat = new Meteor.Stream("chat");
 ChatCollection = new Meteor.Collection(null);
 
@@ -11,7 +14,7 @@ Chat.on("chat", function(message, username) {
 
 Template.chat.helpers({
   "message": function() {
-    return ChatCollection.find({}, {limit: 100});
+    return ChatCollection.find({}, {limit: maxChats});
   }
 });
 
@@ -31,6 +34,9 @@ Template.chat.events({
       Chat.emit("chat", message.val());
       message.val("");
     }
+    // scroll to the bottom of the chat
+    var chatDiv = $(".chat");
+    chatDiv.scrollTop(chatDiv[0].scrollHeight);
   }
 });
 

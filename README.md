@@ -5,6 +5,7 @@ Votable queue playlist with songs that can gain priority.
 ## Todo
 - Add Youtube API support
 - Add Spotify API support (this will require Spotify Premium)
+- Turn chat text input to contentEditable input
 
 ## Possible future features
 - Color theme

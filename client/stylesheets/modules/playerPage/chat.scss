@@ -4,11 +4,23 @@
     top: rem(56);
     left: rem(20);
     bottom: 0;
+    padding-right: rem(20);
     overflow-y: auto;
     overflow-x: hidden;
     z-index: 1;
     -webkit-overflow-scrolling: touch;
     .messages {
         min-height: 90%;
+        padding: rem(10) 0;
+    }
+}
+
+.message {
+    .chat-username {
+        font-weight: bold;
+        color: $dark-amber;
+    }
+    .chat-time {
+        color: $medium-gray;
     }
 }
