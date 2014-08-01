@@ -24,7 +24,7 @@ var processSearchResults = function(tracks, query) {
     }
   });
   // highlight the instant search results
-  $(".instant-search-results ul").highlight(query.split(" "));
+  $(".search-results tbody").highlight(query.split(" "));
   // allow searching api again
 }
 
@@ -56,15 +56,12 @@ Template.search.events({
     // by adding it a bunch of times
     // todo: put in order, upvotes, downvotes
     // this means figuring out where to insert the song into the list
-    console.log(this);
-    Playlist.insert({
-      title: this.title,
-      uri: this.uri,
-      addedByUsername: Meteor.users.findOne(Meteor.userId, {
-        fields: {username: 1}
-      }),
-      addedByUserId: Meteor.userId
+    this.addedByUsername = Meteor.users.findOne(Meteor.userId, {
+      fields: {username: 1}
     });
+    this.addedByUserId = Meteor.userId;
+    this.addedAt = new Date();
+    Playlist.insert(this);
   }
 });
 

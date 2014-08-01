@@ -1,13 +1,15 @@
 .search {
-    $sliding-menu-border-color: $dark-gray;
-    $sliding-menu-background: lighten($sliding-menu-border-color, 5);
-    $sliding-menu-color: #fff;
-    $sliding-menu-border: 1px solid $sliding-menu-border-color;
-    $sliding-menu-background-hover: $base-accent-color;
-    $sliding-menu-color-hover: #fff;
-    $sliding-menu-size-large: rem(680);
-    $sliding-menu-size-medium: $sliding-menu-size-large * 0.8;
-    $sliding-menu-size-small: $sliding-menu-size-large * 0.5;
+    $search-menu-border-color: $dark-gray;
+    $search-menu-background: lighten($search-menu-border-color, 5);
+    $search-menu-color: #fff;
+    $search-menu-border: 1px solid $search-menu-border-color;
+    $search-menu-background-hover: $base-accent-color;
+    $search-menu-color-hover: #fff;
+    $search-menu-size-large: rem(680);
+    $search-menu-size-medium: $search-menu-size-large * 0.8;
+    $search-menu-size-small: $search-menu-size-large * 0.5;
+    $search-menu-padding: rem(20);
+
     @include position(fixed, 0 0 null null);
     width: 0;
     height: 100%;
@@ -19,5 +21,23 @@
 
     &.open {
         width: 50%;
+    }
+}
+.search-results {
+    tr {
+        &:hover, &:focus {
+            background-color: $light-amber;
+        }
+    }
+    .add-to-playlist {
+        i {
+            color: $base-accent-color;
+            cursor: pointer;
+        }
+    }
+    .highlight {
+        font-weight: bold;
+        color: $base-accent-color;
+        background-color: inherit;
     }
 }
