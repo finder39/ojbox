@@ -1,18 +1,20 @@
 <template name="search">
-  <nav class="search">
-    <input type="search" placeholder="Search for a song" />
-    <table class="search-results">
-      <thead></thead>
-      <tbody>
-        {{#each instantResults}}
-          <tr>
-            <td>{{title}}</td>
-            <td class="add-to-playlist">
-              <i class="fa fa-fw fa-lg fa-plus-square" title="Add to playlist"></i>
-            </td>
-          </tr>
-        {{/each}}
-      </tbody>
-    </table>
-  </nav>
+  <div class="search">
+    <nav class="search-nav">
+      <input type="search" placeholder="Search for a song" />
+      <table class="search-results">
+        <thead></thead>
+        <tbody>
+          {{#each instantResults}}
+            <tr>
+              <td class="song-title">{{title}}</td>
+              <td class="add-to-playlist">
+                <i class="fa fa-fw fa-lg fa-plus-square" title="Add to playlist"></i>
+              </td>
+            </tr>
+          {{/each}}
+        </tbody>
+      </table>
+    </nav>
+  </div>
 </template>

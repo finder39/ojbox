@@ -1,14 +1,14 @@
+$search-menu-padding: rem(20);
+$search-menu-border-color: $dark-gray;
+$search-menu-background: lighten($search-menu-border-color, 5);
+$search-menu-color: #fff;
+$search-menu-border: 1px solid $search-menu-border-color;
+$search-menu-background-hover: $base-accent-color;
+$search-menu-color-hover: #fff;
+$search-menu-size-large: rem(680);
+$search-menu-size-medium: $search-menu-size-large * 0.8;
+$search-menu-size-small: $search-menu-size-large * 0.5;
 .search {
-    $search-menu-border-color: $dark-gray;
-    $search-menu-background: lighten($search-menu-border-color, 5);
-    $search-menu-color: #fff;
-    $search-menu-border: 1px solid $search-menu-border-color;
-    $search-menu-background-hover: $base-accent-color;
-    $search-menu-color-hover: #fff;
-    $search-menu-size-large: rem(680);
-    $search-menu-size-medium: $search-menu-size-large * 0.8;
-    $search-menu-size-small: $search-menu-size-large * 0.5;
-    $search-menu-padding: rem(20);
 
     @include position(fixed, 0 0 null null);
     width: 0;
@@ -23,10 +23,27 @@
         width: 50%;
     }
 }
+.search-nav {
+    @include position(absolute, $search-menu-padding $search-menu-padding 0 $search-menu-padding);
+}
 .search-results {
-    tr {
-        &:hover, &:focus {
-            background-color: $light-amber;
+    tbody {
+        @include outer-container;
+        tr {
+            @include span-columns(12);
+            @include row(table);
+            &:hover, &:focus {
+                background-color: $light-amber;
+            }
+        }
+        td.song-title {
+            @include span-columns(10);
+            @include pad();
+        }
+        td.add-to-playlist {
+            @include span-columns(2);
+            @include reset-display;
+            @include pad();
         }
     }
     .add-to-playlist {

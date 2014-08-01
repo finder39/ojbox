@@ -89,9 +89,6 @@ Template.player.events({
     if (!_.isObject(currentSong)) {
       return;
     }
-    console.log(event.currentTarget);
-    console.log(event.offsetX);
-    console.log(event);
     var seekbar = $(".seek-bar");
     currentSong.setPosition(
       currentSong.duration * event.offsetX / seekbar.outerWidth()
