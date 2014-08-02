@@ -6,6 +6,9 @@
     $seek-bar-width-medium: rem(200);
     $seek-bar-width-large: rem(300);
 
+    &.disabled {
+        opacity: 0.5;
+    }
     .playpause {
         @include span-columns(1);
     }

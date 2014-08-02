@@ -12,7 +12,7 @@ html, body {
     @include transition-duration(0.5s);
     .content {
         height: 100%;
-        padding: $top-bar-height-mobile $page-left-right-padding 0;
+        padding: rem(98) $page-left-right-padding 0;
     }
     &.search-open {
         @include transform(translateX(-80%));

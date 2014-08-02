@@ -1,31 +1,21 @@
 var currentSong;
 var nextSong;
 
-//var msToMin = function(ms) {
-    //// The "<< 0" is a bit shift of 0 bits. This can only be done on an integer,
-    //// and causes a typecast
-    //return (ms / 1000 / 60) << 0;
-//}
-
-//var msToSec = function(ms) {
-    //var seconds = (ms / 1000 % 60) << 0;
-    //// return a leading zero if the amount of seconds is less than 9
-    //return seconds > 9 ? seconds : '0' + seconds;
-//}
 
 var updateSeekBarDisplay = function(positionMillis, percentage) {
-  // update the song time
-  //$(".song-time").html(msToMin(positionMillis) + ':' + msToSec(positionMillis));
   // update the progress bar
   $('.progress-bar').width((percentage * 100) + '%');
 }
 
 var enablePlayer = function() {
-
+  $(".player").removeClass("disabled");
+}
+var disablePlayer = function() {
+  $(".player").addClass("disabled");
 }
 
-var disablePlayer = function() {
-
+var playerIsDisabled = function() {
+  return $(".player").hasClass("disabled");
 }
 
 var soundManagerOptions = {
@@ -34,8 +24,7 @@ var soundManagerOptions = {
   stream: true,
   onload: function() {
     console.log("song loaded");
-    // todo: we're going to use this to disable the player until the song is ready to play
-    Session.set("songLoaded", true);
+    enablePlayer();
   },
   whileplaying: function() {
     updateSeekBarDisplay(this.position, this.position / this.duration);
@@ -47,6 +36,7 @@ var soundManagerOptions = {
     CurrentSong.remove(CurrentSong.findOne()._id);
     updateSeekBarDisplay(0, 0);
     $(".fa-pause").switchClass("fa-pause", "fa-play");
+    disablePlayer();
   }
 }
 
@@ -89,30 +79,31 @@ Template.player.helpers({
 
 Template.player.events({
   "click .fa-play": function(event) {
-    if (!_.isObject(currentSong)) {
+    if (playerIsDisabled() || !_.isObject(currentSong)) {
       return;
     }
     $(".fa-play").switchClass("fa-play", "fa-pause");
     currentSong.play();
   },
   "click .fa-pause": function(event) {
-    if (!_.isObject(currentSong)) {
+    if (playerIsDisabled() || !_.isObject(currentSong)) {
       return;
     }
     $(".fa-pause").switchClass("fa-pause", "fa-play");
     currentSong.pause();
   },
   "click .fa-step-forward": function(event) {
-    if (!_.isObject(currentSong)) {
+    if (playerIsDisabled() || !_.isObject(currentSong)) {
       return;
     }
     currentSong.destruct();
     CurrentSong.remove(CurrentSong.findOne()._id);
     updateSeekBarDisplay(0, 0);
     $(".fa-pause").switchClass("fa-pause", "fa-play");
+    disablePlayer();
   },
   "click .seek-bar": function(event) {
-    if (!_.isObject(currentSong)) {
+    if (playerIsDisabled() || !_.isObject(currentSong)) {
       return;
     }
     var seekPercentage = event.offsetX / $(".seek-bar").outerWidth();
