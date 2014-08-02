@@ -20,7 +20,10 @@ $search-menu-size-small: $search-menu-size-large * 0.5;
     -webkit-overflow-scrolling: touch;
 
     &.open {
-        width: 50%;
+        width: 80%;
+        @include media($medium-screen-up) {
+            width: 50%;
+        }
     }
 }
 .search-nav {

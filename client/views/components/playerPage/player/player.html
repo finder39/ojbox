@@ -1,25 +1,26 @@
 <template name="player">
   <ul class="player">
     {{#if mainPlayer}}
-      {{loadStreaming}}
+      {{loadCurrentSong}}
+      <!--{{loadNextSong}}-->
     {{/if}}
     <li class="playpause">
-      <i class="fa fa-play fa-fw fa-lg i-mobile"></i>
+      <i class="fa fa-play fa-fw fa-lg"></i>
     </li>
-    <li>
-      <div class="seek-bar">
-        <span class="progress-bar">
-          <p class="song-time">0:00</p>
-        </span>
-      </div>
+    <li class="seek-bar">
+      <span class="progress-bar">
+        {{#with playingSong}}
+        <p class="song-title">{{title}}</p>
+        {{/with}}
+      </span>
     </li>
     {{#if mainPlayer}}
-      <li>
-        <i class="fa fa-fw fa-fast-forward fa-lg i-mobile"></i>
+      <li class="ff-button">
+        <i class="fa fa-fw fa-step-forward fa-lg"></i>
       </li>
     {{/if}}
     <li class="vendor-icon">
-      <i class="fa fa-soundcloud fa-fw fa-lg i-mobile"></i>
+      <i class="fa fa-soundcloud fa-fw fa-lg"></i>
     </li>
   </ul>
 </template>

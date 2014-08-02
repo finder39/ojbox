@@ -1,5 +1,9 @@
 .chat {
-    @include span-columns(6);
+    @include media($medium-screen-up) {
+        display: inherit;
+        width: 50%;
+    }
+    width: 100%;
     position: fixed;
     top: rem(56);
     left: rem(20);
@@ -13,6 +17,7 @@
         min-height: 90%;
         padding: rem(10) 0;
     }
+    display: none;
 }
 
 .message {

@@ -27,4 +27,4 @@ Chat.addFilter(function(eventName, args) {
     }
   }
   return args;
-})
+});

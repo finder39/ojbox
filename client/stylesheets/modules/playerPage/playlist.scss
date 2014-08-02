@@ -1,4 +1,7 @@
 .playlist {
-    @include span-columns(6);
-    @include shift(6);
+    width: 100%;
+    @include media($medium-screen-up) {
+        width: 48%;
+        @include shift(6);
+    }
 }

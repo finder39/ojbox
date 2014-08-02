@@ -2,11 +2,11 @@ Settings = new Meteor.Collection("settings");
 Playlist = new Meteor.Collection("playlist");
 CurrentSong = new Meteor.Collection("currentSong");
 
-// initial setup
-if (!Settings.findOne()) {
-  Settings.insert({
-    playerId: 0,
-  });
+var isMainPlayer = function() {
+  if (!Settings.findOne.playerId || !Meteor.connection._lastSessionId) {
+    return true;
+  }
+  return Settings.findOne().playerId === Meteor.connection._lastSessionId;
 }
 
 Settings.allow({
@@ -23,24 +23,29 @@ Settings.allow({
 
 Playlist.allow({
   'insert': function(userId, doc) {
+    // if it's already in the playlist, don't allow
+    if (Playlist.findOne({uri: doc.uri})) {
+      return false;
+    }
     return true;
   },
   'update': function(userId, doc, fieldNames, modifier) {
     return true;
   },
   'remove': function(userId, doc) {
-    return false;
+    // only allowed to remove the songs you added
+    return isMainPlayer() || doc.addedByUserId === userId;
   }
 });
 
 CurrentSong.allow({
   'insert': function(userId, doc) {
-    return true;
+    return isMainPlayer();
   },
   'update': function(userId, doc, fieldNames, modifier) {
     return true;
   },
   'remove': function(userId, doc) {
-    return true;
+    return isMainPlayer();
   }
 });

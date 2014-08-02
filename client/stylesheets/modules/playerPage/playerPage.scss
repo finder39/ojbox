@@ -11,64 +11,74 @@ html, body {
     @include transition-timing-function(ease);
     @include transition-duration(0.5s);
     .content {
-        @include outer-container;
-        max-width: none;
         height: 100%;
         padding: $top-bar-height-mobile $page-left-right-padding 0;
     }
     &.search-open {
-        @include transform(translateX(-50%));
+        @include transform(translateX(-80%));
+        @include media($medium-screen-up) {
+            @include transform(translateX(-50%));
+        }
     }
 }
 .top-bar {
     $top-bar-padding: rem(16);
     $top-bar-background: $base-accent-color;
-    $horizontal-bar-mode: $large-screen;
     $flip-transition-time: 0.5s;
 
+    @include media($medium-screen-up) {
+        display: inline;
+    }
     z-index: 10;
-    display: inline;
     position: fixed;
     right: 0;
     background-color: $top-bar-background;
     box-shadow: .05rem .05rem .2rem black;
-    height: $top-bar-height-mobile;
     width: 100%;
     padding: $top-bar-padding;
 
     // left side contains the player
     .left-side {
-        position: absolute;
-        display: inline-block;
+        @include media($medium-screen-up) {
+            display: inline-block;
+            width: 49%;
+        }
     }
 
     // right side contains icons for chat, playlist, search
     .right-side {
-        position: absolute;
-        right: $top-bar-padding;
-        display: inline-block;
-        ul {
-            display: inline;
-            li {
-                display: inline-block;
+        @include media($medium-screen-up) {
+            display: inline-block;
+            width: 49%;
+        }
+        li {
+            padding-top: $top-bar-padding;
+            @include media($medium-screen-up) {
+                padding-top: 0;
             }
+            @include span-columns(4);
+            @include media($medium-screen-up) {
+                @include span-columns(2 of 6);
+            }
+        }
 
-            // tabs
-            li.tab {
-                border-bottom: rem(3) solid $base-accent-color;
-                // pushes the border to the bottom of the bar
-                padding-bottom: rem(13);
-                &:hover {
-                    cursor: pointer;
-                    border-color: darken($base-secondary-color, 20);
-                }
-                @include media($medium-screen-up) {
-                    display: none;
-                }
-                &.selected {
-                    border-color: $base-secondary-color;
-                }
+        // tabs
+        li.tab {
+            border-bottom: rem(2) solid $base-accent-color;
+            &:hover {
+                cursor: pointer;
+                border-color: darken($base-secondary-color, 10);
             }
+            @include media($medium-screen-up) {
+                visibility: hidden;
+            }
+            &.selected {
+                border-color: $base-secondary-color;
+            }
+        }
+        .fa-search {
+            padding-top: rem(5);
+            float: right;
         }
     }
 

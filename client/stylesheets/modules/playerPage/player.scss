@@ -6,21 +6,14 @@
     $seek-bar-width-medium: rem(200);
     $seek-bar-width-large: rem(300);
 
-    display: inline;
-    li {
-        display: inline-block;
+    .playpause {
+        @include span-columns(1);
     }
-
     .seek-bar {
+        @include span-columns(9);
+        position: relative;
         &:hover {
             cursor: pointer;
-        }
-        width: $seek-bar-width-small;
-        @include media($medium-screen) {
-            width: $seek-bar-width-medium;
-        }
-        @include media($large-screen) {
-            width: $seek-bar-width-large;
         }
         height: $seek-bar-height;
         background-repeat: repeat-x;
@@ -33,14 +26,21 @@
         }
     }
     .song-time {
-        text-align: center;
-        width:$seek-bar-width-small;
-        @include media($medium-screen) {
-            width: $seek-bar-width-medium;
-        }
-        @include media($large-screen) {
-            width: $seek-bar-width-large;
-        }
         color: $base-accent-color;
+    }
+    .ff-button {
+        @include span-columns(1);
+    }
+    .song-title {
+        position: absolute;
+        text-align: center;
+        width: 100%;
+        top: 0;
+        left: 0;
+        color: $base-accent-color;
+        overflow: hidden;
+    }
+    .vendor-icon {
+        @include span-columns(1);
     }
 }
