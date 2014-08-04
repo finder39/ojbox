@@ -6,6 +6,7 @@
     $seek-bar-width-medium: rem(200);
     $seek-bar-width-large: rem(300);
 
+    @include outer-container;
     &.disabled {
         opacity: 0.5;
     }

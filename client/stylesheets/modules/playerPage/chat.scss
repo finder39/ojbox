@@ -1,29 +1,13 @@
 .chat {
-    @include media($medium-screen-up) {
-        display: inherit;
-        width: 50%;
-    }
-    width: 100%;
-    position: fixed;
-    top: rem(56);
-    left: rem(20);
-    bottom: 0;
-    padding-right: rem(20);
-    overflow-y: auto;
-    overflow-x: hidden;
-    z-index: 1;
-    -webkit-overflow-scrolling: touch;
-    .messages {
-        min-height: 90%;
-        padding: rem(10) 0;
-    }
+    @include outer-container;
+    @include pad;
     display: none;
 }
 
 .message {
     .chat-username {
         font-weight: bold;
-        color: $dark-amber;
+        color: $cyan;
     }
     .chat-time {
         color: $medium-gray;

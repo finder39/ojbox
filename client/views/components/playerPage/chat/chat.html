@@ -1,20 +1,20 @@
 <template name="chat">
   <div class="chat">
+    <form>
+      <input type="text" placeholder="Chat something!" />
+    </form>
     <ul class="messages">
       {{#each message}}
         {{> chatMessage}}
       {{/each}}
     </ul>
-    <form>
-      <input type="text" placeholder="Chat something!" />
-    </form>
   </div>
 </template>
 
 <template name="chatMessage">
   <li class="message">
     <span class="chat-username">{{username}}</span>
-    <span class="chat-time">{{time}}: </span>
+    <span class="chat-time">{{formattedTime}}: </span>
     <span class="chat-message">{{message}}</span>
   </li>
 </template>

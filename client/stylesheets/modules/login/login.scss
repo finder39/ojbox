@@ -4,18 +4,16 @@
     height: 100%;
     background: url(icons/logo.svg);
     background-repeat: no-repeat;
-    background-color: #d1c4e9;
+    background-color: $light-purple;
     background-attachment: fixed;
     background-position: center;
 
     form {
         // center horizontally
-        width: 100%;
         text-align: center;
-        @include media($medium-screen-up) {
-            max-width: $medium-screen;
-        }
-        padding: 0 2rem 0 2rem;
+        @include outer-container;
+        max-width: $medium-screen;
+        @include pad;
 
         // center vertically
         height: 10rem;
@@ -27,12 +25,11 @@
         bottom: 0;
 
         input {
-            @include span-columns(8);
             font-size: rem(20);
         }
         button {
-            @include span-columns(4);
             font-size: rem(20);
+            width: 100%;
         }
     }
 }

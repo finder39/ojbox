@@ -1,24 +1,17 @@
 .player-setup {
-    padding: 2rem 1rem 0 1rem;
-    .container {
-        box-shadow: .1rem .1rem .4rem black;
-        padding: 1.5rem;
-        @include media($medium-screen-up) {
-            max-width: $medium-screen;
-        }
-        margin-left: auto;
-        margin-right: auto;
-        h1 {
-            color: $base-accent-color;
-            margin: 0 0 1rem 0;
-        }
-        p {
-            font-size: rem(18);
-        }
-        button {
-            min-width: 33%;
-            margin-top: 2rem;
-            font-size: rem(20);
-        }
+    @include outer-container;
+    max-width: $medium-screen;
+    @include pad;
+    h1 {
+        color: $base-accent-color;
+        margin-bottom: 2rem;
+    }
+    p {
+        font-size: rem(18);
+    }
+    button {
+        margin-top: 2rem;
+        font-size: rem(18);
+        width: 100%;
     }
 }

@@ -43,10 +43,30 @@ var getInstantResults = function(event) {
     });
   }
 }
+var getSearchResults = function(event) {
+  var query = $(".search input[type=search]").val().trim();
+  if (query) {
+    SC.get("/tracks", {
+      limit: maxResults,
+      q: query,
+      // there is a bug in the soundcloud api where the filter option
+      // is ignored when there is a query option. i'm including it
+      // anyway so when it's fixed it'll work
+      filter: {streamable: true},
+      duration: {from: minSongLength, to: maxSongLength}
+    }, function(tracks) {
+      processSearchResults(tracks, query);
+    });
+  }
+}
 
 Template.search.events({
   // make sure the api call only fires once the user is done typing
-  "keyup .search input[type=search]": _.debounce(getInstantResults, 250),
+  //"keyup .search input[type=search]": _.debounce(getInstantResults, 250),
+  "submit .search form": function(event) {
+    event.preventDefault();
+    getSearchResults(event);
+  },
   "click .add-to-playlist": function(event) {
     OJPlayer.addSongToPlaylist(this);
   }

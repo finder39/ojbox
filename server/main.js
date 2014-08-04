@@ -1,6 +1,6 @@
 Meteor.startup(function() {
   // initial setup
-  if (!Settings.findOne()) {
+  if (!Settings.find().count() === 0) {
     Settings.insert({
       playerId: 0,
     });

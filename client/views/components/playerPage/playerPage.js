@@ -1,12 +1,4 @@
 Template.topBar.events({
-  "click .search-icon": function(event) {
-    // flip the search icon when the search panel is open
-    var iconDiv = $(".search-icon i");
-    $(".search").toggleClass("open");
-    $(".player-page").toggleClass("search-open");
-    iconDiv.toggleClass("flipped");
-    iconDiv.toggleClass("not-flipped");
-  },
   "click .tab-playlist": function(event) {
     var tab = $(".tab-playlist");
     // if not selected
@@ -17,6 +9,7 @@ Template.topBar.events({
       tab.addClass("selected");
     }
     $(".chat").hide();
+    $(".search").hide();
     $(".playlist").show();
   },
   "click .tab-chat": function(event) {
@@ -29,6 +22,20 @@ Template.topBar.events({
       tab.addClass("selected");
     }
     $(".playlist").hide();
+    $(".search").hide();
     $(".chat").show();
-  }
+  },
+  "click .tab-search": function(event) {
+    var tab = $(".tab-search");
+    // if not selected
+    if (!tab.hasClass("selected")) {
+      // unselect the rest
+      $(".tab.selected").removeClass("selected");
+      // select it
+      tab.addClass("selected");
+    }
+    $(".chat").hide();
+    $(".playlist").hide();
+    $(".search").show();
+  },
 });

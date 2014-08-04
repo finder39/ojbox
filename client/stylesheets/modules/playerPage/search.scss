@@ -1,7 +1,7 @@
-$search-menu-padding: rem(20);
 $search-menu-border-color: $dark-gray;
 $search-menu-background: lighten($search-menu-border-color, 5);
 $search-menu-color: #fff;
+$search-color: $deep-orange;
 $search-menu-border: 1px solid $search-menu-border-color;
 $search-menu-background-hover: $base-accent-color;
 $search-menu-color-hover: #fff;
@@ -9,55 +9,34 @@ $search-menu-size-large: rem(680);
 $search-menu-size-medium: $search-menu-size-large * 0.8;
 $search-menu-size-small: $search-menu-size-large * 0.5;
 .search {
-
-    @include position(fixed, 0 0 null null);
-    width: 0;
-    height: 100%;
-    @include transition-duration(0.5s);
-    @include transition-property(width);
-    @include transition-timing-function(ease);
-    overflow-y: auto;
-    -webkit-overflow-scrolling: touch;
-
-    &.open {
-        width: 80%;
-        @include media($medium-screen-up) {
-            width: 50%;
-        }
-    }
-}
-.search-nav {
-    @include position(absolute, $search-menu-padding $search-menu-padding 0 $search-menu-padding);
+    display: none;
+    @include outer-container;
+    @include pad;
 }
 .search-results {
-    tbody {
-        @include outer-container;
-        tr {
-            @include span-columns(12);
-            @include row(table);
-            &:hover, &:focus {
-                background-color: $light-amber;
-            }
-        }
-        td.song-title {
-            @include span-columns(10);
-            @include pad();
-        }
-        td.add-to-playlist {
-            @include span-columns(2);
-            @include reset-display;
-            @include pad();
-        }
+    tr {
+        @include span-columns(12);
+        @include row(table);
     }
-    .add-to-playlist {
-        i {
-            color: $base-accent-color;
+    td.song-title {
+        @include span-columns(10);
+        @include pad;
+    }
+    td.add-to-playlist {
+        @include span-columns(2);
+        @include pad;
+        @include reset-display;
+        text-align: center;
+        color: $search-color;
+        &:hover {
             cursor: pointer;
+            background-color: $search-color;
+            color: $base-background-color;
         }
     }
     .highlight {
         font-weight: bold;
-        color: $base-accent-color;
+        color: $search-color;
         background-color: inherit;
     }
 }

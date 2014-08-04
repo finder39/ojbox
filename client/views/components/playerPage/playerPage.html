@@ -1,31 +1,27 @@
 <template name="playerPage">
   <div class="player-page">
     {{> topBar}}
-    <div class="content">
-      {{> chat}}
-      {{> playlist}}
-    </div>
+    {{> chat}}
+    {{> playlist}}
+    {{> search}}
   </div>
-  {{> search}}
+    {{> bottomBar}}
 </template>
 
 <template name="topBar">
   <header class="top-bar">
-    <div class="left-side">
-      {{> player}}
-    </div>
-    <div class="right-side">
+    <nav class="tabs">
       <ul>
-        <li class="tab tab-chat">
-          <i class="fa fa-fw fa-comments-o fa-lg">Chat</i>
-        </li>
-        <li class="tab selected tab-playlist">
-          <i class="fa fa-fw fa-bars fa-lg">Playlist</i>
-        </li>
-        <li class="search-icon js-menu-trigger sliding-menu-button">
-          <i class="fa fa-fw fa-search fa-lg not-flipped"></i>
-        </li>
+        <li class="tab tab-search">Search</li>
+        <li class="tab selected tab-playlist">Playlist</li>
+        <li class="tab tab-chat">Chat</li>
       </ul>
-    </div>
+    </nav>
+  </header>
+</template>
+
+<template name="bottomBar">
+  <header class="bottom-bar">
+    {{> player}}
   </header>
 </template>

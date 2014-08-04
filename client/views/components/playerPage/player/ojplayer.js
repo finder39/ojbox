@@ -16,7 +16,7 @@ OJPlayer = {
     // if CurrentSong is empty, put it there instead
     if (!CurrentSong.findOne()) {
       songDoc.position = 0;
-      songDoc.paused = false;
+      songDoc.paused = true;
       CurrentSong.insert(songDoc);
       return;
     }
@@ -30,11 +30,17 @@ OJPlayer = {
     }
     // remove the top of the playlist
     Playlist.remove(firstPlaylistSong._id);
-    // clear the current song
-    CurrentSong.remove(CurrentSong.findOne()._id);
     firstPlaylistSong.position = 0;
-    firstPlaylistSong.paused = false;
-    // replace it with the top playlist song
+    firstPlaylistSong.paused = true;
+
+    var current = CurrentSong.findOne();
+    // clear the current song if there is one
+    if (current) {
+      CurrentSong.remove(current._id);
+      // set the next song to play or pause depending on the last one
+      firstPlaylistSong.paused = current.paused;
+    }
+    // insert the top playlist song
     CurrentSong.insert(firstPlaylistSong);
   },
   topSong: function() {

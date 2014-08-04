@@ -1,84 +1,50 @@
-$top-bar-height: rem(64);
-$top-bar-height-mobile: rem(56);
-html, body {
-    height: 100%;
-}
+$tab-search-background-color: $deep-orange;
+$tab-playlist-background-color: $base-accent-color;
+$tab-chat-background-color: $cyan;
+$tab-text-color: $base-background-color;
+$tab-padding: rem(10);
+$bottom-bar-height: 6%;
+$bottom-bar-padding: rem(16);
+$bottom-bar-background-color: $base-accent-color;
 .player-page {
-    $page-left-right-padding: rem(20);
-    width: 100%;
     height: 100%;
-    @include transition-property(all);
-    @include transition-timing-function(ease);
-    @include transition-duration(0.5s);
-    .content {
-        height: 100%;
-        padding: rem(98) $page-left-right-padding 0;
-    }
-    &.search-open {
-        @include transform(translateX(-80%));
-        @include media($medium-screen-up) {
-            @include transform(translateX(-50%));
-        }
-    }
+    @include pad(0 0 $bottom-bar-height 0);
 }
 .top-bar {
-    $top-bar-padding: rem(16);
-    $top-bar-background: $base-accent-color;
-    $flip-transition-time: 0.5s;
+    @include row;
+    max-width: none;
 
-    @include media($medium-screen-up) {
-        display: inline;
-    }
-    z-index: 10;
-    position: fixed;
-    right: 0;
-    background-color: $top-bar-background;
-    box-shadow: .05rem .05rem .2rem black;
-    width: 100%;
-    padding: $top-bar-padding;
-
-    // left side contains the player
-    .left-side {
-        @include media($medium-screen-up) {
-            display: inline-block;
-            width: 49%;
+    // tabs
+    li.tab {
+        @include span-columns(4, block-collapse);
+        @include pad();
+        color: $med-light-gray;
+        text-transform: uppercase;
+        text-align: center;
+        font-weight: bold;
+        &:hover {
+            cursor: pointer;
+        }
+        &.selected {
+            color: $base-background-color;
         }
     }
-
-    // right side contains icons for chat, playlist, search
-    .right-side {
-        @include media($medium-screen-up) {
-            display: inline-block;
-            width: 49%;
+    .tab-search {
+        background-color: darken($tab-search-background-color, 15);
+        &:hover, &.selected {
+            background-color: $tab-search-background-color;
         }
-        li {
-            padding-top: $top-bar-padding;
-            @include media($medium-screen-up) {
-                padding-top: 0;
-            }
-            @include span-columns(4);
-            @include media($medium-screen-up) {
-                @include span-columns(2 of 6);
-            }
+    }
+    .tab-playlist {
+        background-color: darken($tab-playlist-background-color, 15);
+        &:hover, &.selected {
+            background-color: $tab-playlist-background-color;
         }
-
-        // tabs
-        li.tab {
-            border-bottom: rem(2) solid $base-accent-color;
-            &:hover {
-                cursor: pointer;
-                border-color: darken($base-secondary-color, 10);
-            }
-            @include media($medium-screen-up) {
-                visibility: hidden;
-            }
-            &.selected {
-                border-color: $base-secondary-color;
-            }
-        }
-        .fa-search {
-            padding-top: rem(5);
-            float: right;
+    }
+    .tab-chat {
+        background-color: darken($tab-chat-background-color, 15);
+        &:hover, &.selected {
+            background-color: $tab-chat-background-color;
         }
     }
 
@@ -90,26 +56,11 @@ html, body {
             cursor: pointer;
         }
     }
-
-    .search-icon {
-        &:hover {
-            cursor: pointer;
-        }
-        .not-flipped {
-            @include transform(rotateY(0deg));
-            @include transform-origin(center top);
-            @include transform-style(preserve-3d);
-            @include transition-property(transform);
-            @include transition-duration($flip-transition-time);
-            @include transition-timing-function(linear);
-        }
-        .flipped {
-            @include transform(rotateY(180deg));
-            @include transform-origin(center top);
-            @include transform-style(preserve-3d);
-            @include transition-property(transform);
-            @include transition-duration($flip-transition-time);
-            @include transition-timing-function(linear);
-        }
-    }
+}
+.bottom-bar {
+    position: fixed;
+    width: 100%;
+    background-color: $bottom-bar-background-color;
+    @include pad;
+    bottom: 0;
 }

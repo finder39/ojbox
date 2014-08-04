@@ -1,7 +1,25 @@
+$playlist-color: $base-accent-color;
 .playlist {
-    width: 100%;
-    @include media($medium-screen-up) {
-        width: 48%;
-        @include shift(6);
+    @include outer-container;
+    @include pad;
+    tr {
+        @include span-columns(12);
+        @include row(table);
+    }
+    td.song {
+        @include span-columns(10);
+        @include pad;
+    }
+    td.upvote {
+        @include span-columns(2);
+        @include pad;
+        @include reset-display;
+        text-align: center;
+        color: $playlist-color;
+        &:hover {
+            color: $base-background-color;
+            background-color: $playlist-color;
+            cursor: pointer;
+        }
     }
 }

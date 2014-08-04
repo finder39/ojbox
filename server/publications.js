@@ -5,7 +5,7 @@ Meteor.publish("playlist", function() {
   return Playlist.find();
 });
 Meteor.publish("currentSong", function() {
-  return CurrentSong.find();
+  return CurrentSong.find({}, {limit: 1});
 });
 
 // Streams

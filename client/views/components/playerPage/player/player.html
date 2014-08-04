@@ -1,26 +1,50 @@
 <template name="player">
-  <ul class="player disabled">
-    {{#if mainPlayer}}
-      {{loadCurrentSong}}
-      <!--{{loadNextSong}}-->
-    {{/if}}
-    <li class="playpause">
-      <i class="fa fa-play fa-fw fa-lg"></i>
-    </li>
-    <li class="seek-bar">
-      <span class="progress-bar">
-        {{#with playingSong}}
-        <p class="song-title">{{title}}</p>
-        {{/with}}
-      </span>
-    </li>
-    {{#if mainPlayer}}
+  {{#if mainPlayer}}
+    {{> hostPlayer}}
+  {{else}}
+    {{> clientPlayer}}
+  {{/if}}
+</template>
+
+<template name="hostPlayer">
+  {{loadStreaming}}
+  <ul class="player {{playerDisabled}}">
+    {{#with playingSong}}
+      <li class="playpause">
+        <i class="fa fa-{{playPauseIcon}} fa-fw fa-lg"></i>
+      </li>
+      <li class="seek-bar">
+        <span class="progress-bar">
+          <p class="song-title">{{title}}</p>
+        </span>
+      </li>
       <li class="ff-button">
         <i class="fa fa-fw fa-step-forward fa-lg"></i>
       </li>
-    {{/if}}
-    <li class="vendor-icon">
-      <i class="fa fa-soundcloud fa-fw fa-lg"></i>
-    </li>
+      <li class="vendor-icon">
+        <i class="fa fa-soundcloud fa-fw fa-lg"></i>
+      </li>
+    {{/with}}
+  </ul>
+</template>
+
+<template name="clientPlayer">
+  <ul class="player">
+    {{#with playingSong}}
+      <li class="playpause">
+        <i class="fa fa-{{playPauseIcon}} fa-fw fa-lg"></i>
+      </li>
+      <li class="seek-bar">
+        <span class="progress-bar">
+          <p class="song-title">{{title}}</p>
+        </span>
+      </li>
+      <li class="ff-button">
+        <i class="fa fa-fw fa-step-forward fa-lg"></i>
+      </li>
+      <li class="vendor-icon">
+        <i class="fa fa-soundcloud fa-fw fa-lg"></i>
+      </li>
+    {{/with}}
   </ul>
 </template>

@@ -1,9 +1,15 @@
 <template name="playlist">
-  <div class="playlist">
-    <ul>
+  <table class="playlist">
+    <thead></thead>
+    <tbody>
       {{#each song}}
-        <li class="song">{{title}}</li>
+        <tr>
+          <td class="song">{{title}}</td>
+          <td class="upvote" title="Vote this song up">
+            <i class="fa fa-fw fa-lg fa-thumbs-up"></i>
+          </td>
+        </tr>
       {{/each}}
-    </ul>
-  </div>
+    </tbody>
+  </table>
 </template>
