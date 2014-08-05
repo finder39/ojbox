@@ -10,8 +10,6 @@ $search-menu-size-medium: $search-menu-size-large * 0.8;
 $search-menu-size-small: $search-menu-size-large * 0.5;
 .search {
     display: none;
-    @include outer-container;
-    @include pad;
 }
 .search-results {
     tr {

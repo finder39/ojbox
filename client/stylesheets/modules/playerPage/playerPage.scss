@@ -3,12 +3,11 @@ $tab-playlist-background-color: $base-accent-color;
 $tab-chat-background-color: $cyan;
 $tab-text-color: $base-background-color;
 $tab-padding: rem(10);
-$bottom-bar-height: 6%;
 $bottom-bar-padding: rem(16);
 $bottom-bar-background-color: $base-accent-color;
 .player-page {
-    height: 100%;
-    @include pad(0 0 $bottom-bar-height 0);
+    @include outer-container;
+    @include pad;
 }
 .top-bar {
     @include row;
@@ -63,4 +62,8 @@ $bottom-bar-background-color: $base-accent-color;
     background-color: $bottom-bar-background-color;
     @include pad;
     bottom: 0;
+}
+.fake-bottom-bar {
+    visibility: hidden;
+    @include pad;
 }

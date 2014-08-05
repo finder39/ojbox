@@ -1,6 +1,6 @@
 <template name="playerPage">
-  <div class="player-page">
     {{> topBar}}
+  <div class="player-page">
     {{> chat}}
     {{> playlist}}
     {{> search}}
@@ -21,6 +21,9 @@
 </template>
 
 <template name="bottomBar">
+  <div class="fake-bottom-bar">
+    <ul><li>&nbsp;</li></ul>
+  </div>
   <header class="bottom-bar">
     {{> player}}
   </header>

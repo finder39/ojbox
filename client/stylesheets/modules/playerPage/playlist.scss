@@ -1,7 +1,5 @@
 $playlist-color: $base-accent-color;
 .playlist {
-    @include outer-container;
-    @include pad;
     tr {
         @include span-columns(12);
         @include row(table);
