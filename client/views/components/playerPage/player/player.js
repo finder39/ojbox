@@ -1,8 +1,8 @@
-var currentSound;
-var nextSong;
+var currentSound = null;
+var nextSong = null;
 
 
-var updateSeekBarDisplay = function(positionMillis, percentage) {
+var updateSeekBarDisplay = function(percentage) {
   // update the progress bar
   $('.progress-bar').width((percentage * 100) + '%');
 }
@@ -13,20 +13,23 @@ var soundManagerOptions = {
   stream: true,
   onload: function() {
     console.log("song loaded");
+    // this should be a database value, not a session value
+    OJPlayer.loaded(true);
     Session.set("soundLoaded", true);
-    Session.set("playerIsDisabled", false);
+    if (_.isObject(currentSound) && $(".fa-pause").length) {
+      currentSound.play();
+    }
   },
   whileplaying: function() {
-    updateSeekBarDisplay(this.position, this.position / this.duration);
+    updateSeekBarDisplay(this.position / this.duration);
   },
   onfinish: function() {
     console.log("song finished playing");
     // destroy the song and remove it from CurrentSong
     this.destruct();
     OJPlayer.nextSong();
-    updateSeekBarDisplay(0, 0);
-    $(".fa-pause").switchClass("fa-pause", "fa-play");
-    Session.set("playerIsDisabled", true);
+    updateSeekBarDisplay(0);
+    Session.set("soundLoaded", false);
   }
 }
 
@@ -43,14 +46,17 @@ Template.player.helpers({
 
 Template.hostPlayer.helpers({
   loadStreaming: function() {
+    console.log("load streaming called");
     if (Session.equals("soundLoaded", false)) {
-      if (CurrentSong.find().count() !== 0) {
-        var song = CurrentSong.findOne();
-        SC.stream(
-          song.uri, soundManagerOptions, function(sound) {
-          currentSound = sound;
-        });
-      }
+      Deps.nonreactive(function() {
+        if (CurrentSong.find().count() !== 0) {
+          var song = CurrentSong.findOne();
+          SC.stream(
+            song.uri, soundManagerOptions, function(sound) {
+            currentSound = sound;
+          });
+        }
+      });
     }
   },
   playingSong: function() {
@@ -60,7 +66,14 @@ Template.hostPlayer.helpers({
     return this.paused ? "play" : "pause";
   },
   playerDisabled: function() {
-    return Session.equals("playerIsDisabled", true) ? "disabled" : "";
+    console.log("player is disabled called");
+    var song =  CurrentSong.findOne({}, {
+      fields: {loaded: 1}
+    });
+    if (song && song.loaded) {
+      return "";
+    }
+    return "disabled";
   }
 });
 
@@ -71,13 +84,23 @@ Template.clientPlayer.helpers({
   playPauseIcon: function() {
     return this.paused ? "play" : "pause";
   },
+  playerDisabled: function() {
+    console.log("player is disabled called");
+    var song =  CurrentSong.findOne({}, {
+      fields: {loaded: 1}
+    });
+    if (song && song.loaded) {
+      return "";
+    }
+    return "disabled";
+  }
 });
 
 Template.player.events({
   "click .fa-play": function(event) {
     event.preventDefault();
     console.log("clicked play");
-    if (Session.equals("playerIsDisabled", true)) {
+    if (Session.equals("soundLoaded", false)) {
       return;
     }
     CurrentSong.update(this._id, {
@@ -91,7 +114,7 @@ Template.player.events({
   "click .fa-pause": function(event) {
     event.preventDefault();
     console.log("clicked pause");
-    if (Session.equals("playerIsDisabled", true)) {
+    if (Session.equals("soundLoaded", false)) {
       return;
     }
     CurrentSong.update(this._id, {
@@ -104,23 +127,22 @@ Template.player.events({
   },
   "click .fa-step-forward": function(event) {
     event.preventDefault();
-    if (Session.equals("playerIsDisabled", true) || !_.isObject(currentSound)) {
+    if (Session.equals("soundLoaded", false) || !_.isObject(currentSound)) {
       return;
     }
     currentSound.destruct();
-    OJPlayer.nextSong();
-    updateSeekBarDisplay(0, 0);
-    $(".fa-pause").switchClass("fa-pause", "fa-play");
-    Session.set("playerIsDisabled", true);
+    OJPlayer.nextSong(this);
+    updateSeekBarDisplay(0);
+    Session.set("soundLoaded", false);
   },
   "click .seek-bar": function(event) {
     event.preventDefault();
-    if (Session.equals("playerIsDisabled", true) || !_.isObject(currentSound)) {
+    if (Session.equals("soundLoaded", false) || !_.isObject(currentSound)) {
       return;
     }
     var seekPercentage = event.offsetX / $(".seek-bar").outerWidth();
     var estimatedPosition = currentSound.durationEstimate * seekPercentage;
-    updateSeekBarDisplay(estimatedPosition, seekPercentage);
+    updateSeekBarDisplay(seekPercentage);
     // change the position of the song
     currentSound.setPosition(estimatedPosition);
   }

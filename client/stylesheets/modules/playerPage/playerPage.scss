@@ -47,14 +47,6 @@ $bottom-bar-background-color: $base-accent-color;
         }
     }
 
-    // Icons
-    i {
-        color: $base-secondary-color;
-        text-shadow: .05rem .05rem .2rem $dark-gray;
-        &:hover {
-            cursor: pointer;
-        }
-    }
 }
 .bottom-bar {
     position: fixed;
@@ -62,6 +54,14 @@ $bottom-bar-background-color: $base-accent-color;
     background-color: $bottom-bar-background-color;
     @include pad;
     bottom: 0;
+
+    // Icons
+    i {
+        color: $base-background-color;
+        &:hover {
+            cursor: pointer;
+        }
+    }
 }
 .fake-bottom-bar {
     visibility: hidden;
