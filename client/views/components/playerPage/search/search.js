@@ -63,6 +63,7 @@ Template.search.events({
   "click .add-to-playlist": function(event) {
     console.log("added song to playlist");
     OJPlayer.addSongToPlaylist(this);
+    $(".added").fadeIn("fast").delay(1000).fadeOut("slow");
   }
 });
 

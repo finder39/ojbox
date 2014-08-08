@@ -51,3 +51,9 @@ $search-menu-size-small: $search-menu-size-large * 0.5;
 .in-playlist {
     display: none;
 }
+.added {
+    display: none;
+    @include flash($base-accent-color);
+    color: $base-background-color;
+    text-align: center;
+}
