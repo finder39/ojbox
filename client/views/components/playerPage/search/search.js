@@ -12,7 +12,11 @@ SearchResults = new Meteor.Collection(null);
 var processSearchResults = function(tracks, query) {
   // clear the results
   SearchResults.remove({});
-  var count = 0;
+  if (_.size(tracks)) {
+    $(".results-message").show();
+  } else {
+    $(".no-results").show();
+  }
   _.each(tracks, function(value, key, list) {
     if (value.streamable) {
       //Deps.nonreactive(function() {
@@ -32,6 +36,7 @@ var processSearchResults = function(tracks, query) {
 var getSearchResults = function(event) {
   var query = $(".search input[type=search]").val().trim();
   if (query) {
+    $(".query").html(query);
     SC.get("/tracks", {
       limit: maxResults,
       q: query,
@@ -50,6 +55,8 @@ Template.search.events({
   // make sure the api call only fires once the user is done typing
   //"keyup .search input[type=search]": _.debounce(getInstantResults, 250),
   "submit .search form": function(event) {
+    $(".results-message").hide();
+    $(".no-results").hide();
     event.preventDefault();
     getSearchResults(event);
   },
@@ -61,9 +68,7 @@ Template.search.events({
 
 Template.search.helpers({
   searchResults: function() {
-    return SearchResults.find({}, {
-      sort: [["inPlaylist", "desc"], ["id", "asc"]]
-    });
+    return SearchResults.find({inPlaylist: false});
   },
 });
 

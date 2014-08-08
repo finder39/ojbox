@@ -3,6 +3,8 @@
     <form>
       <input type="search" placeholder="Search for a song" />
     </form>
+    <p class="results-message">Search results for "<span class="query"></span>". Songs already in the playlist are not shown.</p>
+    <p class="no-results">No results for <span class="query"></span>.</p>
     <table class="search-results">
       <thead></thead>
       <tbody>
@@ -17,7 +19,7 @@
 <template name="searchResult">
   <tr class="{{inPlaylist}}">
     <td class="song-title">{{title}}</td>
-    <td class="add-to-playlist" title="Add to playlist">
+    <td class="add-to-playlist" title="">
       <i class="fa fa-fw fa-lg fa-plus-square"></i>
     </td>
   </tr>

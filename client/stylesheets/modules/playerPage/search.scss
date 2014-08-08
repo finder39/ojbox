@@ -8,7 +8,6 @@ $search-menu-color-hover: #fff;
 $search-menu-size-large: rem(680);
 $search-menu-size-medium: $search-menu-size-large * 0.8;
 $search-menu-size-small: $search-menu-size-large * 0.5;
-$search-menu-playlist-background-color: $light-purple;
 .search {
     display: none;
 }
@@ -39,6 +38,16 @@ $search-menu-playlist-background-color: $light-purple;
         background-color: inherit;
     }
 }
+.results-message {
+    display: none;
+}
+.no-results {
+    display: none;
+}
+.query {
+    color: $search-color;
+    font-weight: bold;
+}
 .in-playlist {
-    background-color: $search-menu-playlist-background-color;
+    display: none;
 }
