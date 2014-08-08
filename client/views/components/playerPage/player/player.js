@@ -17,9 +17,14 @@ var soundManagerOptions = {
   stream: true,
   onload: function() {
     console.log("song loaded");
+    var startingPosition;
     Deps.nonreactive(function() {
       OJPlayer.loaded(true);
+      startingPosition = OJPlayer.getStartingPosition();
     });
+    currentSound.setPosition(startingPosition);
+    currentSound.play();
+    currentSound.pause();
     Session.set("loading", false);
   },
   whileplaying: function() {
@@ -82,15 +87,15 @@ Template.hostPlayer.helpers({
     if (this.paused) {
       if (_.isObject(currentSound) &&
           this.loaded &&
-          currentSound.playState === 1) {
+          currentSound.paused === false) {
         currentSound.pause();
       }
       return "play";
     } else {
       if (_.isObject(currentSound) &&
           this.loaded &&
-          currentSound.playState === 0) {
-        currentSound.play();
+          currentSound.paused === true) {
+        currentSound.resume();
       }
       return "pause";
     }

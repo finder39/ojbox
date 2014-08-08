@@ -71,5 +71,8 @@ OJPlayer = {
       $set: {loaded: isLoaded}
     });
   },
+  getStartingPosition: function() {
+    return CurrentSong.findOne().position;
+  }
 };
 
