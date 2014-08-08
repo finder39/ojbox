@@ -1,17 +1,32 @@
 $playlist-color: $base-accent-color;
+$playlist-current-song-color: $base-background-color;
+$playlist-current-song-background-color: $base-accent-color;
 .playlist {
+    .current-song {
+        background-color: $playlist-current-song-background-color;
+        td {
+            @include span-columns(12);
+            @include pad;
+            @include reset-display;
+            color: $playlist-current-song-color;
+        }
+        .now-playing {
+            color: $deep-orange;
+            text-transform: uppercase;
+            font-weight: bold;
+        }
+    }
     tr {
         @include span-columns(12);
         @include row(table);
     }
     td.song {
-        @include span-columns(10);
+        @include span-columns(8);
         @include pad;
     }
     td.upvote {
         @include span-columns(2);
         @include pad;
-        @include reset-display;
         text-align: center;
         color: $playlist-color;
         &:hover {
@@ -19,5 +34,18 @@ $playlist-color: $base-accent-color;
             background-color: $playlist-color;
             cursor: pointer;
         }
+    }
+    td.upvote.vote-disabled {
+        &:hover {
+            cursor: default;
+            background-color: $base-background-color;
+            color: $playlist-color;
+        }
+    }
+    td.num-upvotes {
+        @include span-columns(2);
+        @include pad;
+        @include reset-display;
+        text-align: center;
     }
 }

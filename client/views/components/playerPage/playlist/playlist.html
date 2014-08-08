@@ -2,11 +2,23 @@
   <table class="playlist">
     <thead></thead>
     <tbody>
+      {{#with currentSong}}
+        <tr class="current-song">
+          <td>
+            <div class="now-playing">Now Playing</div>
+            {{title}}
+          </td>
+        </tr>
+      {{/with}}
       {{#each song}}
         <tr>
           <td class="song">{{title}}</td>
-          <td class="upvote" title="Vote this song up">
-            <i class="fa fa-fw fa-lg fa-thumbs-up"></i>
+          <td class="upvote {{voteDisabled}}" title="{{tooltip}}">
+            <i class="fa fa-fw fa-lg {{thumbIcon}}"></i>
+          </td>
+          <td class="num-upvotes" title="Number of votes up">
+            <i class="fa fa-fw fa-lg fa-arrow-circle-up"></i>
+            {{upvotes}}
           </td>
         </tr>
       {{/each}}

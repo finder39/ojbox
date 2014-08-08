@@ -52,8 +52,6 @@ var getSearchResults = function(event) {
 }
 
 Template.search.events({
-  // make sure the api call only fires once the user is done typing
-  //"keyup .search input[type=search]": _.debounce(getInstantResults, 250),
   "submit .search form": function(event) {
     $(".results-message").hide();
     $(".no-results").hide();
@@ -62,7 +60,9 @@ Template.search.events({
   },
   "click .add-to-playlist": function(event) {
     console.log("added song to playlist");
+    event.preventDefault();
     OJPlayer.addSongToPlaylist(this);
+    $(event.currentTarget).parent().addClass("in-playlist");
     $(".added").fadeIn("fast").delay(1000).fadeOut("slow");
   }
 });
