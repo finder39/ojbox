@@ -8,7 +8,7 @@ OJPlayer = {
     // this means figuring out where to insert the song into the list
 
     songDoc.addedByUsername = Meteor.user().username;
-    songDoc.addedByUserId = Meteor.userId;
+    songDoc.addedByUserId = Meteor.userId();
     songDoc.addedAt = new Date();
     songDoc.upvotes = 0;
     songDoc.downvotes = 0;

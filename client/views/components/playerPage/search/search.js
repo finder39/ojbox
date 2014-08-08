@@ -1,7 +1,3 @@
-// makes sure that search only happens on new strings, because
-// keypresses happen on keys that don't matter
-var oldQuery = "";
-
 // limit results and instant results
 var maxResults = 20;
 // minimum song length
@@ -11,38 +7,28 @@ var minSongLength = 120000;
 // 600000 = 10 minutes
 var maxSongLength = 600000;
 
-InstantResults = new Meteor.Collection(null);
+SearchResults = new Meteor.Collection(null);
 
 var processSearchResults = function(tracks, query) {
   // clear the results
-  InstantResults.remove({});
+  SearchResults.remove({});
   var count = 0;
   _.each(tracks, function(value, key, list) {
     if (value.streamable) {
-      InstantResults.insert(value);
+      //Deps.nonreactive(function() {
+        if (Playlist.find({id: value.id}).count()) {
+          value.inPlaylist = true;
+        } else {
+          value.inPlaylist = false;
+        }
+      //});
+      SearchResults.insert(value);
     }
   });
   // highlight the instant search results
   $(".search-results tbody").highlight(query.split(" "));
 }
 
-var getInstantResults = function(event) {
-  var query = $(".search input[type=search]").val().trim();
-  if (query && query != oldQuery) {
-    oldQuery = query;
-    SC.get("/tracks", {
-      limit: maxResults,
-      q: query,
-      // there is a bug in the soundcloud api where the filter option
-      // is ignored when there is a query option. i'm including it
-      // anyway so when it's fixed it'll work
-      filter: {streamable: true},
-      duration: {from: minSongLength, to: maxSongLength}
-    }, function(tracks) {
-      processSearchResults(tracks, query);
-    });
-  }
-}
 var getSearchResults = function(event) {
   var query = $(".search input[type=search]").val().trim();
   if (query) {
@@ -74,7 +60,28 @@ Template.search.events({
 });
 
 Template.search.helpers({
-  instantResults: function() {
-    return InstantResults.find();
+  searchResults: function() {
+    return SearchResults.find({}, {
+      sort: [["inPlaylist", "desc"], ["id", "asc"]]
+    });
+  },
+});
+
+Template.searchResult.helpers({
+  inPlaylist: function() {
+    if (Playlist.find({id: this.id}).count()) {
+      if (!this.inPlaylist) {
+        SearchResults.update(this._id, {
+          $set: {inPlaylist: true}
+        });
+      }
+      return "in-playlist";
+    }
+    if (this.inPlaylist) {
+      SearchResults.update(this._id, {
+        $set: {inPlaylist: false}
+      });
+    }
+    return "";
   },
 });

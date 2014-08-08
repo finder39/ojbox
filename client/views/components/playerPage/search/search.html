@@ -6,15 +6,20 @@
     <table class="search-results">
       <thead></thead>
       <tbody>
-        {{#each instantResults}}
-          <tr>
-            <td class="song-title">{{title}}</td>
-            <td class="add-to-playlist" title="Add to playlist">
-              <i class="fa fa-fw fa-lg fa-plus-square"></i>
-            </td>
-          </tr>
+        {{#each searchResults}}
+          {{> searchResult}}
         {{/each}}
       </tbody>
     </table>
   </div>
 </template>
+
+<template name="searchResult">
+  <tr class="{{inPlaylist}}">
+    <td class="song-title">{{title}}</td>
+    <td class="add-to-playlist" title="Add to playlist">
+      <i class="fa fa-fw fa-lg fa-plus-square"></i>
+    </td>
+  </tr>
+</template>
+
