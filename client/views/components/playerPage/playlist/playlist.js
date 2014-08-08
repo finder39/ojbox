@@ -22,6 +22,9 @@ Template.playlist.helpers({
     return (_.contains(this.userIdsWhoVotedUp, Meteor.userId()) ||
             this.addedByUserId === Meteor.userId()) ?
             "You've added this song or voted it up" : "Vote this song up";
+  },
+  noSongs: function() {
+    return CurrentSong.find().count() === 0;
   }
 });
 

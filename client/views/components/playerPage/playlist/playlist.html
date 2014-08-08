@@ -2,6 +2,11 @@
   <table class="playlist">
     <thead></thead>
     <tbody>
+      {{#if noSongs}}
+      <p class="empty-playlist-message">
+        The playlist is empty. To add music, search for a song on the <span class="search-text">Search</span> tab.
+      </p>
+      {{/if}}
       {{#with currentSong}}
         <tr class="current-song">
           <td>

@@ -50,3 +50,12 @@ $playlist-current-song-background-color: $base-accent-color;
         text-align: center;
     }
 }
+.empty-playlist-message {
+    text-align: center;
+    color: $medium-gray;
+    .search-text {
+        color: $deep-orange;
+        font-weight: bold;
+        text-transform: uppercase;
+    }
+}
