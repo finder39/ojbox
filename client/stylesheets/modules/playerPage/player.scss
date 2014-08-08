@@ -1,4 +1,5 @@
 .player {
+    text-align: center;
     $seek-bar-color: $base-background-color;
     $progress-bar-color: $deep-orange;
     $disabled-color: $medium-gray;
@@ -16,10 +17,10 @@
         }
     }
     .playpause {
-        @include span-columns(1);
+        @include span-columns(2);
     }
     .seek-bar {
-        @include span-columns(9);
+        @include span-columns(6);
         position: relative;
         &:hover {
             cursor: pointer;
@@ -38,11 +39,10 @@
         color: $base-accent-color;
     }
     .ff-button {
-        @include span-columns(1);
+        @include span-columns(2);
     }
     .song-title {
         position: absolute;
-        text-align: center;
         width: 100%;
         top: 0;
         left: 0;
@@ -50,9 +50,10 @@
         overflow: hidden;
     }
     .vendor-icon {
-        @include span-columns(1);
+        @include span-columns(2);
     }
 }
 .player.client-player .seek-bar {
+    @include span-columns(8);
     cursor: default;
 }
