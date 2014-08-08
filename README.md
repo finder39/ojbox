@@ -7,6 +7,9 @@ Demo can be seen at http://ojbox.meteor.com.
 - Add Youtube API support
 - Add Spotify API support (this will require Spotify Premium)
 - Turn chat text input to contentEditable input
+- Clean up CSS
+- Remove console logs
+- Add user list on chat page
 
 ## Possible future features
 - Color theme
