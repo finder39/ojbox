@@ -14,10 +14,15 @@ OJPlayer = {
     songDoc.downvotes = 0;
 
     // if CurrentSong is empty, put it there instead
-    if (!CurrentSong.findOne()) {
+    var current;
+    Deps.nonreactive(function() {
+      current = CurrentSong.find().count();
+    });
+    if (!current) {
+      console.log("adding to currentsong instead of playlist");
       songDoc.position = 0;
       songDoc.paused = true;
-      songDoc.loaded = true;
+      songDoc.loaded = false;
       CurrentSong.insert(songDoc);
       return;
     }
@@ -26,7 +31,9 @@ OJPlayer = {
   },
   nextSong: function(current) {
     // clear the current song if there is one
-    current = current || CurrentSong.findOne();
+    Deps.nonreactive(function() {
+      current = current || CurrentSong.findOne();
+    });
     if (current) {
       CurrentSong.remove(current._id);
     }
@@ -37,10 +44,13 @@ OJPlayer = {
     // remove the top of the playlist
     Playlist.remove(firstPlaylistSong._id);
     firstPlaylistSong.position = 0;
-    firstPlaylistSong.paused = true;
+    if (current) {
+      // set the next song to play or pause depending on the last one
+      firstPlaylistSong.paused = current.paused;
+    } else {
+      firstPlaylistSong.paused = true;
+    }
     firstPlaylistSong.loaded = false;
-    // set the next song to play or pause depending on the last one
-    firstPlaylistSong.paused = current.paused;
 
     // insert the top playlist song
     CurrentSong.insert(firstPlaylistSong);

@@ -56,3 +56,6 @@
         @include span-columns(1);
     }
 }
+.player.client-player .seek-bar {
+    cursor: default;
+}

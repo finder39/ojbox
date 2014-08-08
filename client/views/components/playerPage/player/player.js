@@ -13,12 +13,10 @@ var soundManagerOptions = {
   stream: true,
   onload: function() {
     console.log("song loaded");
-    // this should be a database value, not a session value
-    OJPlayer.loaded(true);
-    Session.set("soundLoaded", true);
-    if (_.isObject(currentSound) && $(".fa-pause").length) {
-      currentSound.play();
-    }
+    Deps.nonreactive(function() {
+      OJPlayer.loaded(true);
+    });
+    Session.set("loading", false);
   },
   whileplaying: function() {
     updateSeekBarDisplay(this.position / this.duration);
@@ -29,7 +27,6 @@ var soundManagerOptions = {
     this.destruct();
     OJPlayer.nextSong();
     updateSeekBarDisplay(0);
-    Session.set("soundLoaded", false);
   }
 }
 
@@ -47,15 +44,13 @@ Template.player.helpers({
 Template.hostPlayer.helpers({
   loadStreaming: function() {
     console.log("load streaming called");
-    if (Session.equals("soundLoaded", false)) {
-      Deps.nonreactive(function() {
-        if (CurrentSong.find().count() !== 0) {
-          var song = CurrentSong.findOne();
-          SC.stream(
-            song.uri, soundManagerOptions, function(sound) {
-            currentSound = sound;
-          });
-        }
+    if (!this.loaded && Session.equals("loading", false)) {
+      console.log("call to stream music");
+      // don't want the song loading multiple times
+      Session.set("loading", true);
+      SC.stream(
+        this.uri, soundManagerOptions, function(sound) {
+        currentSound = sound;
       });
     }
   },
@@ -63,18 +58,23 @@ Template.hostPlayer.helpers({
     return CurrentSong.findOne();
   },
   playPauseIcon: function() {
-    return this.paused ? "play" : "pause";
+    console.log("pause play called");
+    if (this.paused) {
+      if (_.isObject(currentSound) && this.loaded) {
+        currentSound.pause();
+      }
+      return "play";
+    } else {
+      if (_.isObject(currentSound) && this.loaded) {
+        currentSound.play();
+      }
+      return "pause";
+    }
   },
   playerDisabled: function() {
     console.log("player is disabled called");
-    var song =  CurrentSong.findOne({}, {
-      fields: {loaded: 1}
-    });
-    if (song && song.loaded) {
-      return "";
-    }
-    return "disabled";
-  }
+    return this.loaded ? "" : "disabled";
+  },
 });
 
 Template.clientPlayer.helpers({
@@ -86,58 +86,46 @@ Template.clientPlayer.helpers({
   },
   playerDisabled: function() {
     console.log("player is disabled called");
-    var song =  CurrentSong.findOne({}, {
-      fields: {loaded: 1}
-    });
-    if (song && song.loaded) {
-      return "";
-    }
-    return "disabled";
+    return this.loaded ? "" : "disabled";
   }
 });
 
-Template.player.events({
+Template.hostPlayer.events({
   "click .fa-play": function(event) {
     event.preventDefault();
     console.log("clicked play");
-    if (Session.equals("soundLoaded", false)) {
+    if (this.loaded === false) {
       return;
     }
     CurrentSong.update(this._id, {
       $set: {paused: false}
     });
     $(".fa-play").switchClass("fa-play", "fa-pause");
-    if (_.isObject(currentSound)) {
-      currentSound.play();
-    }
   },
   "click .fa-pause": function(event) {
     event.preventDefault();
     console.log("clicked pause");
-    if (Session.equals("soundLoaded", false)) {
+    if (this.loaded === false) {
       return;
     }
     CurrentSong.update(this._id, {
       $set: {paused: true}
     });
     $(".fa-pause").switchClass("fa-pause", "fa-play");
-    if (_.isObject(currentSound)) {
-      currentSound.pause();
-    }
   },
   "click .fa-step-forward": function(event) {
     event.preventDefault();
-    if (Session.equals("soundLoaded", false) || !_.isObject(currentSound)) {
+    console.log("clicked fast forward");
+    if (this.loaded === false) {
       return;
     }
     currentSound.destruct();
     OJPlayer.nextSong(this);
     updateSeekBarDisplay(0);
-    Session.set("soundLoaded", false);
   },
   "click .seek-bar": function(event) {
     event.preventDefault();
-    if (Session.equals("soundLoaded", false) || !_.isObject(currentSound)) {
+    if (this.loaded === false) {
       return;
     }
     var seekPercentage = event.offsetX / $(".seek-bar").outerWidth();
@@ -146,5 +134,30 @@ Template.player.events({
     // change the position of the song
     currentSound.setPosition(estimatedPosition);
   }
+});
+
+Template.clientPlayer.events({
+  "click .fa-play": function(event) {
+    event.preventDefault();
+    console.log("clicked play");
+    if (this.loaded === false) {
+      return;
+    }
+    CurrentSong.update(this._id, {
+      $set: {paused: false}
+    });
+    $(".fa-play").switchClass("fa-play", "fa-pause");
+  },
+  "click .fa-pause": function(event) {
+    event.preventDefault();
+    console.log("clicked pause");
+    if (this.loaded === false) {
+      return;
+    }
+    CurrentSong.update(this._id, {
+      $set: {paused: true}
+    });
+    $(".fa-pause").switchClass("fa-pause", "fa-play");
+  },
 });
 

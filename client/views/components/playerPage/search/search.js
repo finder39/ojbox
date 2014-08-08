@@ -68,6 +68,7 @@ Template.search.events({
     getSearchResults(event);
   },
   "click .add-to-playlist": function(event) {
+    console.log("added song to playlist");
     OJPlayer.addSongToPlaylist(this);
   }
 });

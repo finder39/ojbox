@@ -7,41 +7,41 @@
 </template>
 
 <template name="hostPlayer">
-  {{loadStreaming}}
-  <ul class="player {{playerDisabled}}">
-    {{#with playingSong}}
-      <li class="playpause">
-        <i class="fa fa-{{playPauseIcon}} fa-fw fa-lg"></i>
-      </li>
-      <li class="seek-bar">
-        <span class="progress-bar">
-          <p class="song-title">{{title}}</p>
-        </span>
-      </li>
-      <li class="ff-button">
-        <i class="fa fa-fw fa-step-forward fa-lg"></i>
-      </li>
-      <li class="vendor-icon">
-        <i class="fa fa-soundcloud fa-fw fa-lg"></i>
-      </li>
+  {{#with playingSong}}
+    {{loadStreaming}}
+    <ul class="player {{playerDisabled}}">
+        <li class="playpause">
+          <i class="fa fa-{{playPauseIcon}} fa-fw fa-lg"></i>
+        </li>
+        <li class="seek-bar">
+          <span class="progress-bar">
+            <p class="song-title">{{title}}</p>
+          </span>
+        </li>
+        <li class="ff-button">
+          <i class="fa fa-fw fa-step-forward fa-lg"></i>
+        </li>
+        <li class="vendor-icon">
+          <i class="fa fa-soundcloud fa-fw fa-lg"></i>
+        </li>
+    </ul>
     {{/with}}
-  </ul>
 </template>
 
 <template name="clientPlayer">
-  <ul class="player {{playerDisabled}}">
-    {{#with playingSong}}
-      <li class="playpause">
-        <i class="fa fa-{{playPauseIcon}} fa-fw fa-lg"></i>
-      </li>
-      <li class="seek-bar">
-        <span class="progress-bar">
-          <p class="song-title">{{title}}</p>
-        </span>
-      </li>
-      <li class="vendor-icon">
-        <i class="fa fa-soundcloud fa-fw fa-lg"></i>
-      </li>
+  {{#with playingSong}}
+    <ul class="player client-player {{playerDisabled}}">
+        <li class="playpause">
+          <i class="fa fa-{{playPauseIcon}} fa-fw fa-lg"></i>
+        </li>
+        <li class="seek-bar">
+          <span class="progress-bar">
+            <p class="song-title">{{title}}</p>
+          </span>
+        </li>
+        <li class="vendor-icon">
+          <i class="fa fa-soundcloud fa-fw fa-lg"></i>
+        </li>
+    </ul>
     {{/with}}
-  </ul>
 </template>

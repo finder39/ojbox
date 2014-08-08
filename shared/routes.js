@@ -12,7 +12,7 @@ Router.map(function() {
       ];
     },
     onRun: function() {
-      Session.set("soundLoaded", false);
+      Session.set("loading", false);
     }
   });
 });
