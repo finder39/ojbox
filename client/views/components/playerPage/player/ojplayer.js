@@ -1,12 +1,5 @@
 OJPlayer = {
   addSongToPlaylist: function(songDoc) {
-    // todo: only add to playlist if it's not in playlist already.
-    // if it is in the playlist, then vote it up once
-    // also, check who is adding it so they don't vote it up
-    // by adding it a bunch of times
-    // todo: put in order, upvotes, downvotes
-    // this means figuring out where to insert the song into the list
-
     songDoc.addedByUsername = Meteor.user().username;
     songDoc.addedByUserId = Meteor.userId();
     songDoc.addedAt = new Date();

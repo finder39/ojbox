@@ -1,6 +1,10 @@
+// used to hold the current SoundManager2 sound object
 var currentSound = null;
-var nextSong = null;
 
+// update the seek bar for the clients at intervals
+var okToUpdate = true;
+// how often to update the client seek bar
+var seekBarUpdateInterval = 2000;
 
 var updateSeekBarDisplay = function(percentage) {
   // update the progress bar
@@ -20,6 +24,24 @@ var soundManagerOptions = {
   },
   whileplaying: function() {
     updateSeekBarDisplay(this.position / this.duration);
+    // update the position
+    if (okToUpdate) {
+      // make sure we don't update too often
+      okToUpdate = false;
+      var current;
+      Deps.nonreactive(function() {
+        current = CurrentSong.findOne();
+      });
+      CurrentSong.update(current._id, {
+        $set: {
+          position: this.position,
+        }
+      });
+      // set a timeout to be able to update again in a few seconds
+      Meteor.setTimeout(function() {
+        okToUpdate = true;
+      }, seekBarUpdateInterval);
+    }
   },
   onfinish: function() {
     console.log("song finished playing");
@@ -43,7 +65,6 @@ Template.player.helpers({
 
 Template.hostPlayer.helpers({
   loadStreaming: function() {
-    console.log("load streaming called");
     if (!this.loaded && Session.equals("loading", false)) {
       console.log("call to stream music");
       // don't want the song loading multiple times
@@ -58,21 +79,23 @@ Template.hostPlayer.helpers({
     return CurrentSong.findOne();
   },
   playPauseIcon: function() {
-    console.log("pause play called");
     if (this.paused) {
-      if (_.isObject(currentSound) && this.loaded) {
+      if (_.isObject(currentSound) &&
+          this.loaded &&
+          currentSound.playState === 1) {
         currentSound.pause();
       }
       return "play";
     } else {
-      if (_.isObject(currentSound) && this.loaded) {
+      if (_.isObject(currentSound) &&
+          this.loaded &&
+          currentSound.playState === 0) {
         currentSound.play();
       }
       return "pause";
     }
   },
   playerDisabled: function() {
-    console.log("player is disabled called");
     return this.loaded ? "" : "disabled";
   },
 });
@@ -85,8 +108,10 @@ Template.clientPlayer.helpers({
     return this.paused ? "play" : "pause";
   },
   playerDisabled: function() {
-    console.log("player is disabled called");
     return this.loaded ? "" : "disabled";
+  },
+  updateSeekBar: function() {
+    updateSeekBarDisplay(this.position / this.duration);
   }
 });
 
