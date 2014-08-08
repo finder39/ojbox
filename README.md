@@ -10,6 +10,8 @@ Demo can be seen at http://ojbox.meteor.com.
 - Clean up CSS
 - Remove console logs
 - Add user list on chat page
+- Make it work for mobile
+- Notification for empty playlist
 
 ## Possible future features
 - Color theme

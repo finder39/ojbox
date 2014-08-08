@@ -1,13 +1,5 @@
-$search-menu-border-color: $dark-gray;
-$search-menu-background: lighten($search-menu-border-color, 5);
-$search-menu-color: #fff;
 $search-color: $deep-orange;
-$search-menu-border: 1px solid $search-menu-border-color;
-$search-menu-background-hover: $base-accent-color;
-$search-menu-color-hover: #fff;
-$search-menu-size-large: rem(680);
-$search-menu-size-medium: $search-menu-size-large * 0.8;
-$search-menu-size-small: $search-menu-size-large * 0.5;
+$search-results-message-color: $medium-gray;
 .search {
     display: none;
 }
@@ -40,9 +32,13 @@ $search-menu-size-small: $search-menu-size-large * 0.5;
 }
 .results-message {
     display: none;
+    text-align: center;
+    color: $search-results-message-color;
 }
 .no-results {
     display: none;
+    text-align: center;
+    color: $search-results-message-color;
 }
 .query {
     color: $search-color;
@@ -53,7 +49,7 @@ $search-menu-size-small: $search-menu-size-large * 0.5;
 }
 .added {
     display: none;
-    @include flash($base-accent-color);
+    @include flash($search-color);
     color: $base-background-color;
     text-align: center;
 }

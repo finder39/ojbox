@@ -91,7 +91,7 @@ Template.clientPlayer.helpers({
 });
 
 Template.hostPlayer.events({
-  "click .fa-play": function(event) {
+  "click .fa-play, touchstart .fa-play": function(event) {
     event.preventDefault();
     console.log("clicked play");
     if (this.loaded === false) {
@@ -102,7 +102,7 @@ Template.hostPlayer.events({
     });
     $(".fa-play").switchClass("fa-play", "fa-pause");
   },
-  "click .fa-pause": function(event) {
+  "click .fa-pause, touchstart .fa-pause": function(event) {
     event.preventDefault();
     console.log("clicked pause");
     if (this.loaded === false) {
@@ -113,7 +113,7 @@ Template.hostPlayer.events({
     });
     $(".fa-pause").switchClass("fa-pause", "fa-play");
   },
-  "click .fa-step-forward": function(event) {
+  "click .fa-step-forward, touchstart .fa-step-forward": function(event) {
     event.preventDefault();
     console.log("clicked fast forward");
     if (this.loaded === false) {
@@ -123,7 +123,7 @@ Template.hostPlayer.events({
     OJPlayer.nextSong(this);
     updateSeekBarDisplay(0);
   },
-  "click .seek-bar": function(event) {
+  "click .seek-bar, touchstart .seek-bar": function(event) {
     event.preventDefault();
     if (this.loaded === false) {
       return;
@@ -137,7 +137,7 @@ Template.hostPlayer.events({
 });
 
 Template.clientPlayer.events({
-  "click .fa-play": function(event) {
+  "click .fa-play, touchstart .fa-play": function(event) {
     event.preventDefault();
     console.log("clicked play");
     if (this.loaded === false) {
@@ -148,7 +148,7 @@ Template.clientPlayer.events({
     });
     $(".fa-play").switchClass("fa-play", "fa-pause");
   },
-  "click .fa-pause": function(event) {
+  "click .fa-pause, touchstart .fa-pause": function(event) {
     event.preventDefault();
     console.log("clicked pause");
     if (this.loaded === false) {

@@ -26,7 +26,7 @@ Template.playlist.helpers({
 });
 
 Template.playlist.events({
-  "click .upvote": function(event) {
+  "click .upvote, touchstart .upvote": function(event) {
     event.preventDefault();
     var currentTarget = $(event.currentTarget);
     if (currentTarget.hasClass("vote-disabled")) {

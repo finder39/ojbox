@@ -1,5 +1,5 @@
 Template.topBar.events({
-  "click .tab-playlist": function(event) {
+  "click .tab-playlist, touchstart .tab-playlist": function(event) {
     var tab = $(".tab-playlist");
     // if not selected
     if (!tab.hasClass("selected")) {
@@ -12,7 +12,7 @@ Template.topBar.events({
     $(".search").hide();
     $(".playlist").show();
   },
-  "click .tab-chat": function(event) {
+  "click .tab-chat, touchstart .tab-chat": function(event) {
     var tab = $(".tab-chat");
     // if not selected
     if (!tab.hasClass("selected")) {
@@ -25,7 +25,7 @@ Template.topBar.events({
     $(".search").hide();
     $(".chat").show();
   },
-  "click .tab-search": function(event) {
+  "click .tab-search, touchstart .tab-search": function(event) {
     var tab = $(".tab-search");
     // if not selected
     if (!tab.hasClass("selected")) {

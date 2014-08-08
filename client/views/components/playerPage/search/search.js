@@ -58,7 +58,7 @@ Template.search.events({
     event.preventDefault();
     getSearchResults(event);
   },
-  "click .add-to-playlist": function(event) {
+  "click .add-to-playlist, touchstart .add-to-Playlist": function(event) {
     console.log("added song to playlist");
     event.preventDefault();
     OJPlayer.addSongToPlaylist(this);

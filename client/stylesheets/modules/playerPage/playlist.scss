@@ -2,6 +2,7 @@ $playlist-color: $base-accent-color;
 $playlist-current-song-color: $base-background-color;
 $playlist-current-song-background-color: $base-accent-color;
 .playlist {
+    margin-top: 0;
     .current-song {
         background-color: $playlist-current-song-background-color;
         td {

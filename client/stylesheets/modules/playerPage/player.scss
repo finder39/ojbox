@@ -3,9 +3,6 @@
     $progress-bar-color: $deep-orange;
     $disabled-color: $medium-gray;
     $seek-bar-height: rem(24);
-    $seek-bar-width-small: rem(80);
-    $seek-bar-width-medium: rem(200);
-    $seek-bar-width-large: rem(300);
 
     @include outer-container;
     &.disabled i {
