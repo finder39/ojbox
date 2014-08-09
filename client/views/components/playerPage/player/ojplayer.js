@@ -52,7 +52,7 @@ OJPlayer = {
   },
   topSong: function() {
     return Playlist.findOne({}, {
-      // sort by voteTotal, which is upvotes - downVotes,
+      // sort by voteTotal, which is upvotes - downvotes,
       // breaking ties by time added
       sort: [["voteTotal", "desc"], ["addedAt", "asc"]]
     });

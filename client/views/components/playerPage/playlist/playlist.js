@@ -71,9 +71,9 @@ Template.playlist.events({
     }
 
     // remove the song if it's unanimously downvoted
+    var downvotes = this.downvotes;
     Meteor.call("getOnlineUserCount", function(error, result) {
-      console.log(result);
-      if (result > 2 && this.downvotes >= result - 2) {
+      if (result > 2 && downvotes >= result - 2) {
         Playlist.remove(this._id);
       }
     });
