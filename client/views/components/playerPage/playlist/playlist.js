@@ -35,6 +35,15 @@ Template.playlist.helpers({
   },
   noSongs: function() {
     return CurrentSong.find().count() === 0;
+  },
+  removeSongIcon: function() {
+    return this.addedByUserId === Meteor.userId() ? "fa-times" : "";
+  },
+  removeDisabled: function() {
+    return this.addedByUserId === Meteor.userId() ? "" : "remove-disabled";
+  },
+  tooltipRemove: function() {
+    return this.addedByUserId === Meteor.userId() ? "Remove from playlist" : "";
   }
 });
 
@@ -45,7 +54,6 @@ Template.playlist.events({
     if (currentTarget.hasClass("vote-disabled")) {
       return;
     }
-    console.log(event.currentTarget);
 
     Playlist.update(this._id, {
       $push: {userIdsWhoVotedUp: Meteor.userId()},
@@ -59,12 +67,19 @@ Template.playlist.events({
     if (currentTarget.hasClass("vote-disabled")) {
       return;
     }
-    console.log(event.currentTarget);
 
     Playlist.update(this._id, {
       $push: {userIdsWhoVotedDown: Meteor.userId()},
       $inc: {downvotes: 1, voteTotal: -1}
     });
     $(event.currentTarget).addClass("vote-disabled");
+  },
+  "click .remove-song, touchstart .remove-song": function(event) {
+    event.preventDefault();
+    var currentTarget = $(event.currentTarget);
+    if (currentTarget.hasClass("remove-disabled")) {
+      return;
+    }
+    Playlist.remove(this._id);
   }
 });

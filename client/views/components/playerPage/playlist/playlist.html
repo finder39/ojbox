@@ -18,6 +18,9 @@
       {{#each song}}
         <tr>
           <td class="song">{{title}}</td>
+          <td class="remove-song {{removeDisabled}}" title="{{tooltipRemove}}">
+            <i class="fa fa-fw fa-lg {{removeSongIcon}}"></i>
+          </td>
           <td class="upvote {{voteDisabled}}" title="{{tooltipUp}}">
             <i class="fa fa-fw fa-lg {{thumbUpIcon}}"></i>
             {{upvotes}}

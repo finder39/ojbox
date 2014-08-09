@@ -22,8 +22,25 @@ $playlist-current-song-background-color: $base-accent-color;
         @include row(table);
     }
     td.song {
-        @include span-columns(8);
+        @include span-columns(6);
         @include pad;
+    }
+    td.remove-song {
+        @include span-columns(2);
+        @include pad;
+        text-align: center;
+        color: $deep-orange;
+        &:hover {
+            color: $base-background-color;
+            background-color: $deep-orange;
+            cursor: pointer;
+        }
+    }
+    td.remove-song.remove-disabled {
+        &:hover {
+            cursor: default;
+            background-color: $base-background-color;
+        }
     }
     td.upvote, td.downvote {
         @include span-columns(2);

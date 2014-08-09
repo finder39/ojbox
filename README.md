@@ -11,7 +11,8 @@ Demo can be seen at http://ojbox.meteor.com.
 - Remove console logs
 - Add user list on chat page
 - Make it work for mobile
-- Add notifications for Chat, Playlist
+- Allow downvotes for 3 or more people to push a song off the list
+- Allow removal of your own song from the playlist
 
 ## Possible future features
 - Color theme
