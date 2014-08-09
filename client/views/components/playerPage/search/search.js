@@ -62,6 +62,9 @@ Template.search.events({
     console.log("added song to playlist");
     event.preventDefault();
     OJPlayer.addSongToPlaylist(this);
+  if (!Session.equals("selectedTab", "playlist")) {
+    Session.set("missedPlaylist", Session.get("missedPlaylist") + 1);
+  }
     $(event.currentTarget).parent().addClass("in-playlist");
     $(".added").fadeIn("fast").delay(1000).fadeOut("slow");
   }

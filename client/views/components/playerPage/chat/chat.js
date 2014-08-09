@@ -10,6 +10,9 @@ var addChatMessage = function(message, username) {
     message: message,
     time: new Date()
   });
+  if (!Session.equals("selectedTab", "chat")) {
+    Session.set("missedChats", Session.get("missedChats") + 1);
+  }
 }
 Chat.on("chat", function(message, username) {
   addChatMessage(message, username);

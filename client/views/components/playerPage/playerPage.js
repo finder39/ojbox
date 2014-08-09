@@ -11,6 +11,8 @@ Template.topBar.events({
     $(".chat").hide();
     $(".search").hide();
     $(".playlist").show();
+    Session.set("selectedTab", "playlist");
+    Session.set("missedPlaylist", 0);
   },
   "click .tab-chat, touchstart .tab-chat": function(event) {
     var tab = $(".tab-chat");
@@ -24,6 +26,8 @@ Template.topBar.events({
     $(".playlist").hide();
     $(".search").hide();
     $(".chat").show();
+    Session.set("selectedTab", "chat");
+    Session.set("missedChats", 0);
   },
   "click .tab-search, touchstart .tab-search": function(event) {
     var tab = $(".tab-search");
@@ -37,5 +41,15 @@ Template.topBar.events({
     $(".chat").hide();
     $(".playlist").hide();
     $(".search").show();
+    Session.set("selectedTab", "search");
   },
 });
+
+Template.topBar.helpers({
+  missedChats: function() {
+    return Session.get("missedChats") ? " (" + Session.get("missedChats") + ")": "";
+  },
+  missedPlaylist: function() {
+    return Session.get("missedPlaylist") ? " (" + Session.get("missedPlaylist") + ")": "";
+  }
+})

@@ -10,3 +10,9 @@ Meteor.insecureUserLogin = function(username, callback) {
     userCallback: callback
   });
 };
+
+Meteor.startup(function() {
+  Session.setDefault("selectedTab", "playlist");
+  Session.setDefault("missedChats", 0);
+  Session.setDefault("missedPlaylist", 0);
+});
