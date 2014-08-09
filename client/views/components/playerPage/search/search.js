@@ -8,6 +8,12 @@ var minSongLength = 120000;
 var maxSongLength = 600000;
 
 SearchResults = new Meteor.Collection(null);
+PlaylistTracker = new Meteor.Stream("playlistTracker");
+PlaylistTracker.on("songAdded", function() {
+  if (!Session.equals("selectedTab", "playlist")) {
+    Session.set("missedPlaylist", Session.get("missedPlaylist") + 1);
+  }
+});
 
 var processSearchResults = function(tracks, query) {
   // clear the results
@@ -65,6 +71,7 @@ Template.search.events({
     if (!Session.equals("selectedTab", "playlist")) {
       Session.set("missedPlaylist", Session.get("missedPlaylist") + 1);
     }
+    PlaylistTracker.emit("songAdded");
     $(event.currentTarget).parent().addClass("in-playlist");
     $(".added").fadeIn("fast").delay(1000).fadeOut("slow");
   }

@@ -10,12 +10,21 @@ Meteor.publish("currentSong", function() {
 
 // Streams
 Chat = new Meteor.Stream("chat");
+PlaylistTracker = new Meteor.Stream("playlistTracker");
 
 Chat.permissions.write(function(event) {
   return true;
 });
 
 Chat.permissions.read(function(event) {
+  return true;
+});
+
+PlaylistTracker.permissions.write(function(event) {
+  return true;
+});
+
+PlaylistTracker.permissions.read(function(event) {
   return true;
 });
 
