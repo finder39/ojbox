@@ -10,11 +10,12 @@ Try out the demo at http://ojbox.meteor.com!
 OJ Box needs to run on a server. Since this is free software, you will need to install it on a Mac or Linux box that has Node.js and MongoDB installed on it.
 Then just unpack the tarball provided in the dist/ folder (I haven’t fleshed this part out yet).
 
-After running it, OJ Box will expose a URL that people can go to using a browser. There are three four components to the interface.
+After running it, OJ Box will expose a URL that people can go to using a browser. There are four components to the interface.
 
 ### The Player
-OJ Box plays music from only a single device. This device is the host player. Sound will only come from this device.
-The other clients that connect will be able to play and pause the song, but only the host player can skip to the next song.
+OJ Box plays music from only a single device. This device is the host player. Whoever clicked *YEP* on the set up screen controls the host player.
+Sound will only come from this device. The other clients that connect will be able to play and pause the song,
+but only the host player can skip to the next song.
 
 ### Search
 The Search tab is for adding music to the playlist. The music comes from SoundCloud. OJ Box consumes the SoundCloud API.
