@@ -1,7 +1,33 @@
-# Jukebox
+# OJ Box (Office Jukebox, or Orange Juice Box)
 
-Votable queue playlist with songs that can gain priority.
-Demo can be seen at http://ojbox.meteor.com.
+## What is OJ Box?
+OJ Box is a poor man’s solution to having your own shareable music playlist.
+It is targeted towards single room office or home settings. You can search for songs, add them to a playlist, and vote on the songs in the playlist.
+
+Try out the demo at http://ojbox.meteor.com!
+
+## How does it Work?
+OJ Box needs to run on a server. Since this is free software, you will need to install it on a Mac or Linux box that has Node.js and MongoDB installed on it.
+Then just unpack the tarball provided in the dist/ folder (I haven’t fleshed this part out yet).
+
+After running it, OJ Box will expose a URL that people can go to using a browser. There are three four components to the interface.
+
+### The Player
+OJ Box plays music from only a single device. This device is the host player. Sound will only come from this device.
+The other clients that connect will be able to play and pause the song, but only the host player can skip to the next song.
+
+### Search
+The Search tab is for adding music to the playlist. The music comes from SoundCloud. OJ Box consumes the SoundCloud API.
+
+### The Playlist
+Songs added to the playlist can be viewed on the Playlist tab. Anyone logged in can add songs to the playlist.
+If you are not the person who added the song, you can vote up or down on it. Voting up or down can only be done once per user per song.
+The person who added the song also has the permission to remove it from the playlist.
+
+To make it fun, for playlists with three or more people logged in, if everyone but the person who added the song votes that song down, the song will be booted off the playlist.
+
+### Chat
+You can also chat with other logged in users on the Chat tab!
 
 ## Todo
 - Add Youtube API support
