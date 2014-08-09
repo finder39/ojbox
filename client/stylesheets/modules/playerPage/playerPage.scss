@@ -16,7 +16,7 @@ $bottom-bar-background-color: $base-accent-color;
     // tabs
     li.tab {
         @include span-columns(4, block-collapse);
-        @include pad();
+        @include pad;
         color: $med-light-gray;
         text-transform: uppercase;
         text-align: center;
@@ -52,7 +52,7 @@ $bottom-bar-background-color: $base-accent-color;
     position: fixed;
     width: 100%;
     background-color: $bottom-bar-background-color;
-    @include pad;
+    /*@include pad;*/
     bottom: 0;
 
     // Icons

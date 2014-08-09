@@ -3,21 +3,26 @@
     $seek-bar-color: $base-background-color;
     $progress-bar-color: $deep-orange;
     $disabled-color: $medium-gray;
-    $seek-bar-height: rem(24);
+    $seek-bar-height: $base-line-height;
 
     @include outer-container;
-    &.disabled i {
-        cursor: default;
-        color: $disabled-color;
+    .playpause, .ff-button, .vendor-icon {
+        @include span-columns(2);
+        @include pad;
+        &:hover {
+            cursor: pointer;
+        }
     }
-    &.disabled .seek-bar {
-        background-color: $disabled-color;
+    &.disabled .playpause, &.disabled .ff-button, &.disabled .vendor-icon {
         &:hover {
             cursor: default;
         }
-    }
-    .playpause {
-        @include span-columns(2);
+        i {
+            color: $disabled-color;
+            &:hover {
+                cursor: default;
+            }
+        }
     }
     .seek-bar {
         @include span-columns(6);
@@ -26,6 +31,7 @@
             cursor: pointer;
         }
         height: $seek-bar-height;
+        margin-top: flex-gutter();
         background-repeat: repeat-x;
         background-color: $seek-bar-color;
         .progress-bar {
@@ -35,12 +41,19 @@
             background-color: $progress-bar-color;
         }
     }
-    .song-time {
-        color: $base-accent-color;
+    &.disabled .seek-bar {
+        background-color: $disabled-color;
+        &:hover {
+            cursor: default;
+        }
     }
-    .ff-button {
-        @include span-columns(2);
-    }
+    /*.ff-button {*/
+        /*@include span-columns(2);*/
+        /*@include pad;*/
+        /*&:hover {*/
+            /*cursor: pointer;*/
+        /*}*/
+    /*}*/
     .song-title {
         position: absolute;
         width: 100%;
@@ -49,9 +62,17 @@
         color: $base-accent-color;
         overflow: hidden;
     }
-    .vendor-icon {
-        @include span-columns(2);
-    }
+    /*.vendor-icon {*/
+        /*@include span-columns(2);*/
+        /*@include pad;*/
+        /*&:hover {*/
+            /*cursor: pointer;*/
+        /*}*/
+    /*}*/
+    /*&.disabled li {*/
+        /*cursor: default;*/
+        /*color: $disabled-color;*/
+    /*}*/
 }
 .player.client-player .seek-bar {
     @include span-columns(8);

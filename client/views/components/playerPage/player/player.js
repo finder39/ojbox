@@ -121,29 +121,25 @@ Template.clientPlayer.helpers({
 });
 
 Template.hostPlayer.events({
-  "click .fa-play, touchstart .fa-play": function(event) {
+  "click .playpause, touchstart .playpause": function(event) {
     event.preventDefault();
-    console.log("clicked play");
+    console.log("clicked play/pause");
     if (this.loaded === false) {
       return;
     }
-    CurrentSong.update(this._id, {
-      $set: {paused: false}
-    });
-    $(".fa-play").switchClass("fa-play", "fa-pause");
-  },
-  "click .fa-pause, touchstart .fa-pause": function(event) {
-    event.preventDefault();
-    console.log("clicked pause");
-    if (this.loaded === false) {
-      return;
+    if ($(".playpause").has(".fa-play").length) {
+      CurrentSong.update(this._id, {
+        $set: {paused: false}
+      });
+      $(".fa-play").switchClass("fa-play", "fa-pause");
+    } else {
+      CurrentSong.update(this._id, {
+        $set: {paused: true}
+      });
+      $(".fa-pause").switchClass("fa-pause", "fa-play");
     }
-    CurrentSong.update(this._id, {
-      $set: {paused: true}
-    });
-    $(".fa-pause").switchClass("fa-pause", "fa-play");
   },
-  "click .fa-step-forward, touchstart .fa-step-forward": function(event) {
+  "click .ff-button, touchstart .ff-button": function(event) {
     event.preventDefault();
     console.log("clicked fast forward");
     if (this.loaded === false) {
@@ -160,34 +156,29 @@ Template.hostPlayer.events({
     }
     var seekPercentage = event.offsetX / $(".seek-bar").outerWidth();
     var estimatedPosition = currentSound.durationEstimate * seekPercentage;
-    updateSeekBarDisplay(seekPercentage);
     // change the position of the song
     currentSound.setPosition(estimatedPosition);
   }
 });
 
 Template.clientPlayer.events({
-  "click .fa-play, touchstart .fa-play": function(event) {
+  "click .playpause, touchstart .playpause": function(event) {
     event.preventDefault();
-    console.log("clicked play");
+    console.log("clicked play/pause");
     if (this.loaded === false) {
       return;
     }
-    CurrentSong.update(this._id, {
-      $set: {paused: false}
-    });
-    $(".fa-play").switchClass("fa-play", "fa-pause");
-  },
-  "click .fa-pause, touchstart .fa-pause": function(event) {
-    event.preventDefault();
-    console.log("clicked pause");
-    if (this.loaded === false) {
-      return;
+    if ($(".playpause").has(".fa-play").length) {
+      CurrentSong.update(this._id, {
+        $set: {paused: false}
+      });
+      $(".fa-play").switchClass("fa-play", "fa-pause");
+    } else {
+      CurrentSong.update(this._id, {
+        $set: {paused: true}
+      });
+      $(".fa-pause").switchClass("fa-pause", "fa-play");
     }
-    CurrentSong.update(this._id, {
-      $set: {paused: true}
-    });
-    $(".fa-pause").switchClass("fa-pause", "fa-play");
   },
 });
 
