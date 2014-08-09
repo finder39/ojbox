@@ -25,11 +25,13 @@ Template.playlist.helpers({
   },
   tooltipUp: function() {
     return (_.contains(this.userIdsWhoVotedUp, Meteor.userId()) ||
+            _.contains(this.userIdsWhoVotedDown, Meteor.userId()) ||
             this.addedByUserId === Meteor.userId()) ?
             "You've added this song or already voted it up" : "Vote this song up";
   },
   tooltipDown: function() {
-    return (_.contains(this.userIdsWhoVotedDown, Meteor.userId()) ||
+    return (_.contains(this.userIdsWhoVotedUp, Meteor.userId()) ||
+            _.contains(this.userIdsWhoVotedDown, Meteor.userId()) ||
             this.addedByUserId === Meteor.userId()) ?
             "You've added this song or already voted it down" : "Vote this song down";
   },
@@ -68,6 +70,13 @@ Template.playlist.events({
       return;
     }
 
+    // remove the song if it's unanimously downvoted
+    Meteor.call("getOnlineUserCount", function(error, result) {
+      console.log(result);
+      if (result > 2 && this.downvotes >= result - 2) {
+        Playlist.remove(this._id);
+      }
+    });
     Playlist.update(this._id, {
       $push: {userIdsWhoVotedDown: Meteor.userId()},
       $inc: {downvotes: 1, voteTotal: -1}

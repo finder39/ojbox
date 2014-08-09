@@ -45,6 +45,11 @@ Template.topBar.events({
   },
 });
 
+Template.playerPage.created = function() {
+  Session.set("missedPlaylist", 0);
+  Session.set("missedChats", 0);
+}
+
 Template.topBar.helpers({
   missedChats: function() {
     return Session.get("missedChats") ? " (" + Session.get("missedChats") + ")": "";
