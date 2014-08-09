@@ -11,7 +11,7 @@ Demo can be seen at http://ojbox.meteor.com.
 - Remove console logs
 - Add user list on chat page
 - Make it work for mobile
-- Make clickable player buttons bigger
+- Add notifications for Chat, Playlist
 
 ## Possible future features
 - Color theme
