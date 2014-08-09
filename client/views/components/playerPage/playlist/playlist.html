@@ -18,12 +18,13 @@
       {{#each song}}
         <tr>
           <td class="song">{{title}}</td>
-          <td class="upvote {{voteDisabled}}" title="{{tooltip}}">
-            <i class="fa fa-fw fa-lg {{thumbIcon}}"></i>
-          </td>
-          <td class="num-upvotes" title="Number of votes up">
-            <i class="fa fa-fw fa-lg fa-arrow-circle-up"></i>
+          <td class="upvote {{voteDisabled}}" title="{{tooltipUp}}">
+            <i class="fa fa-fw fa-lg {{thumbUpIcon}}"></i>
             {{upvotes}}
+          </td>
+          <td class="downvote {{voteDisabled}}" title="{{tooltipDown}}">
+            <i class="fa fa-fw fa-lg {{thumbDownIcon}}"></i>
+            {{downvotes}}
           </td>
         </tr>
       {{/each}}

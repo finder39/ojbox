@@ -5,6 +5,7 @@ OJPlayer = {
     songDoc.addedAt = new Date();
     songDoc.upvotes = 0;
     songDoc.downvotes = 0;
+    songDoc.voteTotal = 0;
 
     // if CurrentSong is empty, put it there instead
     var current;
@@ -51,8 +52,9 @@ OJPlayer = {
   },
   topSong: function() {
     return Playlist.findOne({}, {
-      // sort by upvotes, breaking ties by time added
-      sort: [["upvotes", "desc"], ["addedAt", "asc"]]
+      // sort by voteTotal, which is upvotes - downVotes,
+      // breaking ties by time added
+      sort: [["voteTotal", "desc"], ["addedAt", "asc"]]
     });
   },
   pause: function(current) {

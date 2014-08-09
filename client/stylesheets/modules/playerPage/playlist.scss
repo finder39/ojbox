@@ -25,7 +25,7 @@ $playlist-current-song-background-color: $base-accent-color;
         @include span-columns(8);
         @include pad;
     }
-    td.upvote {
+    td.upvote, td.downvote {
         @include span-columns(2);
         @include pad;
         text-align: center;
@@ -36,18 +36,12 @@ $playlist-current-song-background-color: $base-accent-color;
             cursor: pointer;
         }
     }
-    td.upvote.vote-disabled {
+    td.upvote.vote-disabled, td.downvote.vote-disabled {
         &:hover {
             cursor: default;
             background-color: $base-background-color;
             color: $playlist-color;
         }
-    }
-    td.num-upvotes {
-        @include span-columns(2);
-        @include pad;
-        @include reset-display;
-        text-align: center;
     }
 }
 .empty-playlist-message {
