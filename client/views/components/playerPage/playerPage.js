@@ -48,6 +48,7 @@ Template.topBar.events({
 Template.playerPage.created = function() {
   Session.set("missedPlaylist", 0);
   Session.set("missedChats", 0);
+  Session.set("selectedTab", "playlist");
 }
 
 Template.topBar.helpers({
