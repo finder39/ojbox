@@ -67,3 +67,12 @@ You can also chat with other logged in users on the Chat tab!
 user name, setting your user picture, file location for local music files
 - Either put in a list of connected users, or use the chat as a message log
 and say when users connect, disconnect, etc.
+
+## Notes
+Of course there is a limit to how much the SoundCloud API will allow
+streaming if this player becomes popular. Also, the YouTube API expressly
+forbids just playing the audio from a video, so YouTube is no longer an
+option (unless I show the whole video, but that’s beyond the scope of
+the project for now).
+
+I will need to add the ability to add your own music library.
