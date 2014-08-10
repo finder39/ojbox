@@ -13,7 +13,6 @@ OJPlayer = {
       current = CurrentSong.find().count();
     });
     if (!current) {
-      console.log("adding to currentsong instead of playlist");
       songDoc.position = 0;
       songDoc.paused = true;
       songDoc.loaded = false;

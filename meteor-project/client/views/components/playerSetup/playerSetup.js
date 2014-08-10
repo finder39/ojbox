@@ -1,7 +1,6 @@
 Template.playerSetup.events({
   "submit .player-setup form": function(event) {
     event.preventDefault();
-    console.log("setting up player on this connection");
 
     // make sure this runs only once when the main player is set up
     Deps.nonreactive(function() {
@@ -13,7 +12,6 @@ Template.playerSetup.events({
         // start off the player paused and make sure loaded status
         // is set as off
         if (CurrentSong.find().count() !== 0) {
-          console.log("setting current song as paused and not loaded");
           CurrentSong.update(CurrentSong.findOne()._id, {
             $set: {paused: true, loaded: false}
           });

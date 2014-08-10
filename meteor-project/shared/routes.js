@@ -4,7 +4,6 @@ Router.map(function() {
   this.route('app', {
     path: '*',
     waitOn: function() {
-      console.log("iron router waiting on");
       return [
         Meteor.subscribe("settings"),
         Meteor.subscribe("currentSong"),
