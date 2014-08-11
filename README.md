@@ -76,3 +76,6 @@ option (unless I show the whole video, but that’s beyond the scope of
 the project for now).
 
 I will need to add the ability to add your own music library.
+
+If you have any questions or suggestions, please
+email me.
