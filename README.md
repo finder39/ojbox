@@ -47,15 +47,14 @@ off the playlist.
 You can also chat with other logged in users on the Chat tab!
 
 ## Todo
-- Add Youtube API support
 - Add Spotify API support (this will require Spotify Premium)
 - Turn chat text input to contentEditable input
-- Clean up CSS
-- Remove console logs
 - Add user list on chat page
-- Make it work for mobile
+- Make it work for mobile. Phonegap
 - Add Velocity and some animations
 - Find other places to make performance boosts in the UI
+- Add collection hooks
+- Validate data
 
 ## Possible future features
 - Color theme
