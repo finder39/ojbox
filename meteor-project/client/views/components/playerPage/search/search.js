@@ -7,7 +7,9 @@ var minSongLength = 120000;
 // 600000 = 10 minutes
 var maxSongLength = 600000;
 
+// collection for results. only a local collection
 SearchResults = new Meteor.Collection(null);
+// to track adds to the playlist
 PlaylistTracker = new Meteor.Stream("playlistTracker");
 PlaylistTracker.on("songAdded", function() {
   if (!Session.equals("selectedTab", "playlist")) {
@@ -25,13 +27,11 @@ var processSearchResults = function(tracks, query) {
   }
   _.each(tracks, function(value, key, list) {
     if (value.streamable) {
-      //Deps.nonreactive(function() {
-        if (Playlist.find({id: value.id}).count()) {
-          value.inPlaylist = true;
-        } else {
-          value.inPlaylist = false;
-        }
-      //});
+      if (Playlist.find({id: value.id}).count()) {
+        value.inPlaylist = true;
+      } else {
+        value.inPlaylist = false;
+      }
       SearchResults.insert(value);
     }
   });

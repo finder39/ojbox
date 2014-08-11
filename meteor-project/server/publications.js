@@ -29,6 +29,7 @@ PlaylistTracker.permissions.read(function(event) {
 });
 
 Chat.addFilter(function(eventName, args) {
+  // switch the user id with the user's name
   if (this.userId) {
     var user = Meteor.users.findOne(this.userId);
     if (args[0] && user && user.username) {
