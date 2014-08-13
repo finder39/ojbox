@@ -3,9 +3,10 @@
 ## What is OJ Box?
 OJ Box is a poor man’s solution to having your own shareable music playlist.
 It is targeted towards single room office or home settings. You can search for
-songs, add them to a playlist, and vote on the songs in the playlist.
+songs, add them to a playlist, and vote on the songs in the playlist. No more
+yelling across the room to have your buddy play you a song!
 
-Try out the demo at http://ojbox.meteor.com!
+Try out the demo at http://ojbox.meteor.com.
 
 ## Installation
 OJ Box will currently only work on a Linux installation (and I’m not exactly
