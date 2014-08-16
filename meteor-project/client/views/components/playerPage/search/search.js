@@ -20,6 +20,7 @@ PlaylistTracker.on("songAdded", function() {
 var processSearchResults = function(tracks, query) {
   // clear the results
   SearchResults.remove({});
+  $(".searching").hide();
   if (_.size(tracks)) {
     $(".results-message").show();
   } else {
@@ -61,6 +62,7 @@ Template.search.events({
   "submit .search form": function(event) {
     $(".results-message").hide();
     $(".no-results").hide();
+    $(".searching").show();
     event.preventDefault();
     getSearchResults(event);
   },

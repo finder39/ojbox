@@ -2,6 +2,11 @@ $search-color: $deep-orange;
 $search-results-message-color: $medium-gray;
 .search {
     display: none;
+    p {
+        display: none;
+        text-align: center;
+        color: $search-results-message-color;
+    }
 }
 .search-results {
     tr {
@@ -29,16 +34,6 @@ $search-results-message-color: $medium-gray;
         color: $search-color;
         background-color: inherit;
     }
-}
-.results-message {
-    display: none;
-    text-align: center;
-    color: $search-results-message-color;
-}
-.no-results {
-    display: none;
-    text-align: center;
-    color: $search-results-message-color;
 }
 .query {
     color: $search-color;
