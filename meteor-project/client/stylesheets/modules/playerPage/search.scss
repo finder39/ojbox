@@ -2,11 +2,6 @@ $search-color: $deep-orange;
 $search-results-message-color: $medium-gray;
 .search {
     display: none;
-    p {
-        display: none;
-        text-align: center;
-        color: $search-results-message-color;
-    }
 }
 .search-results {
     tr {
@@ -41,6 +36,11 @@ $search-results-message-color: $medium-gray;
 }
 .in-playlist {
     display: none;
+}
+.searching, .results-message, .no-results, .added {
+    display: none;
+    text-align: center;
+    color: $search-results-message-color;
 }
 .added {
     display: none;

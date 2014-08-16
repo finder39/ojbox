@@ -2339,10 +2339,6 @@ input[type="submit"] {
 
 .search {
   display: none; }
-  .search p {
-    display: none;
-    text-align: center;
-    color: #757575; }
 
 .search-results tr {
   float: left;
@@ -2383,6 +2379,11 @@ input[type="submit"] {
 
 .in-playlist {
   display: none; }
+
+.searching, .results-message, .no-results, .added {
+  display: none;
+  text-align: center;
+  color: #757575; }
 
 .added {
   display: none;
