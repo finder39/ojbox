@@ -1245,11 +1245,11 @@ th {
 }
 .fa-h-square:before {
   content: "\f0fd";
-}
+}*/
 .fa-plus-square:before {
-  content: "\f0fe";
-}
-.fa-angle-double-left:before {
+  content: "\f0fe"; }
+
+/*.fa-angle-double-left:before {
   content: "\f100";
 }
 .fa-angle-double-right:before {
