@@ -14,7 +14,8 @@ OJPlayer = {
     });
     if (!current) {
       songDoc.position = 0;
-      songDoc.paused = true;
+      // automatically play the song
+      songDoc.paused = false;
       songDoc.loaded = false;
       CurrentSong.insert(songDoc);
       return;
