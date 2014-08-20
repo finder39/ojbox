@@ -69,6 +69,9 @@ user name, setting your user picture, file location for local music files
 and say when users connect, disconnect, etc.
 
 ## Notes
+The sound doesn’t work on mobile devices. For some reason it never loads.
+This is a known bug that; I will fix it soon.
+
 Of course there is a limit to how much the SoundCloud API will allow
 streaming if this player becomes popular. Also, the YouTube API expressly
 forbids just playing the audio from a video, so YouTube is no longer an

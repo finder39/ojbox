@@ -4,7 +4,7 @@
     "user-status": {},
     "highlight": {},
     "jquery-ui": {},
-    "iron-router": {},
+    "moment": {},
     "iron-router-progress": {},
     "fast-render": {}
   }
