@@ -1,69 +1,68 @@
 $tab-search-background-color: $deep-orange;
 $tab-playlist-background-color: $base-accent-color;
 $tab-chat-background-color: $cyan;
-$tab-text-color: $base-background-color;
-$tab-padding: rem(10);
-$bottom-bar-padding: rem(16);
+$tab-selected-text-color: $base-background-color;
+$tab-unselected-text-color: $med-light-gray;
 $bottom-bar-background-color: $base-accent-color;
 .player-page {
-    @include outer-container;
-    @include pad;
+  @include outer-container;
+  @include pad;
 }
 .top-bar {
-    @include row;
-    max-width: none;
+  @include row;
+  max-width: none;
 
-    // tabs
-    li.tab {
-        @include span-columns(4, block-collapse);
-        @include pad;
-        color: $med-light-gray;
-        text-transform: uppercase;
-        text-align: center;
-        font-weight: bold;
-        &:hover {
-            cursor: pointer;
-        }
-        &.selected {
-            color: $base-background-color;
-        }
+  // tabs
+  li.tab {
+    @include span-columns(4, block-collapse);
+    @include pad;
+    color: $tab-unselected-text-color;
+    text-transform: uppercase;
+    text-align: center;
+    font-weight: bold;
+    &:hover {
+      cursor: pointer;
     }
-    .tab-search {
-        background-color: darken($tab-search-background-color, 15);
-        &:hover, &.selected {
-            background-color: $tab-search-background-color;
-        }
+    &.selected {
+      color: $tab-selected-text-color;
     }
-    .tab-playlist {
-        background-color: darken($tab-playlist-background-color, 15);
-        &:hover, &.selected {
-            background-color: $tab-playlist-background-color;
-        }
+  }
+  .tab-search {
+    background-color: darken($tab-search-background-color, 15);
+    &:hover, &.selected {
+      background-color: $tab-search-background-color;
     }
-    .tab-chat {
-        background-color: darken($tab-chat-background-color, 15);
-        &:hover, &.selected {
-            background-color: $tab-chat-background-color;
-        }
+  }
+  .tab-playlist {
+    background-color: darken($tab-playlist-background-color, 15);
+    &:hover, &.selected {
+      background-color: $tab-playlist-background-color;
     }
+  }
+  .tab-chat {
+    background-color: darken($tab-chat-background-color, 15);
+    &:hover, &.selected {
+      background-color: $tab-chat-background-color;
+    }
+  }
 
 }
 .bottom-bar {
-    position: fixed;
-    width: 100%;
-    background-color: $bottom-bar-background-color;
-    /*@include pad;*/
-    bottom: 0;
+  position: fixed;
+  width: 100%;
+  background-color: $bottom-bar-background-color;
+  bottom: 0;
 
-    // Icons
-    i {
-        color: $base-background-color;
-        &:hover {
-            cursor: pointer;
-        }
+
+  // Icons
+  i {
+    color: $base-background-color;
+    &:hover {
+      cursor: pointer;
     }
+  }
 }
 .fake-bottom-bar {
-    visibility: hidden;
-    @include pad;
+  visibility: hidden;
+  @include pad;
 }

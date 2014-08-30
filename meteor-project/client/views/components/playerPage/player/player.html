@@ -1,3 +1,8 @@
+<head>
+  <link href="//cdnjs.cloudflare.com/ajax/libs/foundicons/3.0.0/foundation-icons.min.css" rel="stylesheet" type="text/css" />
+  <link href="//cdnjs.cloudflare.com/ajax/libs/foundicons/3.0.0/svgs/fi-rewind-ten.svg" rel="icon" />
+</head>
+
 <template name="player">
   {{#if mainPlayer}}
     {{> hostPlayer}}
@@ -10,43 +15,34 @@
   {{#with playingSong}}
     {{loadStreaming}}
     <ul class="player {{playerDisabled}}">
-        <li class="playpause">
-          <i class="fa fa-{{playPauseIcon}} fa-fw fa-lg"></i>
-        </li>
-        <li class="seek-bar">
-          <span class="progress-bar">
-            <p class="song-title">{{title}}</p>
-          </span>
-        </li>
-        <li class="ff-button">
-          <i class="fa fa-fw fa-step-forward fa-lg"></i>
-        </li>
-        <li class="vendor-icon">
-          <a href="{{permalink_url}}" target="_blank">
-            <i class="fa fa-soundcloud fa-fw fa-lg"></i>
-          </a>
-        </li>
+      <li class="ff-ten player-button">
+        <i class="fi-rewind-ten fa-lg"></i>
+      </li>
+      <li class="playpause player-button">
+        <i class="fa fa-{{playPauseIcon}} fa-fw fa-lg"></i>
+      </li>
+      <li class="ff-next player-button">
+        <i class="fa fa-fw fa-step-forward fa-lg"></i>
+      </li>
+      <li class="seek-bar">
+        <span class="progress-bar"></span>
+      </li>
     </ul>
-    {{/with}}
+  {{/with}}
 </template>
 
 <template name="clientPlayer">
   {{#with playingSong}}
     <ul class="player client-player {{playerDisabled}}">
-        <li class="playpause">
-          <i class="fa fa-{{playPauseIcon}} fa-fw fa-lg"></i>
-        </li>
-        <li class="seek-bar">
-          {{updateSeekBar}}
-          <span class="progress-bar">
-            <p class="song-title">{{title}}</p>
-          </span>
-        </li>
-        <li class="vendor-icon">
-          <a href="{{permalink_url}}" target="_blank">
-            <i class="fa fa-soundcloud fa-fw fa-lg"></i>
-          </a>
-        </li>
+      <li class="ff-ten player-button">&nbsp;</li>
+      <li class="playpause player-button">
+        <i class="fa fa-{{playPauseIcon}} fa-fw fa-lg"></i>
+      </li>
+      <li class="ff-next player-button">&nbsp;</li>
+      <li class="seek-bar">
+        {{updateSeekBar}}
+        <span class="progress-bar"></span>
+      </li>
     </ul>
-    {{/with}}
+  {{/with}}
 </template>

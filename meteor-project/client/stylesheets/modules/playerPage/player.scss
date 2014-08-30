@@ -1,80 +1,64 @@
 .player {
-    text-align: center;
-    $seek-bar-color: $base-background-color;
-    $progress-bar-color: $deep-orange;
-    $disabled-color: $medium-gray;
-    $seek-bar-height: $base-line-height;
+  text-align: center;
+  $seek-bar-color: $base-background-color;
+  $progress-bar-color: $deep-orange;
+  $disabled-color: $medium-gray;
+  $seek-bar-height: $base-line-height / 4;
 
-    @include outer-container;
-    .playpause, .ff-button, .vendor-icon {
-        @include span-columns(2);
-        @include pad;
-        &:hover {
-            cursor: pointer;
-        }
+  @include outer-container;
+  max-width: none;
+
+  // for all player buttons
+  li.player-button {
+    @include span-columns(4);
+    @include pad;
+  }
+  li.ff-next {
+    @include omega;
+  }
+  // special css for forward ten button because it comes from a different icon
+  // set than the rest of them
+  .fi-rewind-ten {
+    display: inline-block;
+    font-style: normal;
+    font-weight: normal;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+  // so that the hover areas are larger
+  .playpause, .ff-next, .vendor-icon, .ff-ten {
+    &:hover {
+      cursor: pointer;
     }
-    &.disabled .playpause, &.disabled .ff-button, &.disabled .vendor-icon {
-        &:hover {
-            cursor: default;
-        }
-        i {
-            color: $disabled-color;
-            &:hover {
-                cursor: default;
-            }
-        }
+  }
+  // disabled player button state
+  &.disabled .playpause, &.disabled .ff-next, &.disabled .vendor-icon, &.disabled .ff-ten {
+    &:hover {
+      cursor: default;
     }
-    .seek-bar {
-        @include span-columns(6);
-        position: relative;
-        &:hover {
-            cursor: pointer;
-        }
-        height: $seek-bar-height;
-        margin-top: flex-gutter();
-        background-repeat: repeat-x;
-        background-color: $seek-bar-color;
-        .progress-bar {
-            display: block;
-            width: 0%;
-            height: 100%;
-            background-color: $progress-bar-color;
-        }
+    i {
+      color: $disabled-color;
+      &:hover {
+        cursor: default;
+      }
     }
-    &.disabled .seek-bar {
-        background-color: $disabled-color;
-        &:hover {
-            cursor: default;
-        }
+  }
+
+  // seek bar and progress bar
+  .seek-bar {
+    @include span-columns(12, block-collapse);
+    position: relative;
+    height: $seek-bar-height;
+    background-repeat: repeat-x;
+    background-color: $seek-bar-color;
+    .progress-bar {
+      display: block;
+      width: 0%;
+      height: 100%;
+      background-color: $progress-bar-color;
     }
-    /*.ff-button {*/
-        /*@include span-columns(2);*/
-        /*@include pad;*/
-        /*&:hover {*/
-            /*cursor: pointer;*/
-        /*}*/
-    /*}*/
-    .song-title {
-        position: absolute;
-        width: 100%;
-        top: 0;
-        left: 0;
-        color: $base-accent-color;
-        overflow: hidden;
-    }
-    /*.vendor-icon {*/
-        /*@include span-columns(2);*/
-        /*@include pad;*/
-        /*&:hover {*/
-            /*cursor: pointer;*/
-        /*}*/
-    /*}*/
-    /*&.disabled li {*/
-        /*cursor: default;*/
-        /*color: $disabled-color;*/
-    /*}*/
-}
-.player.client-player .seek-bar {
-    @include span-columns(8);
-    cursor: default;
+  }
+  &.disabled .seek-bar {
+    background-color: $disabled-color;
+  }
 }

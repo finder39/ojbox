@@ -135,7 +135,7 @@ Template.hostPlayer.events({
       $(".fa-pause").switchClass("fa-pause", "fa-play");
     }
   },
-  "click .ff-button, touchstart .ff-button": function(event) {
+  "click .ff-next, touchstart .ff-next": function(event) {
     event.preventDefault();
     if (this.loaded === false) {
       return;
@@ -144,16 +144,24 @@ Template.hostPlayer.events({
     OJPlayer.nextSong(this);
     updateSeekBarDisplay(0);
   },
-  "click .seek-bar, touchstart .seek-bar": function(event) {
+  "click .ff-ten, touchstart .ff-ten": function(event) {
     event.preventDefault();
     if (this.loaded === false) {
       return;
     }
-    var seekPercentage = event.offsetX / $(".seek-bar").outerWidth();
-    var estimatedPosition = currentSound.durationEstimate * seekPercentage;
-    // change the position of the song
-    currentSound.setPosition(estimatedPosition);
+    // skip ahead 10 seconds
+    currentSound.setPosition(currentSound.position + 10000);
   }
+  //"click .seek-bar, touchstart .seek-bar": function(event) {
+    //event.preventDefault();
+    //if (this.loaded === false) {
+      //return;
+    //}
+    //var seekPercentage = event.offsetX / $(".seek-bar").outerWidth();
+    //var estimatedPosition = currentSound.durationEstimate * seekPercentage;
+    //// change the position of the song
+    //currentSound.setPosition(estimatedPosition);
+  //}
 });
 
 Template.clientPlayer.events({
