@@ -2258,33 +2258,7 @@ input[type="submit"] {
   max-width: 68em;
   margin-left: auto;
   margin-right: auto;
-  max-width: none;
-  /*.ff-button {*/
-  /*@include span-columns(2);*/
-  /*@include pad;*/
-  /*&:hover {*/
-  /*cursor: pointer;*/
-  /*}*/
-  /*}*/
-  /*.song-title {*/
-  /*position: absolute;*/
-  /*width: 100%;*/
-  /*top: 0;*/
-  /*left: 0;*/
-  /*color: $base-accent-color;*/
-  /*overflow: hidden;*/
-  /*}*/
-  /*.vendor-icon {*/
-  /*@include span-columns(2);*/
-  /*@include pad;*/
-  /*&:hover {*/
-  /*cursor: pointer;*/
-  /*}*/
-  /*}*/
-  /*&.disabled li {*/
-  /*cursor: default;*/
-  /*color: $disabled-color;*/
-  /*}*/ }
+  max-width: none; }
   .player:after {
     content: "";
     display: table;
@@ -2318,11 +2292,7 @@ input[type="submit"] {
     display: block;
     width: 102.35765%;
     position: relative;
-    /*&:hover {*/
-    /*cursor: pointer;*/
-    /*}*/
     height: 0.375em;
-    /*margin-top: flex-gutter();*/
     background-repeat: repeat-x;
     background-color: white; }
     .player .seek-bar:last-child {
@@ -2333,15 +2303,8 @@ input[type="submit"] {
       height: 100%;
       background-color: #ff5722; }
   .player.disabled .seek-bar {
-    background-color: #757575;
-    /*&:hover {*/
-    /*cursor: default;*/
-    /*}*/ }
+    background-color: #757575; }
 
-/*.player.client-player .seek-bar {*/
-/*@include span-columns(8);*/
-/*cursor: default;*/
-/*}*/
 .search {
   display: none; }
 
