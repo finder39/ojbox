@@ -9,11 +9,9 @@ yelling across the room to have your buddy play you a song!
 Try out the demo at http://ojbox.meteor.com.
 
 ## Installation
-OJ Box will currently only work on a Linux installation (and I’m not exactly
-sure which versions this extends to). Installation is quite a process: the
-instructions at
-http://journal.gentlenode.com/meteor-1-deploy-a-meteor-application-on-ubuntu-with-nginx/
-detail how to do it. The tarball indicated can be found in the dist folder.
+Installation can be done with arunoda’s wonderful [meteor-up](https://github.com/arunoda/meteor-up)
+tool. Simply git clone this repository and use the meteor-up tool to deploy to
+a Debian/Ubuntu/Open Solaris environment.
 
 ## How does it Work?
 OJ Box needs to run on a server. Since this is free software, you will need to
