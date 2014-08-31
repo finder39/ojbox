@@ -6,7 +6,7 @@ It is targeted towards single room office or home settings. You can search for
 songs, add them to a playlist, and vote on the songs in the playlist. No more
 yelling across the room to have your buddy play you a song!
 
-Try out the demo at http://ojbox.meteor.com.
+Try out the demo at http://ojbox.rocks.
 
 ## Installation
 Installation can be done with arunoda’s wonderful [meteor-up](https://github.com/arunoda/meteor-up)
