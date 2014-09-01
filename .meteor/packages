@@ -5,13 +5,13 @@
 
 standard-app-packages
 jquery
-streams
+arunoda:streams@0.1.17
 appcache
-user-status
+mizzao:user-status@0.6.0
 accounts-base
 accounts-password
 underscore
-highlight
-jquery-ui
-moment
+mrt:highlight@0.0.1
+mrt:jquery-ui@1.9.2
+mrt:moment@2.8.1
 iron:router
