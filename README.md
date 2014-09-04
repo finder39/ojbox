@@ -54,10 +54,10 @@ You can also chat with other logged in users on the Chat tab!
 - Find other places to make performance boosts in the UI
 - Add collection hooks
 - Validate data
+- Ability to toggle sound on/off from different clients
 
 ## Possible future features
 - Color theme
-- Ability to toggle sound on/off from different clients
 - Maybe save chat history?
 - Database pruning, like delete users who haven’t logged on for a long time
 - Gravatar for chat? and/or ability to upload image
@@ -68,7 +68,7 @@ and say when users connect, disconnect, etc.
 
 ## Notes
 The sound doesn’t work on mobile devices. For some reason it never loads.
-This is a known bug that; I will fix it soon.
+This is a known bug that I will fix soon.
 
 Of course there is a limit to how much the SoundCloud API will allow
 streaming if this player becomes popular. Also, the YouTube API expressly
