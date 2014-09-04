@@ -2,71 +2,80 @@ $playlist-color: $base-accent-color;
 $playlist-current-song-color: $base-background-color;
 $playlist-current-song-background-color: $base-accent-color;
 .playlist {
-    margin-top: 0;
-    .current-song {
-        background-color: $playlist-current-song-background-color;
-        td {
-            @include span-columns(12);
-            @include pad;
-            @include reset-display;
-            color: $playlist-current-song-color;
-        }
-        .now-playing {
-            color: $deep-orange;
-            text-transform: uppercase;
-            font-weight: bold;
-        }
+  margin-top: 0;
+  .current-song {
+    background-color: $playlist-current-song-background-color;
+    color: $playlist-current-song-color;
+    @include outer-container;
+    .playing-title {
+      @include span-columns(10);
+      @include pad;
     }
+    .song-title i {
+      color: $playlist-current-song-color;
+    }
+    .song-image {
+      @include span-columns(2);
+    }
+    .now-playing {
+      color: $deep-orange;
+      text-transform: uppercase;
+      font-weight: bold;
+    }
+  }
+
+  table {
     tr {
-        @include span-columns(12);
-        @include row(table);
+      @include span-columns(12);
+      @include row(table);
     }
     td.song {
-        @include span-columns(6);
-        @include pad;
+      @include span-columns(6);
+      @include pad;
     }
     td.remove-song {
-        @include span-columns(2);
-        @include pad;
-        text-align: center;
-        color: $deep-orange;
-        &:hover {
-            color: $base-background-color;
-            background-color: $deep-orange;
-            cursor: pointer;
+      @include span-columns(2);
+      @include pad;
+      text-align: center;
+      color: $deep-orange;
+      &:hover {
+        color: $base-background-color;
+        background-color: $deep-orange;
+        cursor: pointer;
         }
     }
     td.remove-song.remove-disabled {
-        &:hover {
-            cursor: default;
-            background-color: $base-background-color;
+      &:hover {
+        cursor: default;
+        background-color: $base-background-color;
         }
     }
     td.upvote, td.downvote {
-        @include span-columns(2);
-        @include pad;
-        text-align: center;
-        color: $playlist-color;
-        &:hover {
-            color: $base-background-color;
-            background-color: $playlist-color;
-            cursor: pointer;
+      @include span-columns(2);
+      @include pad;
+      text-align: center;
+      color: $playlist-color;
+      &:hover {
+        color: $base-background-color;
+        background-color: $playlist-color;
+        cursor: pointer;
         }
     }
     td.upvote.vote-disabled, td.downvote.vote-disabled {
-        &:hover {
-            cursor: default;
-            background-color: $base-background-color;
-            color: $playlist-color;
+      &:hover {
+        cursor: default;
+        background-color: $base-background-color;
+        color: $playlist-color;
         }
     }
+  }
 }
 .empty-playlist-message {
-    text-align: center;
-    color: $medium-gray;
-    .search-text {
-        color: $deep-orange;
-        font-weight: bold;
-        text-transform: uppercase;
-    }
+  text-align: center;
+  color: $medium-gray;
+  .search-text {
+    color: $deep-orange;
+    font-weight: bold;
+    text-transform: uppercase;
+  }
 }

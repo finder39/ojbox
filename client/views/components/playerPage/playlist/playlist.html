@@ -1,36 +1,46 @@
 <template name="playlist">
-  <table class="playlist">
-    <thead></thead>
-    <tbody>
-      {{#if noSongs}}
+  <div class="playlist">
+    {{#if noSongs}}
       <p class="empty-playlist-message">
-        The playlist is empty. To add music, search for a song on the <span class="search-text">Search</span> tab.
+      The playlist is empty. To add music, search for a song on the <span class="search-text">Search</span> tab.
       </p>
-      {{/if}}
-      {{#with currentSong}}
-        <tr class="current-song">
-          <td>
-            <div class="now-playing">Now Playing</div>
-            {{title}}
-          </td>
-        </tr>
-      {{/with}}
-      {{#each song}}
-        <tr>
-          <td class="song">{{title}}</td>
-          <td class="remove-song {{removeDisabled}}" title="{{tooltipRemove}}">
-            <i class="fa fa-fw fa-lg {{removeSongIcon}}"></i>
-          </td>
-          <td class="upvote {{voteDisabled}}" title="{{tooltipUp}}">
-            <i class="fa fa-fw fa-lg {{thumbUpIcon}}"></i>
-            {{upvotes}}
-          </td>
-          <td class="downvote {{voteDisabled}}" title="{{tooltipDown}}">
-            <i class="fa fa-fw fa-lg {{thumbDownIcon}}"></i>
-            {{downvotes}}
-          </td>
-        </tr>
-      {{/each}}
-    </tbody>
-  </table>
+    {{/if}}
+    {{#with currentSong}}
+      <div class="current-song">
+        <div class="playing-title">
+          <div class="now-playing">Now Playing</div>
+          <div class="song-title">
+            {{title}}&nbsp;
+            <a href="{{permalink_url}}" target="_blank">
+              <i class="fa fa-fw fa-lg fa-soundcloud"></i>
+            </a>
+          </div>
+        </div>
+        <div class="song-image">
+          <img src="{{artwork_url}}" alt=""/>
+        </div>
+      </div>
+    {{/with}}
+    <table>
+      <thead></thead>
+      <tbody>
+        {{#each song}}
+          <tr>
+            <td class="song">{{title}}</td>
+            <td class="remove-song {{removeDisabled}}" title="{{tooltipRemove}}">
+              <i class="fa fa-fw fa-lg {{removeSongIcon}}"></i>
+            </td>
+            <td class="upvote {{voteDisabled}}" title="{{tooltipUp}}">
+              <i class="fa fa-fw fa-lg {{thumbUpIcon}}"></i>
+              {{upvotes}}
+            </td>
+            <td class="downvote {{voteDisabled}}" title="{{tooltipDown}}">
+              <i class="fa fa-fw fa-lg {{thumbDownIcon}}"></i>
+              {{downvotes}}
+            </td>
+          </tr>
+        {{/each}}
+      </tbody>
+    </table>
+  </div>
 </template>

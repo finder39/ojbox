@@ -805,21 +805,37 @@ input[type="submit"] {
 .playlist {
   margin-top: 0; }
   .playlist .current-song {
-    background-color: #673ab7; }
-    .playlist .current-song td {
+    background-color: #673ab7;
+    color: white;
+    max-width: 68em;
+    margin-left: auto;
+    margin-right: auto; }
+    .playlist .current-song:after {
+      content: "";
+      display: table;
+      clear: both; }
+    .playlist .current-song .playing-title {
       float: left;
       display: block;
       margin-right: 2.35765%;
-      width: 100%;
-      padding: 2.35765%;
+      width: 82.94039%;
+      padding: 2.35765%; }
+      .playlist .current-song .playing-title:last-child {
+        margin-right: 0; }
+    .playlist .current-song .song-title i {
       color: white; }
-      .playlist .current-song td:last-child {
+    .playlist .current-song .song-image {
+      float: left;
+      display: block;
+      margin-right: 2.35765%;
+      width: 14.70196%; }
+      .playlist .current-song .song-image:last-child {
         margin-right: 0; }
     .playlist .current-song .now-playing {
       color: #ff5722;
       text-transform: uppercase;
       font-weight: bold; }
-  .playlist tr {
+  .playlist table tr {
     float: left;
     display: block;
     margin-right: 2.35765%;
@@ -827,40 +843,40 @@ input[type="submit"] {
     display: table;
     width: 100%;
     table-layout: fixed; }
-    .playlist tr:last-child {
+    .playlist table tr:last-child {
       margin-right: 0; }
-    .playlist tr:after {
+    .playlist table tr:after {
       content: "";
       display: table;
       clear: both; }
-  .playlist td.song {
+  .playlist table td.song {
     display: table-cell;
     width: 50%;
     padding: 2.35765%; }
-  .playlist td.remove-song {
+  .playlist table td.remove-song {
     display: table-cell;
     width: 16.66667%;
     padding: 2.35765%;
     text-align: center;
     color: #ff5722; }
-    .playlist td.remove-song:hover {
+    .playlist table td.remove-song:hover {
       color: white;
       background-color: #ff5722;
       cursor: pointer; }
-  .playlist td.remove-song.remove-disabled:hover {
+  .playlist table td.remove-song.remove-disabled:hover {
     cursor: default;
     background-color: white; }
-  .playlist td.upvote, .playlist td.downvote {
+  .playlist table td.upvote, .playlist table td.downvote {
     display: table-cell;
     width: 16.66667%;
     padding: 2.35765%;
     text-align: center;
     color: #673ab7; }
-    .playlist td.upvote:hover, .playlist td.downvote:hover {
+    .playlist table td.upvote:hover, .playlist table td.downvote:hover {
       color: white;
       background-color: #673ab7;
       cursor: pointer; }
-  .playlist td.upvote.vote-disabled:hover, .playlist td.downvote.vote-disabled:hover {
+  .playlist table td.upvote.vote-disabled:hover, .playlist table td.downvote.vote-disabled:hover {
     cursor: default;
     background-color: white;
     color: #673ab7; }

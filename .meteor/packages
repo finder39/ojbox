@@ -6,7 +6,6 @@
 standard-app-packages
 jquery
 arunoda:streams@0.1.17
-appcache
 mizzao:user-status@0.6.0
 accounts-base
 accounts-password
@@ -15,3 +14,6 @@ mrt:highlight@0.0.1
 mrt:jquery-ui@1.9.2
 mrt:moment@2.8.1
 iron:router
+mrt:iron-router-progress
+appcache
+
