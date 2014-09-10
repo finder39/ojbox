@@ -17,7 +17,7 @@ var soundManagerOptions = {
   stream: true,
   onload: function() {
     var startingPosition;
-    Deps.nonreactive(function() {
+    Tracker.nonreactive(function() {
       OJPlayer.loaded(true);
       startingPosition = OJPlayer.getStartingPosition();
     });
@@ -33,7 +33,7 @@ var soundManagerOptions = {
       // make sure we don't update too often
       okToUpdate = false;
       var current;
-      Deps.nonreactive(function() {
+      Tracker.nonreactive(function() {
         current = CurrentSong.findOne();
       });
       CurrentSong.update(current._id, {

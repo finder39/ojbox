@@ -3,7 +3,7 @@ Template.playerSetup.events({
     event.preventDefault();
 
     // make sure this runs only once when the main player is set up
-    Deps.nonreactive(function() {
+    Tracker.nonreactive(function() {
         // load in a song from the top of the playlist if the current
         // song is empty
         if (CurrentSong.find().count() === 0) {

@@ -9,7 +9,7 @@ OJPlayer = {
 
     // if CurrentSong is empty, put it there instead
     var current;
-    Deps.nonreactive(function() {
+    Tracker.nonreactive(function() {
       current = CurrentSong.find().count();
     });
     if (!current) {
@@ -25,7 +25,7 @@ OJPlayer = {
   },
   nextSong: function(current) {
     // clear the current song if there is one
-    Deps.nonreactive(function() {
+    Tracker.nonreactive(function() {
       current = current || CurrentSong.findOne();
     });
     if (current) {
