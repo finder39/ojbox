@@ -1,4 +1,6 @@
 OJPlayer = {
+  currentSound: null,
+
   addSongToPlaylist: function(songDoc) {
     songDoc.addedByUsername = Meteor.user().username;
     songDoc.addedByUserId = Meteor.userId();

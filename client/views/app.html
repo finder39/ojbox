@@ -1,10 +1,11 @@
 <template name="app">
+<!--go directly to the player page now-->
   {{#if currentUser}}
-    {{#if playerIsSetup}}
+    <!--{{#if playerIsSetup}}-->
       {{> playerPage}}
-    {{else}}
-      {{> playerSetup}}
-    {{/if}}
+    <!--{{else}}-->
+      <!--{{> playerSetup}}-->
+    <!--{{/if}}-->
   {{else}}
     {{> login}}
   {{/if}}

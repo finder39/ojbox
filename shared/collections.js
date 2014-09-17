@@ -1,6 +1,6 @@
-Settings = new Meteor.Collection("settings");
-Playlist = new Meteor.Collection("playlist");
-CurrentSong = new Meteor.Collection("currentSong");
+Settings = new Mongo.Collection("settings");
+Playlist = new Mongo.Collection("playlist");
+CurrentSong = new Mongo.Collection("currentSong");
 
 var isMainPlayer = function() {
   if (!Settings.findOne.playerId || !Meteor.connection._lastSessionId) {

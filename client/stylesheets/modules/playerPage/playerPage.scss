@@ -13,7 +13,7 @@ $bottom-bar-background-color: $base-accent-color;
   max-width: none;
 
   // tabs
-  li.tab {
+  .tab {
     @include span-columns(4, block-collapse);
     @include pad;
     color: $tab-unselected-text-color;
@@ -23,9 +23,9 @@ $bottom-bar-background-color: $base-accent-color;
     &:hover {
       cursor: pointer;
     }
-    &.selected {
-      color: $tab-selected-text-color;
-    }
+  }
+  .selected {
+    color: $tab-selected-text-color;
   }
   .tab-search {
     background-color: darken($tab-search-background-color, 15);
@@ -44,8 +44,15 @@ $bottom-bar-background-color: $base-accent-color;
     &:hover, &.selected {
       background-color: $tab-chat-background-color;
     }
+    @include omega;
   }
-
+  .tab-title {
+    @include span-columns(12);
+    @include pad;
+    text-align: center;
+    text-transform: uppercase;
+    font-weight: bold;
+  }
 }
 .bottom-bar {
   position: fixed;
@@ -62,6 +69,8 @@ $bottom-bar-background-color: $base-accent-color;
     }
   }
 }
+// this is needed for the spacing at the bottom of the page, because of the
+// fixed position bottom bar
 .fake-bottom-bar {
   visibility: hidden;
   @include pad;

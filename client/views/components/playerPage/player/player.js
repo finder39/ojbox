@@ -11,6 +11,7 @@ var updateSeekBarDisplay = function(percentage) {
   $('.progress-bar').width((percentage * 100) + '%');
 }
 
+// now we want all clients to get the same thing
 var soundManagerOptions = {
   autoLoad: true,
   autoPlay: false,
@@ -36,11 +37,11 @@ var soundManagerOptions = {
       Tracker.nonreactive(function() {
         current = CurrentSong.findOne();
       });
-      CurrentSong.update(current._id, {
-        $set: {
-          position: this.position,
-        }
-      });
+      //CurrentSong.update(current._id, {
+        //$set: {
+          //position: this.position,
+        //}
+      //});
       // set a timeout to be able to update again in a few seconds
       Meteor.setTimeout(function() {
         okToUpdate = true;
@@ -56,46 +57,64 @@ var soundManagerOptions = {
 }
 
 // initialize soundcloud api
-SC.initialize({
-  client_id: "dab79335daff5c0c3b601594af49d985"
-});
+//SC.initialize({
+  //client_id: "dab79335daff5c0c3b601594af49d985"
+//});
 
 Template.player.helpers({
   mainPlayer: function() {
     return Meteor.connection._lastSessionId === Settings.findOne().playerId;
   },
+  playingSong: function() {
+    return CurrentSong.findOne();
+  },
 });
+
+Template.hostPlayer.created = function() {
+  console.log("hostplayer template created");
+  console.log(this.data.uri);
+  var uri = this.data.uri;
+  SC.whenStreamingReady(function() {
+    console.log("streaming ready");
+    SC.stream(
+      uri, soundManagerOptions, function(sound) {
+      OJPlayer.currentSound = sound;
+    });
+  });
+}
 
 Template.hostPlayer.helpers({
   loadStreaming: function() {
-    if (!this.loaded && Session.equals("loading", false)) {
+    //if (!this.loaded && Session.equals("loading", false)) {
       // don't want the song loading multiple times
-      Session.set("loading", true);
-      SC.stream(
-        this.uri, soundManagerOptions, function(sound) {
-        currentSound = sound;
-      });
-    }
+      //Session.set("loading", true);
+    //console.log("loadstreaming called");
+      //SC.stream(
+        //this.uri, soundManagerOptions, function(sound) {
+        //currentSound = sound;
+      //});
+    //}
   },
   playingSong: function() {
     return CurrentSong.findOne();
   },
   playPauseIcon: function() {
-    if (this.paused) {
-      if (_.isObject(currentSound) &&
-          this.loaded &&
-          currentSound.paused === false) {
-        currentSound.pause();
-      }
-      return "play";
-    } else {
-      if (_.isObject(currentSound) &&
-          this.loaded &&
-          currentSound.paused === true) {
-        currentSound.resume();
-      }
-      return "pause";
-    }
+    //if (this.paused) {
+      //if (_.isObject(currentSound) &&
+          //this.loaded &&
+          //currentSound.paused === false) {
+        //currentSound.pause();
+      //}
+      //return "play";
+    //} else {
+      //if (_.isObject(currentSound) &&
+          //this.loaded &&
+          //currentSound.paused === true) {
+        //currentSound.resume();
+      //}
+      //return "pause";
+    //}
+    return "play";
   },
   playerDisabled: function() {
     return this.loaded ? "" : "disabled";
@@ -120,9 +139,9 @@ Template.clientPlayer.helpers({
 Template.hostPlayer.events({
   "click .playpause, touchstart .playpause": function(event) {
     event.preventDefault();
-    if (this.loaded === false) {
-      return;
-    }
+    //if (this.loaded === false) {
+      //return;
+    //}
     if ($(".playpause").has(".fa-play").length) {
       CurrentSong.update(this._id, {
         $set: {paused: false}

@@ -12,11 +12,20 @@
   <header class="top-bar">
     <nav class="tabs">
       <ul>
-        <li class="tab tab-search">Search</li>
-        <li class="tab selected tab-playlist">Playlist<span class="missed-playlist">{{missedPlaylist}}</span></li>
-        <li class="tab tab-chat">Chat<span class="missed-chats">{{missedChats}}</span></li>
+        <li class="tab tab-search">
+          <i class="fa fa-fw fa-lg fa-search"></i>
+        </li>
+        <li class="tab selected tab-playlist">
+          <i class="fa fa-fw fa-lg fa-music"></i>
+          <span>{{missedPlaylist}}</span>
+        </li>
+        <li class="tab tab-chat">
+          <i class="fa fa-fw fa-lg fa-comment"></i>
+          <span>{{missedChats}}</span>
+        </li>
       </ul>
     </nav>
+    <div class="tab-title tab-{{tabTitle}} selected">{{tabTitle}}</div>
   </header>
 </template>
 
