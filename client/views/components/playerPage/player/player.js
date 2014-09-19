@@ -1,5 +1,5 @@
 // used to hold the current SoundManager2 sound object
-var currentSound = null;
+//var currentSound = null;
 
 // update the seek bar for the clients at intervals
 var okToUpdate = true;
@@ -11,22 +11,25 @@ var updateSeekBarDisplay = function(percentage) {
   $('.progress-bar').width((percentage * 100) + '%');
 }
 
+// to be able to access the template from inside soundmanager callbacks
+var playerTemplateInstance;
+
 // now we want all clients to get the same thing
 var soundManagerOptions = {
   autoLoad: true,
   autoPlay: false,
   stream: true,
-  onload: function() {
-    var startingPosition;
-    Tracker.nonreactive(function() {
-      OJPlayer.loaded(true);
-      startingPosition = OJPlayer.getStartingPosition();
-    });
-    currentSound.setPosition(startingPosition);
-    currentSound.play();
-    currentSound.pause();
-    Session.set("loading", false);
-  },
+  //onload: function() {
+    //var startingPosition;
+    //Tracker.nonreactive(function() {
+      //OJPlayer.loaded(true);
+      //startingPosition = OJPlayer.getStartingPosition();
+    //});
+    //currentSound.setPosition(startingPosition);
+    //currentSound.play();
+    //currentSound.pause();
+    //Session.set("loading", false);
+  //},
   whileplaying: function() {
     updateSeekBarDisplay(this.position / this.duration);
     // update the position
@@ -50,8 +53,10 @@ var soundManagerOptions = {
   },
   onfinish: function() {
     // destroy the song and remove it from CurrentSong
+    console.log("song finished playing");
+    console.log(playerTemplateInstance);
     this.destruct();
-    OJPlayer.nextSong();
+    OJPlayer.nextSong(playerTemplateInstance.data);
     updateSeekBarDisplay(0);
   }
 }
@@ -70,15 +75,28 @@ Template.player.helpers({
   },
 });
 
+Template.player.created = function() {
+  console.log("player created");
+  var self = this;
+  playerTemplateInstance = self;
+}
+
 Template.hostPlayer.created = function() {
   console.log("hostplayer template created");
-  console.log(this.data.uri);
-  var uri = this.data.uri;
   SC.whenStreamingReady(function() {
     console.log("streaming ready");
-    SC.stream(
-      uri, soundManagerOptions, function(sound) {
-      OJPlayer.currentSound = sound;
+    Tracker.autorun(function() {
+      console.log("autorun");
+      // this should set up a reactive variable
+      var uri = CurrentSong.findOne({}, {fields: {uri: 1}});
+      console.log(uri);
+      if (uri) {
+        SC.stream(
+          uri.uri, soundManagerOptions, function(sound) {
+          console.log("streaming sound successful and created");
+          OJPlayer.currentSound = sound;
+        });
+      }
     });
   });
 }
@@ -117,7 +135,8 @@ Template.hostPlayer.helpers({
     return "play";
   },
   playerDisabled: function() {
-    return this.loaded ? "" : "disabled";
+    //return this.loaded ? "" : "disabled";
+    return "";
   },
 });
 
@@ -129,7 +148,8 @@ Template.clientPlayer.helpers({
     return this.paused ? "play" : "pause";
   },
   playerDisabled: function() {
-    return this.loaded ? "" : "disabled";
+    //return this.loaded ? "" : "disabled";
+    return "";
   },
   updateSeekBar: function() {
     updateSeekBarDisplay(this.position / this.duration);
@@ -137,6 +157,7 @@ Template.clientPlayer.helpers({
 });
 
 Template.hostPlayer.events({
+  // use togglepause on this one (soundmanager2 library)
   "click .playpause, touchstart .playpause": function(event) {
     event.preventDefault();
     //if (this.loaded === false) {
@@ -156,12 +177,13 @@ Template.hostPlayer.events({
   },
   "click .ff-next, touchstart .ff-next": function(event) {
     event.preventDefault();
-    if (this.loaded === false) {
-      return;
-    }
-    currentSound.destruct();
+    //if (this.loaded === false) {
+      //return;
+    //}
+    console.log(this);
+    OJPlayer.currentSound.destruct();
     OJPlayer.nextSong(this);
-    updateSeekBarDisplay(0);
+    //updateSeekBarDisplay(0);
   },
   "click .ff-ten, touchstart .ff-ten": function(event) {
     event.preventDefault();

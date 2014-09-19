@@ -11,6 +11,10 @@ Router.map(function() {
         Meteor.subscribe("playlist")
       ];
     },
+    data: function() {
+      console.log("data function in routes called");
+      return CurrentSong.findOne();
+    }
   });
   this.route('app', {
     path: '*',

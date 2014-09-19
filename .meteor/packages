@@ -16,6 +16,5 @@ mrt:moment@2.8.1
 iron:router
 mrt:iron-router-progress
 appcache
-xolvio:velocity
-velocity:html-reporter
-mrt:mocha-web-velocity
+mike:mocha
+

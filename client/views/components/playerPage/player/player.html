@@ -4,18 +4,16 @@
 </head>
 
 <template name="player">
-  {{#with playingSong}}
   <!--{{#if mainPlayer}}-->
     {{> hostPlayer}}
   <!--{{else}}-->
     <!--{{> clientPlayer}}-->
   <!--{{/if}}-->
-  {{/with}}
 </template>
 
 <template name="hostPlayer">
   <!--{{#with playingSong}}-->
-    <!--{{loadStreaming}}-->
+    {{loadStreaming}}
     <ul class="player {{playerDisabled}}">
       <li class="ff-ten player-button">
         <i class="fi-rewind-ten fa-lg"></i>
