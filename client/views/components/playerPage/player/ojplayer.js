@@ -23,16 +23,18 @@ OJPlayer = {
       return;
     }
 
+    // todo: change this to only insert the fields we need
+    // (we don't need a lot of the soundcloud specific fields)
     Playlist.insert(songDoc);
   },
-  nextSong: function(current) {
+  nextSong: function(currentId, paused) {
     // clear the current song if there is one
-    Tracker.nonreactive(function() {
-      current = current || CurrentSong.findOne();
-    });
-    if (current) {
-      CurrentSong.remove(current._id);
-    }
+    //Tracker.nonreactive(function() {
+      //current = current || CurrentSong.findOne();
+    //});
+    //if (current) {
+      CurrentSong.remove(currentId);
+    //}
     var firstPlaylistSong = OJPlayer.topSong();
     if (!firstPlaylistSong) {
       return false;
@@ -40,12 +42,12 @@ OJPlayer = {
     // remove the top of the playlist
     Playlist.remove(firstPlaylistSong._id);
     firstPlaylistSong.position = 0;
-    if (current) {
+    //if (current) {
       // set the next song to play or pause depending on the last one
-      firstPlaylistSong.paused = current.paused;
-    } else {
-      firstPlaylistSong.paused = true;
-    }
+      firstPlaylistSong.paused = paused || true;
+    //} else {
+      //firstPlaylistSong.paused = true;
+    //}
     firstPlaylistSong.loaded = false;
 
     // insert the top playlist song

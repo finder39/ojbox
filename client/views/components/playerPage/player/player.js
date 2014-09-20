@@ -33,30 +33,30 @@ var soundManagerOptions = {
   whileplaying: function() {
     updateSeekBarDisplay(this.position / this.duration);
     // update the position
-    if (okToUpdate) {
-      // make sure we don't update too often
-      okToUpdate = false;
-      var current;
-      Tracker.nonreactive(function() {
-        current = CurrentSong.findOne();
-      });
+    //if (okToUpdate) {
+      //// make sure we don't update too often
+      //okToUpdate = false;
+      //var current;
+      //Tracker.nonreactive(function() {
+        //current = CurrentSong.findOne();
+      //});
       //CurrentSong.update(current._id, {
         //$set: {
           //position: this.position,
         //}
       //});
-      // set a timeout to be able to update again in a few seconds
-      Meteor.setTimeout(function() {
-        okToUpdate = true;
-      }, seekBarUpdateInterval);
-    }
+      //// set a timeout to be able to update again in a few seconds
+      //Meteor.setTimeout(function() {
+        //okToUpdate = true;
+      //}, seekBarUpdateInterval);
+    //}
   },
   onfinish: function() {
     // destroy the song and remove it from CurrentSong
     console.log("song finished playing");
     console.log(playerTemplateInstance);
     this.destruct();
-    OJPlayer.nextSong(playerTemplateInstance.data);
+    OJPlayer.nextSong(playerTemplateInstance.data._id, playerTemplateInstance.data.paused);
     updateSeekBarDisplay(0);
   }
 }
@@ -102,7 +102,7 @@ Template.hostPlayer.created = function() {
 }
 
 Template.hostPlayer.helpers({
-  loadStreaming: function() {
+  //loadStreaming: function() {
     //if (!this.loaded && Session.equals("loading", false)) {
       // don't want the song loading multiple times
       //Session.set("loading", true);
@@ -112,10 +112,10 @@ Template.hostPlayer.helpers({
         //currentSound = sound;
       //});
     //}
-  },
-  playingSong: function() {
-    return CurrentSong.findOne();
-  },
+  //},
+  //playingSong: function() {
+    //return CurrentSong.findOne();
+  //},
   playPauseIcon: function() {
     //if (this.paused) {
       //if (_.isObject(currentSound) &&
@@ -132,7 +132,7 @@ Template.hostPlayer.helpers({
       //}
       //return "pause";
     //}
-    return "play";
+    //return "play";
   },
   playerDisabled: function() {
     //return this.loaded ? "" : "disabled";
@@ -159,40 +159,55 @@ Template.clientPlayer.helpers({
 Template.hostPlayer.events({
   // use togglepause on this one (soundmanager2 library)
   "click .playpause, touchstart .playpause": function(event) {
-    event.preventDefault();
+    //event.preventDefault();
     //if (this.loaded === false) {
       //return;
     //}
-    if ($(".playpause").has(".fa-play").length) {
-      CurrentSong.update(this._id, {
-        $set: {paused: false}
-      });
-      $(".fa-play").switchClass("fa-play", "fa-pause");
-    } else {
-      CurrentSong.update(this._id, {
-        $set: {paused: true}
-      });
-      $(".fa-pause").switchClass("fa-pause", "fa-play");
-    }
+    OJPlayer.currentSound.togglePause();
+    var icon = $(".playpause > i");
+    icon.toggleClass("fa-play");
+    icon.toggleClass("fa-pause");
+    //if ($(".playpause").has(".fa-play").length) {
+      //CurrentSong.update(this._id, {
+        //$set: {paused: false}
+      //});
+      //$(".fa-play").switchClass("fa-play", "fa-pause");
+    //} else {
+      //CurrentSong.update(this._id, {
+        //$set: {paused: true}
+      //});
+      //$(".fa-pause").switchClass("fa-pause", "fa-play");
+    //}
+  },
+  "touchend .playpause": function(event) {
+    // click doubles as a touchend event, so prevent doubling up
+    event.preventDefault();
   },
   "click .ff-next, touchstart .ff-next": function(event) {
-    event.preventDefault();
+    //event.preventDefault();
     //if (this.loaded === false) {
       //return;
     //}
-    console.log(this);
+    var self = this;
+    console.log(self);
     OJPlayer.currentSound.destruct();
-    OJPlayer.nextSong(this);
-    //updateSeekBarDisplay(0);
+    OJPlayer.nextSong(self._id, this.paused);
+    updateSeekBarDisplay(0);
+  },
+  "touchend .ff-next": function(event) {
+    event.preventDefault();
   },
   "click .ff-ten, touchstart .ff-ten": function(event) {
-    event.preventDefault();
-    if (this.loaded === false) {
-      return;
-    }
+    //event.preventDefault();
+    //if (this.loaded === false) {
+      //return;
+    //}
     // skip ahead 10 seconds
     currentSound.setPosition(currentSound.position + 10000);
-  }
+  },
+  "touchend .ff-ten": function(event) {
+    event.preventDefault();
+  },
 });
 
 Template.clientPlayer.events({
