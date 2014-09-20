@@ -14,6 +14,9 @@ Template.topBar.events({
     Session.set("selectedTab", "playlist");
     Session.set("missedPlaylist", 0);
   },
+  "touchend .tab-playlist": function(event) {
+    event.preventDefault();
+  },
   "click .tab-chat, touchstart .tab-chat": function(event) {
     var tab = $(".tab-chat");
     // if not selected
@@ -29,6 +32,9 @@ Template.topBar.events({
     Session.set("selectedTab", "chat");
     Session.set("missedChats", 0);
   },
+  "touchend .tab-chat": function(event) {
+    event.preventDefault();
+  },
   "click .tab-search, touchstart .tab-search": function(event) {
     var tab = $(".tab-search");
     // if not selected
@@ -42,6 +48,9 @@ Template.topBar.events({
     $(".playlist").hide();
     $(".search").show();
     Session.set("selectedTab", "search");
+  },
+  "touchend .tab-search": function(event) {
+    event.preventDefault();
   },
 });
 
@@ -61,4 +70,4 @@ Template.topBar.helpers({
   tabTitle: function() {
     return Session.get("selectedTab");
   }
-})
+});
