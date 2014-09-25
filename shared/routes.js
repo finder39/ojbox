@@ -12,10 +12,10 @@ Router.map(function() {
       ];
     },
     // todo: change this later to use only the required fields, not all of them
-    data: function() {
-      console.log("data function in routes called");
-      return CurrentSong.findOne();
-    }
+    //data: function() {
+      //console.log("data function in routes called");
+      //return CurrentSong.findOne();
+    //}
   });
   this.route('app', {
     path: '*',

@@ -12,7 +12,7 @@ var updateSeekBarDisplay = function(percentage) {
 }
 
 // to be able to access the template from inside soundmanager callbacks
-var playerTemplateInstance;
+var hostplayerTemplateInstance;
 
 // now we want all clients to get the same thing
 var soundManagerOptions = {
@@ -30,6 +30,16 @@ var soundManagerOptions = {
     //currentSound.pause();
     //Session.set("loading", false);
   //},
+  onplay: function() {
+    //console.log("play called");
+    $(".playpause > i").removeClass("fa-play");
+    $(".playpause > i").addClass("fa-pause");
+  },
+  onpause: function() {
+    //console.log("pause called");
+    $(".playpause > i").removeClass("fa-pause");
+    $(".playpause > i").addClass("fa-play");
+  },
   whileplaying: function() {
     updateSeekBarDisplay(this.position / this.duration);
     // update the position
@@ -54,17 +64,12 @@ var soundManagerOptions = {
   onfinish: function() {
     // destroy the song and remove it from CurrentSong
     console.log("song finished playing");
-    console.log(playerTemplateInstance);
+    console.log(hostplayerTemplateInstance);
     this.destruct();
-    OJPlayer.nextSong(playerTemplateInstance.data._id, playerTemplateInstance.data.paused);
+    OJPlayer.nextSong(hostplayerTemplateInstance.data._id, hostplayerTemplateInstance.data.paused);
     updateSeekBarDisplay(0);
   }
 }
-
-// initialize soundcloud api
-//SC.initialize({
-  //client_id: "dab79335daff5c0c3b601594af49d985"
-//});
 
 Template.player.helpers({
   mainPlayer: function() {
@@ -77,27 +82,47 @@ Template.player.helpers({
 
 Template.player.created = function() {
   console.log("player created");
-  var self = this;
-  playerTemplateInstance = self;
+  // if it's the first run of the player, start off paused
+  var current = CurrentSong.findOne();
+  if (current) {
+    console.log("setting song to initially be paused");
+    CurrentSong.update(current._id, {
+      $set: {paused: true}
+    });
+  }
 }
 
 Template.hostPlayer.created = function() {
   console.log("hostplayer template created");
+  var self = this;
+  hostplayerTemplateInstance = self;
   SC.whenStreamingReady(function() {
     console.log("streaming ready");
     Tracker.autorun(function() {
       console.log("autorun");
       // this should set up a reactive variable
       var uri = CurrentSong.findOne({}, {fields: {uri: 1}});
-      console.log(uri);
       if (uri) {
         SC.stream(
           uri.uri, soundManagerOptions, function(sound) {
           console.log("streaming sound successful and created");
           OJPlayer.currentSound = sound;
+          console.log("getting paused value");
+          var paused = hostplayerTemplateInstance.data.paused;
+          console.log(paused);
+          if (!paused) {
+            console.log("should be played");
+            OJPlayer.currentSound.play();
+          }
         });
       }
     });
+  });
+  // to handle playing/pausing using spacebar
+  $(document).on("keydown", function(event) {
+    if (event.which === 32 && document.activeElement.tagName !== "INPUT") {
+      OJPlayer.currentSound.togglePause();
+    }
   });
 }
 
@@ -158,15 +183,12 @@ Template.clientPlayer.helpers({
 
 Template.hostPlayer.events({
   // use togglepause on this one (soundmanager2 library)
-  "click .playpause, touchstart .playpause": function(event) {
+  "click .playpause, touchstart .playpause" : function(event) {
     //event.preventDefault();
     //if (this.loaded === false) {
       //return;
     //}
     OJPlayer.currentSound.togglePause();
-    var icon = $(".playpause > i");
-    icon.toggleClass("fa-play");
-    icon.toggleClass("fa-pause");
     //if ($(".playpause").has(".fa-play").length) {
       //CurrentSong.update(this._id, {
         //$set: {paused: false}
@@ -189,9 +211,8 @@ Template.hostPlayer.events({
       //return;
     //}
     var self = this;
-    console.log(self);
     OJPlayer.currentSound.destruct();
-    OJPlayer.nextSong(self._id, this.paused);
+    OJPlayer.nextSong(self._id, self.paused);
     updateSeekBarDisplay(0);
   },
   "touchend .ff-next": function(event) {
@@ -203,7 +224,7 @@ Template.hostPlayer.events({
       //return;
     //}
     // skip ahead 10 seconds
-    currentSound.setPosition(currentSound.position + 10000);
+    OJPlayer.currentSound.setPosition(OJPlayer.currentSound.position + 10000);
   },
   "touchend .ff-ten": function(event) {
     event.preventDefault();
