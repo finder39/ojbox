@@ -52,7 +52,12 @@ var getSearchResults = function(event) {
       // anyway so when it's fixed it'll work
       filter: {streamable: true},
       duration: {from: minSongLength, to: maxSongLength}
-    }, function(tracks) {
+    }, function(tracks, error) {
+      if (error) {
+        $(".searching").hide();
+        $(".error").show();
+        return;
+      }
       processSearchResults(tracks, query);
     });
   }
@@ -62,6 +67,7 @@ Template.search.events({
   "submit .search form": function(event) {
     $(".results-message").hide();
     $(".no-results").hide();
+    $(".error").hide();
     $(".searching").show();
     event.preventDefault();
     getSearchResults(event);

@@ -189,17 +189,17 @@ Template.hostPlayer.events({
       //return;
     //}
     OJPlayer.currentSound.togglePause();
-    //if ($(".playpause").has(".fa-play").length) {
-      //CurrentSong.update(this._id, {
-        //$set: {paused: false}
-      //});
+    if ($(".playpause").has(".fa-play").length) {
+      CurrentSong.update(this._id, {
+        $set: {paused: false}
+      });
       //$(".fa-play").switchClass("fa-play", "fa-pause");
-    //} else {
-      //CurrentSong.update(this._id, {
-        //$set: {paused: true}
-      //});
+    } else {
+      CurrentSong.update(this._id, {
+        $set: {paused: true}
+      });
       //$(".fa-pause").switchClass("fa-pause", "fa-play");
-    //}
+    }
   },
   "touchend .playpause": function(event) {
     // click doubles as a touchend event, so prevent doubling up

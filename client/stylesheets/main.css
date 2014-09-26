@@ -795,7 +795,7 @@ input[type="submit"] {
 .in-playlist {
   display: none; }
 
-.searching, .results-message, .no-results, .added {
+.searching, .results-message, .no-results, .added, .error {
   display: none;
   text-align: center;
   color: #757575; }

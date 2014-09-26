@@ -37,7 +37,7 @@ $search-results-message-color: $medium-gray;
 .in-playlist {
     display: none;
 }
-.searching, .results-message, .no-results, .added {
+.searching, .results-message, .no-results, .added, .error {
     display: none;
     text-align: center;
     color: $search-results-message-color;
