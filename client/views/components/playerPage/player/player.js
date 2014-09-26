@@ -1,4 +1,5 @@
 // used to hold the current SoundManager2 sound object
+// this has been moved to ojplayer class
 //var currentSound = null;
 
 // update the seek bar for the clients at intervals
@@ -31,14 +32,23 @@ var soundManagerOptions = {
     //Session.set("loading", false);
   //},
   onplay: function() {
-    //console.log("play called");
+    console.log("play called");
     $(".playpause > i").removeClass("fa-play");
     $(".playpause > i").addClass("fa-pause");
+    CurrentSong.update(hostplayerTemplateInstance.data._id, {
+      $set: {paused: false}
+    });
   },
   onpause: function() {
-    //console.log("pause called");
+    console.log("pause called");
     $(".playpause > i").removeClass("fa-pause");
     $(".playpause > i").addClass("fa-play");
+    CurrentSong.update(hostplayerTemplateInstance.data._id, {
+      $set: {paused: true}
+    });
+  },
+  onload: function() {
+    console.log("on load");
   },
   whileplaying: function() {
     updateSeekBarDisplay(this.position / this.duration);
@@ -64,7 +74,7 @@ var soundManagerOptions = {
   onfinish: function() {
     // destroy the song and remove it from CurrentSong
     console.log("song finished playing");
-    console.log(hostplayerTemplateInstance);
+    //console.log(hostplayerTemplateInstance);
     this.destruct();
     OJPlayer.nextSong(hostplayerTemplateInstance.data._id, hostplayerTemplateInstance.data.paused);
     updateSeekBarDisplay(0);
@@ -94,17 +104,20 @@ Template.player.created = function() {
 
 Template.hostPlayer.created = function() {
   console.log("hostplayer template created");
-  var self = this;
-  hostplayerTemplateInstance = self;
+  hostplayerTemplateInstance = this;
   SC.whenStreamingReady(function() {
     console.log("streaming ready");
-    Tracker.autorun(function() {
+    // makes sure this autorun gets destroyed when the hostplayer template is
+    hostplayerTemplateInstance.autorun(function() {
       console.log("autorun");
       // this should set up a reactive variable
-      var uri = CurrentSong.findOne({}, {fields: {uri: 1}});
-      if (uri) {
+      var url = CurrentSong.findOne({}, {fields: {stream_url: 1}});
+      //console.log(hostplayerTemplateInstance.data);
+      //console.log(url);
+      //console.log(soundManager.canPlayURL(url.stream_url));
+      if (url) {
         SC.stream(
-          uri.uri, soundManagerOptions, function(sound) {
+          url.stream_url, soundManagerOptions, function(sound) {
           console.log("streaming sound successful and created");
           OJPlayer.currentSound = sound;
           console.log("getting paused value");
@@ -119,8 +132,10 @@ Template.hostPlayer.created = function() {
     });
   });
   // to handle playing/pausing using spacebar
-  $(document).on("keydown", function(event) {
+  $(document).off('.hostplayer').on("keydown.hostplayer", function(event) {
+    console.log("keydown event");
     if (event.which === 32 && document.activeElement.tagName !== "INPUT") {
+      console.log("spacebar pressed");
       OJPlayer.currentSound.togglePause();
     }
   });
@@ -189,17 +204,17 @@ Template.hostPlayer.events({
       //return;
     //}
     OJPlayer.currentSound.togglePause();
-    if ($(".playpause").has(".fa-play").length) {
-      CurrentSong.update(this._id, {
-        $set: {paused: false}
-      });
+    //if ($(".playpause").has(".fa-play").length) {
+      //CurrentSong.update(this._id, {
+        //$set: {paused: false}
+      //});
       //$(".fa-play").switchClass("fa-play", "fa-pause");
-    } else {
-      CurrentSong.update(this._id, {
-        $set: {paused: true}
-      });
+    //} else {
+      //CurrentSong.update(this._id, {
+        //$set: {paused: true}
+      //});
       //$(".fa-pause").switchClass("fa-pause", "fa-play");
-    }
+    //}
   },
   "touchend .playpause": function(event) {
     // click doubles as a touchend event, so prevent doubling up
@@ -210,6 +225,7 @@ Template.hostPlayer.events({
     //if (this.loaded === false) {
       //return;
     //}
+    console.log("next clicked");
     var self = this;
     OJPlayer.currentSound.destruct();
     OJPlayer.nextSong(self._id, self.paused);
