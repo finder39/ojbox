@@ -48,7 +48,10 @@ var soundManagerOptions = {
     });
   },
   onload: function() {
-    console.log("on load");
+    //console.log("on load");
+    if (this.readyState === 2) {
+      console.log("error loading");
+    }
   },
   whileplaying: function() {
     updateSeekBarDisplay(this.position / this.duration);
