@@ -109,6 +109,10 @@ Template.hostPlayer.created = function() {
     console.log("streaming ready");
     // makes sure this autorun gets destroyed when the hostplayer template is
     hostplayerTemplateInstance.autorun(function() {
+      // if there's already a sound, get rid of it first so two don't start
+      // playing at the same time
+      OJPlayer.currentSound && OJPlayer.currentSound.destruct();
+      OJPlayer.currentSound = null;
       console.log("autorun");
       // this should set up a reactive variable
       var url = CurrentSong.findOne({}, {fields: {stream_url: 1}});
