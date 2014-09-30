@@ -61,13 +61,13 @@ OJPlayer = {
       sort: [["voteTotal", "desc"], ["addedAt", "asc"]]
     });
   },
-  pause: function(current) {
-    current && CurrentSong.update(current._id, {
+  pause: function(currentID) {
+    currentID && CurrentSong.update(currentID, {
       $set: {paused: true}
     });
   },
-  play: function(current) {
-    current && CurrentSong.update(current._id, {
+  play: function(currentID) {
+    currentID && CurrentSong.update(currentID, {
       $set: {paused: false}
     });
   },

@@ -40,19 +40,13 @@ var soundManagerOptions = {
   },
   onplay: function() {
     console.log("play called");
-    $(".playpause > i").removeClass("fa-play");
-    $(".playpause > i").addClass("fa-pause");
-    CurrentSong.update(hostplayerTemplateInstance.data._id, {
-      $set: {paused: false}
-    });
+    $(".playpause > i").removeClass("fa-play").addClass("fa-pause");
+    OJPlayer.play(hostplayerTemplateInstance.data._id);
   },
   onpause: function() {
     console.log("pause called");
-    $(".playpause > i").removeClass("fa-pause");
-    $(".playpause > i").addClass("fa-play");
-    CurrentSong.update(hostplayerTemplateInstance.data._id, {
-      $set: {paused: true}
-    });
+    $(".playpause > i").removeClass("fa-pause").addClass("fa-play");
+    OJPlayer.pause(hostplayerTemplateInstance.data._id);
   },
   onload: function() {
     //console.log("on load");
@@ -109,8 +103,8 @@ Template.player.created = function() {
   }
 }
 
-Template.hostPlayer.created = function() {
-  console.log("hostplayer template created");
+Template.hostPlayer.rendered = function() {
+  console.log("hostplayer template rendered");
   hostplayerTemplateInstance = this;
   SC.whenStreamingReady(function() {
     console.log("streaming ready");
