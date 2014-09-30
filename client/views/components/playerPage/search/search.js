@@ -34,6 +34,7 @@ var processSearchResults = function(tracks, query) {
         track.inPlaylist = false;
       }
       SearchResults.insert({
+        id: track.id,
         duration: track.duration,
         original_content_size: track.original_content_size,
         tag_list: track.tag_list,
