@@ -77,8 +77,8 @@ OJPlayer = {
       //$set: {loaded: isLoaded}
     //});
   //},
-  getStartingPosition: function() {
-    return CurrentSong.findOne().position;
-  }
+  //getStartingPosition: function() {
+    //return CurrentSong.findOne().position;
+  //}
 };
 

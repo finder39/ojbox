@@ -31,6 +31,13 @@ var soundManagerOptions = {
     //currentSound.pause();
     //Session.set("loading", false);
   //},
+  onconnect: function() {
+    if (this.connected) {
+      console.log("successfully connected");
+    } else {
+      console.log("error connecting");
+    }
+  },
   onplay: function() {
     console.log("play called");
     $(".playpause > i").removeClass("fa-play");
@@ -56,30 +63,27 @@ var soundManagerOptions = {
   whileplaying: function() {
     updateSeekBarDisplay(this.position / this.duration);
     // update the position
-    //if (okToUpdate) {
-      //// make sure we don't update too often
-      //okToUpdate = false;
-      //var current;
-      //Tracker.nonreactive(function() {
-        //current = CurrentSong.findOne();
-      //});
-      //CurrentSong.update(current._id, {
-        //$set: {
-          //position: this.position,
-        //}
-      //});
-      //// set a timeout to be able to update again in a few seconds
-      //Meteor.setTimeout(function() {
-        //okToUpdate = true;
-      //}, seekBarUpdateInterval);
-    //}
+    if (okToUpdate) {
+      // make sure we don't update too often
+      okToUpdate = false;
+      CurrentSong.update(hostplayerTemplateInstance.data._id, {
+        $set: {
+          position: this.position,
+        }
+      });
+      // set a timeout to be able to update again in a few seconds
+      Meteor.setTimeout(function() {
+        okToUpdate = true;
+      }, seekBarUpdateInterval);
+    }
   },
   onfinish: function() {
     // destroy the song and remove it from CurrentSong
     console.log("song finished playing");
     //console.log(hostplayerTemplateInstance);
     this.destruct();
-    OJPlayer.nextSong(hostplayerTemplateInstance.data._id, hostplayerTemplateInstance.data.paused);
+    OJPlayer.nextSong(hostplayerTemplateInstance.data._id,
+                      hostplayerTemplateInstance.data.paused);
     updateSeekBarDisplay(0);
   }
 }
@@ -131,7 +135,7 @@ Template.hostPlayer.created = function() {
           var paused = hostplayerTemplateInstance.data.paused;
           console.log(paused);
           if (!paused) {
-            console.log("should be played");
+            console.log("not paused, play it!");
             OJPlayer.currentSound.play();
           }
         });
