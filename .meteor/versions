@@ -48,7 +48,6 @@ mobile-status-bar@1.0.0
 mongo@1.0.6
 mrt:highlight@0.0.1
 mrt:iron-router-progress@0.9.2
-mrt:jquery-ui@1.9.2
 mrt:moment@2.8.1
 npm-bcrypt@0.7.7
 observe-sequence@1.0.2

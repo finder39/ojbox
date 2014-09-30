@@ -299,12 +299,12 @@ Template.clientPlayer.events({
       CurrentSong.update(this._id, {
         $set: {paused: false}
       });
-      $(".fa-play").switchClass("fa-play", "fa-pause");
+      //$(".fa-play").switchClass("fa-play", "fa-pause");
     } else {
       CurrentSong.update(this._id, {
         $set: {paused: true}
       });
-      $(".fa-pause").switchClass("fa-pause", "fa-play");
+      //$(".fa-pause").switchClass("fa-pause", "fa-play");
     }
   },
 });
