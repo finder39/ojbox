@@ -26,14 +26,29 @@ var processSearchResults = function(tracks, query) {
   } else {
     $(".no-results").show();
   }
-  _.each(tracks, function(value, key, list) {
-    if (value.streamable) {
-      if (Playlist.find({id: value.id}).count()) {
-        value.inPlaylist = true;
+  _.each(tracks, function(track, key, list) {
+    if (track.streamable) {
+      if (Playlist.find({id: track.id}).count()) {
+        track.inPlaylist = true;
       } else {
-        value.inPlaylist = false;
+        track.inPlaylist = false;
       }
-      SearchResults.insert(value);
+      SearchResults.insert({
+        duration: track.duration,
+        original_content_size: track.original_content_size,
+        tag_list: track.tag_list,
+        purchase_title: track.purchase_title,
+        genre: track.genre,
+        title: track.title,
+        description: track.description,
+        track_type: track.track_type,
+        video_url: track.video_url,
+        uri: track.uri,
+        permalink_url: track.permalink_url,
+        artwork_url: track.artwork_url,
+        stream_url: track.stream_url,
+        inPlaylist: track.inPlaylist,
+      });
     }
   });
   // highlight the instant search results

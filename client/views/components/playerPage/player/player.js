@@ -75,7 +75,6 @@ var soundManagerOptions = {
     }
   },
   whileloading: function() {
-    console.log("loading");
     if (OJPlayer.startingPosition) {
       if (OJPlayer.currentSound.position >= OJPlayer.startingPosition) {
         console.log("setting the position has been done");
