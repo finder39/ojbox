@@ -18,7 +18,7 @@ OJPlayer = {
       songDoc.position = 0;
       // automatically play the song
       songDoc.paused = false;
-      songDoc.loaded = false;
+      //songDoc.loaded = false;
       CurrentSong.insert(songDoc);
       return;
     }
@@ -48,7 +48,7 @@ OJPlayer = {
     //} else {
       //firstPlaylistSong.paused = true;
     //}
-    firstPlaylistSong.loaded = false;
+    //firstPlaylistSong.loaded = false;
 
     // insert the top playlist song
     CurrentSong.insert(firstPlaylistSong);
@@ -71,12 +71,12 @@ OJPlayer = {
       $set: {paused: false}
     });
   },
-  loaded: function(isLoaded) {
-    var current = CurrentSong.findOne();
-    current && CurrentSong.update(current._id, {
-      $set: {loaded: isLoaded}
-    });
-  },
+  //loaded: function(isLoaded) {
+    //var current = CurrentSong.findOne();
+    //current && CurrentSong.update(current._id, {
+      //$set: {loaded: isLoaded}
+    //});
+  //},
   getStartingPosition: function() {
     return CurrentSong.findOne().position;
   }

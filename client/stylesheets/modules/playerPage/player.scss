@@ -13,26 +13,18 @@
     @include span-columns(4);
     @include pad;
   }
-  li.ff-next {
+  li.forward-fifteen {
     @include omega;
   }
-  // special css for forward ten button because it comes from a different icon
-  // set than the rest of them
-  .fi-rewind-ten {
-    display: inline-block;
-    font-style: normal;
-    font-weight: normal;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-  }
   // so that the hover areas are larger
-  .playpause, .ff-next, .vendor-icon, .ff-ten {
+  .playpause, .forward-fifteen, .vendor-icon, .backward-fifteen {
     &:hover {
       cursor: pointer;
     }
   }
   // disabled player button state
-  &.disabled .playpause, &.disabled .ff-next, &.disabled .vendor-icon, &.disabled .ff-ten {
+  &.disabled .playpause, &.disabled .vendor-icon,
+  &.disabled .forward-fifteen, &.disabled .backward-fifteen {
     &:hover {
       cursor: default;
     }

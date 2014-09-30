@@ -227,29 +227,40 @@ Template.hostPlayer.events({
     // click doubles as a touchend event, so prevent doubling up
     event.preventDefault();
   },
-  "click .ff-next, touchstart .ff-next": function(event) {
+  //"click .ff-next, touchstart .ff-next": function(event) {
+    ////event.preventDefault();
+    ////if (this.loaded === false) {
+      ////return;
+    ////}
+    //console.log("next clicked");
+    //var self = this;
+    //OJPlayer.currentSound.destruct();
+    //OJPlayer.nextSong(self._id, self.paused);
+    //updateSeekBarDisplay(0);
+  //},
+  //"touchend .ff-next": function(event) {
+    //event.preventDefault();
+  //},
+  "click .backward-fifteen, touchstart .backward-fifteen": function(event) {
     //event.preventDefault();
     //if (this.loaded === false) {
       //return;
     //}
-    console.log("next clicked");
-    var self = this;
-    OJPlayer.currentSound.destruct();
-    OJPlayer.nextSong(self._id, self.paused);
-    updateSeekBarDisplay(0);
+    // rewind 15 seconds
+    OJPlayer.currentSound.setPosition(OJPlayer.currentSound.position - 15000);
   },
-  "touchend .ff-next": function(event) {
+  "touchend .backward-fifteen": function(event) {
     event.preventDefault();
   },
-  "click .ff-ten, touchstart .ff-ten": function(event) {
+  "click .forward-fifteen, touchstart .forward-fifteen": function(event) {
     //event.preventDefault();
     //if (this.loaded === false) {
       //return;
     //}
-    // skip ahead 10 seconds
-    OJPlayer.currentSound.setPosition(OJPlayer.currentSound.position + 10000);
+    // skip ahead 15 seconds
+    OJPlayer.currentSound.setPosition(OJPlayer.currentSound.position + 15000);
   },
-  "touchend .ff-ten": function(event) {
+  "touchend .forward-fifteen": function(event) {
     event.preventDefault();
   },
 });
