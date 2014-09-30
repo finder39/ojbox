@@ -55,7 +55,7 @@ var soundManagerOptions = {
     }
   },
   whileplaying: function() {
-    updateSeekBarDisplay(this.position / this.duration);
+    updateSeekBarDisplay(this.position / this.durationEstimate);
     // update the position
     if (okToUpdate) {
       // make sure we don't update too often
@@ -76,6 +76,7 @@ var soundManagerOptions = {
     console.log("song finished playing");
     //console.log(hostplayerTemplateInstance);
     this.destruct();
+    OJPlayer.currentSound = null;
     OJPlayer.nextSong(hostplayerTemplateInstance.data._id,
                       hostplayerTemplateInstance.data.paused);
     updateSeekBarDisplay(0);
