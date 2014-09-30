@@ -3,3 +3,4 @@
 *.sublime-workspace
 dump
 packages/
+.tern-project
