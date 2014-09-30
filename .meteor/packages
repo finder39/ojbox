@@ -13,7 +13,7 @@ mrt:moment@2.8.1
 iron:router
 mrt:iron-router-progress
 appcache
-mike:mocha
 meteor-platform
 jquery
+mike:mocha
 

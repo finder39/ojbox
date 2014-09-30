@@ -64,7 +64,7 @@ var soundManagerOptions = {
   whileplaying: function() {
     updateSeekBarDisplay(this.position / this.durationEstimate);
     // update the position
-    if (okToUpdate) {
+    if (okToUpdate && !OJPlayer.startingPosition) {
       // make sure we don't update too often
       okToUpdate = false;
       OJPlayer.setPosition(hostplayerTemplateInstance.data._id, this.position);
