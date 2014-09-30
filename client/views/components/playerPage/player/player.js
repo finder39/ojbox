@@ -41,6 +41,7 @@ var soundManagerOptions = {
   onplay: function() {
     console.log("play called");
     $(".playpause > i").removeClass("fa-play").addClass("fa-pause");
+    //console.log(hostplayerTemplateInstance.data);
     OJPlayer.play(hostplayerTemplateInstance.data._id);
   },
   onpause: function() {
@@ -48,10 +49,16 @@ var soundManagerOptions = {
     $(".playpause > i").removeClass("fa-pause").addClass("fa-play");
     OJPlayer.pause(hostplayerTemplateInstance.data._id);
   },
-  onload: function() {
+  onload: function(success) {
     //console.log("on load");
-    if (this.readyState === 2) {
-      console.log("error loading");
+    if (!success || this.readyState === 2) {
+      this.destruct();
+      OJPlayer.currentSound = null;
+      OJPlayer.startingPosition = null;
+      console.log("error loading, skipping track");
+      OJPlayer.nextSong(hostplayerTemplateInstance.data._id,
+                        hostplayerTemplateInstance.data.paused);
+      updateSeekBarDisplay(0);
     }
   },
   whileplaying: function() {
@@ -60,15 +67,22 @@ var soundManagerOptions = {
     if (okToUpdate) {
       // make sure we don't update too often
       okToUpdate = false;
-      CurrentSong.update(hostplayerTemplateInstance.data._id, {
-        $set: {
-          position: this.position,
-        }
-      });
+      OJPlayer.setPosition(hostplayerTemplateInstance.data._id, this.position);
       // set a timeout to be able to update again in a few seconds
       Meteor.setTimeout(function() {
         okToUpdate = true;
       }, seekBarUpdateInterval);
+    }
+  },
+  whileloading: function() {
+    console.log("loading");
+    if (OJPlayer.startingPosition) {
+      if (OJPlayer.currentSound.position >= OJPlayer.startingPosition) {
+        console.log("setting the position has been done");
+        OJPlayer.startingPosition = null;
+      } else {
+        OJPlayer.currentSound.setPosition(OJPlayer.startingPosition);
+      }
     }
   },
   onfinish: function() {
@@ -77,6 +91,7 @@ var soundManagerOptions = {
     //console.log(hostplayerTemplateInstance);
     this.destruct();
     OJPlayer.currentSound = null;
+    OJPlayer.startingPosition = null;
     OJPlayer.nextSong(hostplayerTemplateInstance.data._id,
                       hostplayerTemplateInstance.data.paused);
     updateSeekBarDisplay(0);
@@ -88,6 +103,7 @@ Template.player.helpers({
     return Meteor.connection._lastSessionId === Settings.findOne().playerId;
   },
   playingSong: function() {
+    console.log("playingsong called");
     return CurrentSong.findOne();
   },
 });
@@ -98,9 +114,7 @@ Template.player.created = function() {
   var current = CurrentSong.findOne();
   if (current) {
     console.log("setting song to initially be paused");
-    CurrentSong.update(current._id, {
-      $set: {paused: true}
-    });
+    OJPlayer.pause(current._id);
   }
 }
 
@@ -115,6 +129,7 @@ Template.hostPlayer.rendered = function() {
       // playing at the same time
       OJPlayer.currentSound && OJPlayer.currentSound.destruct();
       OJPlayer.currentSound = null;
+      OJPlayer.startingPosition = null;
       console.log("autorun");
       // this should set up a reactive variable
       var url = CurrentSong.findOne({}, {fields: {stream_url: 1}});
@@ -127,11 +142,22 @@ Template.hostPlayer.rendered = function() {
           console.log("streaming sound successful and created");
           OJPlayer.currentSound = sound;
           console.log("getting paused value");
-          var paused = hostplayerTemplateInstance.data.paused;
-          console.log(paused);
-          if (!paused) {
-            console.log("not paused, play it!");
-            OJPlayer.currentSound.play();
+          //var paused = hostplayerTemplateInstance.data.paused;
+          //console.log(paused);
+          // need this nonreactive because for some reason, the template data
+          // context does not update yet
+          Tracker.nonreactive(function() {
+            OJPlayer.startingPosition = CurrentSong.findOne(
+              {},
+              {fields: {position: 1}}
+            ).position;
+          });
+          //console.log(hostplayerTemplateInstance.data);
+          console.log(OJPlayer.startingPosition);
+          OJPlayer.currentSound.play();
+          if (hostplayerTemplateInstance.data.paused) {
+            console.log("paused!");
+            OJPlayer.currentSound.pause();
           }
         });
       }

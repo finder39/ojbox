@@ -1,5 +1,6 @@
 OJPlayer = {
   currentSound: null,
+  startingPosition: null,
 
   addSongToPlaylist: function(songDoc) {
     songDoc.addedByUsername = Meteor.user().username;
@@ -33,10 +34,12 @@ OJPlayer = {
       //current = current || CurrentSong.findOne();
     //});
     //if (current) {
+    console.log("nextsong called");
       CurrentSong.remove(currentId);
     //}
     var firstPlaylistSong = OJPlayer.topSong();
     if (!firstPlaylistSong) {
+      console.log("no first playlist song");
       return false;
     }
     // remove the top of the playlist
@@ -61,16 +64,21 @@ OJPlayer = {
       sort: [["voteTotal", "desc"], ["addedAt", "asc"]]
     });
   },
-  pause: function(currentID) {
-    currentID && CurrentSong.update(currentID, {
+  pause: function(currentId) {
+    currentId && CurrentSong.update(currentId, {
       $set: {paused: true}
     });
   },
-  play: function(currentID) {
-    currentID && CurrentSong.update(currentID, {
+  play: function(currentId) {
+    currentId && CurrentSong.update(currentId, {
       $set: {paused: false}
     });
   },
+  setPosition: function(currentId, newPosition) {
+    currentId && CurrentSong.update(currentId, {
+      $set: {position: newPosition}
+    });
+  }
   //loaded: function(isLoaded) {
     //var current = CurrentSong.findOne();
     //current && CurrentSong.update(current._id, {
