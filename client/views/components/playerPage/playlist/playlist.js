@@ -50,7 +50,7 @@ Template.playlist.helpers({
 });
 
 Template.playlist.events({
-  "click .upvote, touchstart .upvote": function(event) {
+  "click .upvote": function(event) {
     event.preventDefault();
     var currentTarget = $(event.currentTarget);
     if (currentTarget.hasClass("vote-disabled")) {
@@ -63,7 +63,7 @@ Template.playlist.events({
     });
     $(event.currentTarget).addClass("vote-disabled");
   },
-  "click .downvote, touchstart .downvote": function(event) {
+  "click .downvote": function(event) {
     event.preventDefault();
     var currentTarget = $(event.currentTarget);
     if (currentTarget.hasClass("vote-disabled")) {
@@ -83,7 +83,7 @@ Template.playlist.events({
     });
     $(event.currentTarget).addClass("vote-disabled");
   },
-  "click .remove-song, touchstart .remove-song": function(event) {
+  "click .remove-song": function(event) {
     event.preventDefault();
     var currentTarget = $(event.currentTarget);
     if (currentTarget.hasClass("remove-disabled")) {

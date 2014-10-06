@@ -67,7 +67,4 @@ Template.topBar.helpers({
   missedPlaylist: function() {
     return Session.get("missedPlaylist") ? " (" + Session.get("missedPlaylist") + ")": "";
   },
-  tabTitle: function() {
-    return Session.get("selectedTab");
-  }
 });

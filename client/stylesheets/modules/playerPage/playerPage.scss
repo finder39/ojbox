@@ -46,13 +46,6 @@ $bottom-bar-background-color: $base-accent-color;
     }
     @include omega;
   }
-  .tab-title {
-    @include span-columns(12);
-    @include pad;
-    text-align: center;
-    text-transform: uppercase;
-    font-weight: bold;
-  }
 }
 .bottom-bar {
   position: fixed;
