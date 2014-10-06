@@ -1,13 +1,7 @@
 <template name="home">
-<!--go directly to the player page now-->
-  <!--{{#if currentUser}}-->
-    <!--{{#if playerIsSetup}}-->
-      <!--{{> playerPage}}-->
-    <!--{{else}}-->
-      <!--{{> playerSetup}}-->
-    <!--{{/if}}-->
-  <!--{{else}}-->
-    <!--{{> login}}-->
-  <!--{{/if}}-->
-  <div>Welcome to OJ Box</div>
+  {{#if currentUser}}
+    {{> playerPage}}
+  {{else}}
+    {{> login}}
+  {{/if}}
 </template>

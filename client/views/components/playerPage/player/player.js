@@ -1,7 +1,3 @@
-// used to hold the current SoundManager2 sound object
-// this has been moved to ojplayer class
-//var currentSound = null;
-
 // update the seek bar for the clients at intervals
 var okToUpdate = true;
 // how often to update the client seek bar
@@ -20,17 +16,6 @@ var soundManagerOptions = {
   autoLoad: true,
   autoPlay: false,
   stream: true,
-  //onload: function() {
-    //var startingPosition;
-    //Tracker.nonreactive(function() {
-      //OJPlayer.loaded(true);
-      //startingPosition = OJPlayer.getStartingPosition();
-    //});
-    //currentSound.setPosition(startingPosition);
-    //currentSound.play();
-    //currentSound.pause();
-    //Session.set("loading", false);
-  //},
   onconnect: function() {
     if (this.connected) {
       console.log("successfully connected");
@@ -39,13 +24,13 @@ var soundManagerOptions = {
     }
   },
   onplay: function() {
-    console.log("play called");
+    //console.log("play called");
     $(".playpause > i").removeClass("fa-play").addClass("fa-pause");
     //console.log(hostplayerTemplateInstance.data);
     OJPlayer.play(hostplayerTemplateInstance.data._id);
   },
   onpause: function() {
-    console.log("pause called");
+    //console.log("pause called");
     $(".playpause > i").removeClass("fa-pause").addClass("fa-play");
     OJPlayer.pause(hostplayerTemplateInstance.data._id);
   },
@@ -77,7 +62,7 @@ var soundManagerOptions = {
   whileloading: function() {
     if (OJPlayer.startingPosition) {
       if (OJPlayer.currentSound.position >= OJPlayer.startingPosition) {
-        console.log("setting the position has been done");
+        //console.log("setting the position has been done");
         OJPlayer.startingPosition = null;
       } else {
         OJPlayer.currentSound.setPosition(OJPlayer.startingPosition);
@@ -102,7 +87,7 @@ Template.player.helpers({
     return Meteor.connection._lastSessionId === Settings.findOne().playerId;
   },
   playingSong: function() {
-    console.log("playingsong called");
+    //console.log("playingsong called");
     return CurrentSong.findOne();
   },
 });
@@ -121,7 +106,7 @@ Template.hostPlayer.rendered = function() {
   console.log("hostplayer template rendered");
   hostplayerTemplateInstance = this;
   SC.whenStreamingReady(function() {
-    console.log("streaming ready");
+    //console.log("streaming ready");
     // makes sure this autorun gets destroyed when the hostplayer template is
     hostplayerTemplateInstance.autorun(function() {
       // if there's already a sound, get rid of it first so two don't start
@@ -140,7 +125,7 @@ Template.hostPlayer.rendered = function() {
           id.stream_url, soundManagerOptions, function(sound) {
           console.log("streaming sound successful and created");
           OJPlayer.currentSound = sound;
-          console.log("getting paused value");
+          //console.log("getting paused value");
           //var paused = hostplayerTemplateInstance.data.paused;
           //console.log(paused);
           // need this nonreactive because for some reason, the template data
@@ -152,10 +137,10 @@ Template.hostPlayer.rendered = function() {
             ).position;
           });
           //console.log(hostplayerTemplateInstance.data);
-          console.log(OJPlayer.startingPosition);
+          //console.log(OJPlayer.startingPosition);
           OJPlayer.currentSound.play();
           if (hostplayerTemplateInstance.data.paused) {
-            console.log("paused!");
+            //console.log("paused!");
             OJPlayer.currentSound.pause();
           }
         });
@@ -164,47 +149,15 @@ Template.hostPlayer.rendered = function() {
   });
   // to handle playing/pausing using spacebar
   $(document).off('.hostplayer').on("keydown.hostplayer", function(event) {
-    console.log("keydown event");
+    //console.log("keydown event");
     if (event.which === 32 && document.activeElement.tagName !== "INPUT") {
-      console.log("spacebar pressed");
+      //console.log("spacebar pressed");
       OJPlayer.currentSound.togglePause();
     }
   });
 }
 
 Template.hostPlayer.helpers({
-  //loadStreaming: function() {
-    //if (!this.loaded && Session.equals("loading", false)) {
-      // don't want the song loading multiple times
-      //Session.set("loading", true);
-    //console.log("loadstreaming called");
-      //SC.stream(
-        //this.uri, soundManagerOptions, function(sound) {
-        //currentSound = sound;
-      //});
-    //}
-  //},
-  //playingSong: function() {
-    //return CurrentSong.findOne();
-  //},
-  playPauseIcon: function() {
-    //if (this.paused) {
-      //if (_.isObject(currentSound) &&
-          //this.loaded &&
-          //currentSound.paused === false) {
-        //currentSound.pause();
-      //}
-      //return "play";
-    //} else {
-      //if (_.isObject(currentSound) &&
-          //this.loaded &&
-          //currentSound.paused === true) {
-        //currentSound.resume();
-      //}
-      //return "pause";
-    //}
-    //return "play";
-  },
   playerDisabled: function() {
     //return this.loaded ? "" : "disabled";
     return "";

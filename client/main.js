@@ -1,7 +1,7 @@
 // using code from https://github.com/mizzao/meteor-accounts-testing
-Meteor.insecureUserLogin = function(username, callback) {
+Meteor.insecureUserLogin = function(username, boxname, callback) {
   return Accounts.callLoginMethod({
-    methodArguments: [{username: username}],
+    methodArguments: [{username: username, boxname: boxname}],
     userCallback: callback
   });
 };

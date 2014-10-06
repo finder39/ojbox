@@ -1,7 +1,4 @@
 // Mongo collections
-Meteor.publish("settings", function() {
-  return Settings.find({}, {limit: 1});
-});
 Meteor.publish("playlist", function() {
   return Playlist.find();
 });

@@ -4,12 +4,16 @@ Accounts.registerLoginHandler(function(loginRequest) {
   if (!loginRequest.username) {
     return;
   }
+  if (!loginRequest.boxname) {
+    return;
+  }
   user = Meteor.users.findOne({
     username: loginRequest.username
   });
   if (!user) {
     userId = Accounts.insertUserDoc({}, {
-      username: loginRequest.username
+      username: loginRequest.username,
+      boxname: loginRequest.boxname,
     });
   } else {
     userId = user._id;
