@@ -4,7 +4,6 @@
 # but you can also edit it by hand.
 
 arunoda:streams@0.1.17
-mizzao:user-status@0.6.0
 accounts-base
 accounts-password
 underscore
@@ -16,4 +15,3 @@ appcache
 meteor-platform
 jquery
 mike:mocha
-

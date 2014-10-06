@@ -19,24 +19,3 @@ Accounts.registerLoginHandler(function(loginRequest) {
   };
 });
 
-// if the connection that just logged out is the one hosting the jukebox,
-// notify the rest of the clients that there is no player anymore
-UserStatus.events.on("connectionLogout", function(fields) {
-  var settings = Settings.findOne();
-  if (settings && settings.playerId && fields.connectionId &&
-      settings.playerId === fields.connectionId) {
-    Settings.update(settings._id, {
-      $set: {playerId: 0}
-    });
-  }
-});
-// on a connection login, check whether the player is still active.
-// a page reload may have happened
-UserStatus.events.on("connectionLogin", function(fields) {
-  var settings = Settings.findOne();
-  if (!UserStatus.connections.findOne({_id: settings.playerId})) {
-    Settings.update(settings._id, {
-      $set: {playerId: 0}
-    });
-  }
-});

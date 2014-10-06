@@ -2,14 +2,19 @@ Router.map(function() {
   // single page app
   // this template will be returned for all routes
   // need to have more routes now
-  this.route('playerPage', {
-    path: '/player',
+  this.route('/player', {
+    template: 'playerPage',
     waitOn: function() {
       return [
         Meteor.subscribe("settings"),
         Meteor.subscribe("currentSong"),
         Meteor.subscribe("playlist")
       ];
+    },
+    onBeforeAction: function() {
+      if (!Meteor.user()) {
+        Router.go('/');
+      }
     },
     // todo: change this later to use only the required fields, not all of them
     //data: function() {
@@ -17,8 +22,8 @@ Router.map(function() {
       //return CurrentSong.findOne();
     //}
   });
-  this.route('app', {
-    path: '*',
+  this.route('*', {
+    template: 'home',
     waitOn: function() {
       return [
         Meteor.subscribe("settings"),
@@ -26,8 +31,10 @@ Router.map(function() {
         Meteor.subscribe("playlist")
       ];
     },
-    onRun: function() {
-      Session.set("loading", false);
-    }
+    onBeforeAction: function() {
+      if (Meteor.user()) {
+        Router.go('/player');
+      }
+    },
   });
 });
