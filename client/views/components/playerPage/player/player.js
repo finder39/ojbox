@@ -131,13 +131,13 @@ Template.hostPlayer.rendered = function() {
       OJPlayer.startingPosition = null;
       console.log("autorun");
       // this should set up a reactive variable
-      var url = CurrentSong.findOne({}, {fields: {stream_url: 1}});
+      var id = CurrentSong.findOne({}, {fields: {_id: 1, stream_url: 1}});
       //console.log(hostplayerTemplateInstance.data);
       //console.log(url);
       //console.log(soundManager.canPlayURL(url.stream_url));
-      if (url) {
+      if (id) {
         SC.stream(
-          url.stream_url, soundManagerOptions, function(sound) {
+          id.stream_url, soundManagerOptions, function(sound) {
           console.log("streaming sound successful and created");
           OJPlayer.currentSound = sound;
           console.log("getting paused value");
