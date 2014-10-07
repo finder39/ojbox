@@ -59,37 +59,40 @@ var processSearchResults = function(tracks, query) {
   $(".search-results tbody").highlight(query.split(" "));
 }
 
-var getSearchResults = function(event) {
-  var query = $(".search input[type=search]").val().trim();
-  if (query) {
-    $(".query").html(query);
-    SC.get("/tracks", {
-      limit: maxResults,
-      q: query,
-      // there is a bug in the soundcloud api where the filter option
-      // is ignored when there is a query option. i'm including it
-      // anyway so when it's fixed it'll work
-      filter: {streamable: true},
-      duration: {from: minSongLength, to: maxSongLength}
-    }, function(tracks, error) {
-      if (error) {
-        $(".searching").hide();
-        $(".error").show();
-        return;
-      }
-      processSearchResults(tracks, query);
-    });
+var getSearchResults = function(query) {
+  if (!query) {
+    return;
   }
+  $(".query").html(query);
+  SC.get("/tracks", {
+    limit: maxResults,
+    q: query,
+    // there is a bug in the soundcloud api where the filter option
+    // is ignored when there is a query option. i'm including it
+    // anyway so when it's fixed it'll work
+    filter: {streamable: true},
+    duration: {from: minSongLength, to: maxSongLength}
+  }, function(tracks, error) {
+    if (error) {
+      $(".searching").hide();
+      $(".error").show();
+      return;
+    }
+    processSearchResults(tracks, query);
+  });
 }
 
 Template.search.events({
   "submit .search form": function(event) {
-    $(".results-message").hide();
-    $(".no-results").hide();
-    $(".error").hide();
-    $(".searching").show();
     event.preventDefault();
-    getSearchResults(event);
+    var query = $(".search input[type=search]").val().trim();
+    if (query) {
+      $(".results-message").hide();
+      $(".no-results").hide();
+      $(".error").hide();
+      $(".searching").show();
+      getSearchResults(query);
+    }
   },
   "click .add-to-playlist": function(event) {
     event.preventDefault();
