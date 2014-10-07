@@ -29,3 +29,4 @@ CurrentSong.allow({
     return true;
   }
 });
+

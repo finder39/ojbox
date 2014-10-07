@@ -3,17 +3,20 @@ OJPlayer = {
   startingPosition: null,
 
   addSongToPlaylist: function(songDoc) {
+    var boxname = Meteor.user().profile.boxname;
+
     songDoc.addedByUsername = Meteor.user().username;
     songDoc.addedByUserId = Meteor.userId();
     songDoc.addedAt = new Date();
     songDoc.upvotes = 0;
     songDoc.downvotes = 0;
     songDoc.voteTotal = 0;
+    songDoc.boxname = boxname;
 
     // if CurrentSong is empty, put it there instead
     var current;
     Tracker.nonreactive(function() {
-      current = CurrentSong.find().count();
+      current = CurrentSong.find({boxname: boxname}).count();
     });
     if (!current) {
       songDoc.position = 0;
@@ -58,7 +61,7 @@ OJPlayer = {
     return true;
   },
   topSong: function() {
-    return Playlist.findOne({}, {
+    return Playlist.findOne({boxname: Meteor.user().profile.boxname}, {
       // sort by voteTotal, which is upvotes - downvotes,
       // breaking ties by time added
       sort: [["voteTotal", "desc"], ["addedAt", "asc"]]

@@ -28,7 +28,10 @@ var processSearchResults = function(tracks, query) {
   }
   _.each(tracks, function(track, key, list) {
     if (track.streamable) {
-      if (Playlist.find({id: track.id}).count()) {
+      if (Playlist.find({
+        id: track.id,
+        boxname: Meteor.user().profile.boxname
+      }).count()) {
         track.inPlaylist = true;
       } else {
         track.inPlaylist = false;
@@ -88,7 +91,7 @@ Template.search.events({
     event.preventDefault();
     getSearchResults(event);
   },
-  "click .add-to-playlist, touchstart .add-to-Playlist": function(event) {
+  "click .add-to-playlist": function(event) {
     event.preventDefault();
     OJPlayer.addSongToPlaylist(this);
     if (!Session.equals("selectedTab", "playlist")) {
@@ -108,7 +111,10 @@ Template.search.helpers({
 
 Template.searchResult.helpers({
   inPlaylist: function() {
-    if (Playlist.find({id: this.id}).count()) {
+    if (Playlist.find({
+      id: this.id,
+      boxname: Meteor.user().profile.boxname
+    }).count()) {
       if (!this.inPlaylist) {
         SearchResults.update(this._id, {
           $set: {inPlaylist: true}

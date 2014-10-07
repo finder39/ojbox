@@ -1,14 +1,15 @@
 Template.playlist.helpers({
   currentSong: function() {
-    return CurrentSong.findOne();
+    return CurrentSong.findOne({boxname: Meteor.user().profile.boxname});
   },
   song: function() {
-    return Playlist.find({}, {
+    return Playlist.find({boxname: Meteor.user().profile.boxname}, {
       // sort by voteTotal, which is upvotes - downVotes,
       // breaking ties by time added
       sort: [["voteTotal", "desc"], ["addedAt", "asc"]]
     });
   },
+  // TODO: need to change the color of the icons if they're disabled
   thumbUpIcon: function() {
     return _.contains(this.userIdsWhoVotedUp, Meteor.userId()) ?
       "fa-thumbs-up" : "fa-thumbs-o-up";
@@ -36,7 +37,7 @@ Template.playlist.helpers({
             "You've added this song or already voted it down" : "Vote this song down";
   },
   noSongs: function() {
-    return CurrentSong.find().count() === 0;
+    return CurrentSong.find({boxname: Meteor.user().profile.boxname}).count() === 0;
   },
   removeSongIcon: function() {
     return this.addedByUserId === Meteor.userId() ? "fa-times" : "";
@@ -46,7 +47,7 @@ Template.playlist.helpers({
   },
   tooltipRemove: function() {
     return this.addedByUserId === Meteor.userId() ? "Remove from playlist" : "";
-  }
+  },
 });
 
 Template.playlist.events({
@@ -71,12 +72,13 @@ Template.playlist.events({
     }
 
     // remove the song if it's unanimously downvoted
-    var downvotes = this.downvotes;
-    Meteor.call("getOnlineUserCount", function(error, result) {
-      if (result > 2 && downvotes >= result - 2) {
-        Playlist.remove(this._id);
-      }
-    });
+    // removed for now because I removed the user status package. put it back in later
+    //var downvotes = this.downvotes;
+    //Meteor.call("getOnlineUserCount", function(error, result) {
+      //if (result > 2 && downvotes >= result - 2) {
+        //Playlist.remove(this._id);
+      //}
+    //});
     Playlist.update(this._id, {
       $push: {userIdsWhoVotedDown: Meteor.userId()},
       $inc: {downvotes: 1, voteTotal: -1}

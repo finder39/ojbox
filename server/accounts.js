@@ -13,11 +13,13 @@ Accounts.registerLoginHandler(function(loginRequest) {
   if (!user) {
     userId = Accounts.insertUserDoc({}, {
       username: loginRequest.username,
-      boxname: loginRequest.boxname,
     });
   } else {
     userId = user._id;
   }
+  Meteor.users.update(userId, {
+    $set: {"profile.boxname": loginRequest.boxname}
+  });
   return {
     userId: userId
   };

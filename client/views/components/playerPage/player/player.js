@@ -83,19 +83,19 @@ var soundManagerOptions = {
 }
 
 Template.player.helpers({
-  mainPlayer: function() {
-    return Meteor.connection._lastSessionId === Settings.findOne().playerId;
-  },
+  //mainPlayer: function() {
+    //return Meteor.connection._lastSessionId === Settings.findOne().playerId;
+  //},
   playingSong: function() {
     //console.log("playingsong called");
-    return CurrentSong.findOne();
+    return CurrentSong.findOne({boxname: Meteor.user().profile.boxname});
   },
 });
 
 Template.player.created = function() {
   console.log("player created");
   // if it's the first run of the player, start off paused
-  var current = CurrentSong.findOne();
+  var current = CurrentSong.findOne({boxname: Meteor.user().profile.boxname});
   if (current) {
     console.log("setting song to initially be paused");
     OJPlayer.pause(current._id);
@@ -116,7 +116,10 @@ Template.hostPlayer.rendered = function() {
       OJPlayer.startingPosition = null;
       console.log("autorun");
       // this should set up a reactive variable
-      var id = CurrentSong.findOne({}, {fields: {_id: 1, stream_url: 1}});
+      var id = CurrentSong.findOne(
+        {boxname: Meteor.user().profile.boxname},
+        {fields: {_id: 1, stream_url: 1}}
+      );
       //console.log(hostplayerTemplateInstance.data);
       //console.log(url);
       //console.log(soundManager.canPlayURL(url.stream_url));
@@ -132,7 +135,7 @@ Template.hostPlayer.rendered = function() {
           // context does not update yet
           Tracker.nonreactive(function() {
             OJPlayer.startingPosition = CurrentSong.findOne(
-              {},
+              {boxname: Meteor.user().profile.boxname},
               {fields: {position: 1}}
             ).position;
           });
