@@ -14,8 +14,12 @@ var addChatMessage = function(message, username) {
     Session.set("missedChats", Session.get("missedChats") + 1);
   }
 }
-Chat.on("chat", function(message, username) {
-  addChatMessage(message, username);
+
+Chat.on("chat", function(message, username, boxname) {
+  // only show the chats from the same box
+  if (boxname === Meteor.user().profile.boxname) {
+    addChatMessage(message, username);
+  }
 });
 
 Template.chat.helpers({
@@ -37,11 +41,10 @@ Template.chat.events({
   "submit .chat form": function(event) {
     event.preventDefault();
 
-    var user = Meteor.users.findOne(Meteor.userId());
     var message = $(".chat form input");
     // don't do anything if the message is empty
     if (message.val()) {
-      addChatMessage(message.val(), user.username);
+      addChatMessage(message.val(), Meteor.user().username);
       Chat.emit("chat", message.val());
       message.val("");
     }

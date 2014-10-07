@@ -30,8 +30,9 @@ Chat.addFilter(function(eventName, args) {
   // switch the user id with the user's name
   if (this.userId) {
     var user = Meteor.users.findOne(this.userId);
-    if (args[0] && user && user.username) {
-      return [args[0], user.username];
+    if (args[0] && user && user.username &&
+        user.profile && user.profile.boxname) {
+      return [args[0], user.username, user.profile.boxname];
     }
   }
   return args;
