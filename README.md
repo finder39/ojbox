@@ -9,27 +9,26 @@ yelling across the room to have your buddy play you a song!
 Try out the demo at http://ojbox.rocks.
 
 ## Installation
-Installation can be done with arunoda’s wonderful [meteor-up](https://github.com/arunoda/meteor-up)
-tool. Simply git clone this repository and use the meteor-up tool to deploy to
-a Debian/Ubuntu/Open Solaris environment.
+No more installation! I’m actually going to be hosting this at http://ojbox.rocks.
+The project isn’t fully complete yet, but I’m working on it.
 
 ## How does it Work?
-OJ Box needs to run on a server. Since this is free software, you will need to
-install it on a Linux box that has Node.js and MongoDB installed on it.
-Installation instructions are above.
-
 OJ Box is a web application that people can go to using a browser.
-There are four components to the interface.
+
+### Log In
+Choose a user name and a box name. No password is required currently, although
+I may add that in the future. The box name is so that you can share music with
+only the people who are joined in to that particular box.
 
 ### The Player
-OJ Box plays music from only a single device. This device is the host player.
-Whoever clicked *YEP* on the set up screen controls the host player. Sound will
-only come from this device. The other clients that connect will be able to play
-and pause the song, but only the host player can skip to the next song.
+It’s a media player with only three functions: a play/pause button, a button to
+go back fifteen seconds, and a button to skip forward fifteen seconds. Since the
+playlist is synced across everyone who is in that box, if the song ends, all playlists
+on every client will get updated.
 
 ### Search
 The Search tab is for adding music to the playlist. The music comes from
-SoundCloud. OJ Box consumes the SoundCloud API.
+SoundCloud. OJ Box consumes the SoundCloud API. Thank you, SoundCloud!
 
 ### The Playlist
 Songs added to the playlist can be viewed on the Playlist tab. Anyone logged in
@@ -38,16 +37,11 @@ you can vote up or down on it. Voting up or down can only be done once per user
 per song. The person who added the song also has the permission to remove it
 from the playlist.
 
-To make it fun, for playlists with three or more people logged in, if everyone
-but the person who added the song votes that song down, the song will be booted
-off the playlist.
-
 ### Chat
 You can also chat with other logged in users on the Chat tab!
 
 ## Todo
 - Add Spotify API support (this will require Spotify Premium)
-- Turn chat text input to contentEditable input
 - Add user list on chat page
 - Make it work for mobile. Phonegap
 - Add Velocity and some animations
@@ -55,10 +49,18 @@ You can also chat with other logged in users on the Chat tab!
 - Add collection hooks
 - Validate data
 - Ability to toggle sound on/off from different clients
+- Tutorial
+- Splash page
+- User accounts with authentication
+- Ability to log out
+- Ability to switch boxes
+- Ability to search for boxes
+- Settings tab
+- Volume adjustment
 
 ## Possible future features
 - Color theme
-- Maybe save chat history?
+- Save chat history
 - Database pruning, like delete users who haven’t logged on for a long time
 - Gravatar for chat? and/or ability to upload image
 - Settings page: settings include color theme, different modes, changing your
@@ -67,16 +69,11 @@ user name, setting your user picture, file location for local music files
 and say when users connect, disconnect, etc.
 
 ## Notes
-The sound doesn’t work on mobile devices. For some reason it never loads.
-This is a known bug that I will fix soon.
-
 Of course there is a limit to how much the SoundCloud API will allow
 streaming if this player becomes popular. Also, the YouTube API expressly
 forbids just playing the audio from a video, so YouTube is no longer an
 option (unless I show the whole video, but that’s beyond the scope of
 the project for now).
-
-I will need to add the ability to add your own music library.
 
 If you have any questions or suggestions, please
 email me.
