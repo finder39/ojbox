@@ -57,6 +57,11 @@ You can also chat with other logged in users on the Chat tab!
 - Ability to search for boxes
 - Settings tab
 - Volume adjustment
+- Make box names case-insensitive
+- Make the chat channel a message channel including user joins/exits, song
+  adds, and votes
+- UI improvements on voting
+- Test out the playlist changing when other people do it. Seems buggy
 
 ## Possible future features
 - Color theme
