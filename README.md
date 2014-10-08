@@ -62,6 +62,7 @@ You can also chat with other logged in users on the Chat tab!
   adds, and votes
 - UI improvements on voting
 - Test out the playlist changing when other people do it. Seems buggy
+- Put speaker on the side of the orange juice box in the logo
 
 ## Possible future features
 - Color theme
