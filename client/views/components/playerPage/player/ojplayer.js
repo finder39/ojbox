@@ -3,7 +3,7 @@ OJPlayer = {
   startingPosition: null,
 
   addSongToPlaylist: function(songDoc) {
-    var boxname = Meteor.user().profile.boxname;
+    var boxname = Meteor.user().profile.boxname.toLowerCase();
 
     songDoc.addedByUsername = Meteor.user().username;
     songDoc.addedByUserId = Meteor.userId();
@@ -61,11 +61,12 @@ OJPlayer = {
     return true;
   },
   topSong: function() {
-    return Playlist.findOne({boxname: Meteor.user().profile.boxname}, {
+    return Playlist.findOne(
+      {boxname: Meteor.user().profile.boxname.toLowerCase()},
       // sort by voteTotal, which is upvotes - downvotes,
       // breaking ties by time added
-      sort: [["voteTotal", "desc"], ["addedAt", "asc"]]
-    });
+      {sort: [["voteTotal", "desc"], ["addedAt", "asc"]]}
+    );
   },
   pause: function(currentId) {
     currentId && CurrentSong.update(currentId, {

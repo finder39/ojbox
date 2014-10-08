@@ -17,7 +17,7 @@ var addChatMessage = function(message, username) {
 
 Chat.on("chat", function(message, username, boxname) {
   // only show the chats from the same box
-  if (boxname === Meteor.user().profile.boxname) {
+  if (boxname.toLowerCase() === Meteor.user().profile.boxname.toLowerCase()) {
     addChatMessage(message, username);
   }
 });

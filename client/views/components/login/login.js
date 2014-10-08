@@ -2,8 +2,8 @@ Template.login.events({
   "submit .login form": function(event) {
     event.preventDefault();
 
-    var username = $(".name").val().toLowerCase();
-    var boxname = $(".box").val().toLowerCase();
+    var username = $(".name").val();
+    var boxname = $(".box").val();
     Meteor.insecureUserLogin(username, boxname);
   }
 });

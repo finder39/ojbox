@@ -7,9 +7,9 @@ Accounts.registerLoginHandler(function(loginRequest) {
   if (!loginRequest.boxname) {
     return;
   }
-  user = Meteor.users.findOne({
-    username: loginRequest.username
-  });
+  // case insensitive regular expression object for user name
+  var username = new RegExp(loginRequest.username, 'i');
+  user = Meteor.users.findOne({username: username});
   if (!user) {
     userId = Accounts.insertUserDoc({}, {
       username: loginRequest.username,

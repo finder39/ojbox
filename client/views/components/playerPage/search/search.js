@@ -30,7 +30,7 @@ var processSearchResults = function(tracks, query) {
     if (track.streamable) {
       if (Playlist.find({
         id: track.id,
-        boxname: Meteor.user().profile.boxname
+        boxname: Meteor.user().profile.boxname.toLowerCase()
       }).count()) {
         track.inPlaylist = true;
       } else {
@@ -116,7 +116,7 @@ Template.searchResult.helpers({
   inPlaylist: function() {
     if (Playlist.find({
       id: this.id,
-      boxname: Meteor.user().profile.boxname
+      boxname: Meteor.user().profile.boxname.toLowerCase()
     }).count()) {
       if (!this.inPlaylist) {
         SearchResults.update(this._id, {

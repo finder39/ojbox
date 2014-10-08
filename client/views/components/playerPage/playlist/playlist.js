@@ -1,13 +1,16 @@
 Template.playlist.helpers({
   currentSong: function() {
-    return CurrentSong.findOne({boxname: Meteor.user().profile.boxname});
+    return CurrentSong.findOne({
+      boxname: Meteor.user().profile.boxname.toLowerCase()
+    });
   },
   song: function() {
-    return Playlist.find({boxname: Meteor.user().profile.boxname}, {
+    return Playlist.find(
+      {boxname: Meteor.user().profile.boxname.toLowerCase()},
       // sort by voteTotal, which is upvotes - downVotes,
       // breaking ties by time added
-      sort: [["voteTotal", "desc"], ["addedAt", "asc"]]
-    });
+      {sort: [["voteTotal", "desc"], ["addedAt", "asc"]]}
+    );
   },
   // TODO: need to change the color of the icons if they're disabled
   thumbUpIcon: function() {
@@ -37,7 +40,9 @@ Template.playlist.helpers({
             "You've added this song or already voted it down" : "Vote this song down";
   },
   noSongs: function() {
-    return CurrentSong.find({boxname: Meteor.user().profile.boxname}).count() === 0;
+    return CurrentSong.find({
+      boxname: Meteor.user().profile.boxname.toLowerCase()
+    }).count() === 0;
   },
   removeSongIcon: function() {
     return this.addedByUserId === Meteor.userId() ? "fa-times" : "";

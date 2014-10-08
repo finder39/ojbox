@@ -88,14 +88,18 @@ Template.player.helpers({
   //},
   playingSong: function() {
     //console.log("playingsong called");
-    return CurrentSong.findOne({boxname: Meteor.user().profile.boxname});
+    return CurrentSong.findOne({
+      boxname: Meteor.user().profile.boxname.toLowerCase()
+    });
   },
 });
 
 Template.player.created = function() {
   console.log("player created");
   // if it's the first run of the player, start off paused
-  var current = CurrentSong.findOne({boxname: Meteor.user().profile.boxname});
+  var current = CurrentSong.findOne({
+    boxname: Meteor.user().profile.boxname.toLowerCase()
+  });
   if (current) {
     console.log("setting song to initially be paused");
     OJPlayer.pause(current._id);
@@ -117,7 +121,7 @@ Template.hostPlayer.rendered = function() {
       console.log("autorun");
       // this should set up a reactive variable
       var id = CurrentSong.findOne(
-        {boxname: Meteor.user().profile.boxname},
+        {boxname: Meteor.user().profile.boxname.toLowerCase()},
         {fields: {_id: 1, stream_url: 1}}
       );
       //console.log(hostplayerTemplateInstance.data);
@@ -135,7 +139,7 @@ Template.hostPlayer.rendered = function() {
           // context does not update yet
           Tracker.nonreactive(function() {
             OJPlayer.startingPosition = CurrentSong.findOne(
-              {boxname: Meteor.user().profile.boxname},
+              {boxname: Meteor.user().profile.boxname.toLowerCase()},
               {fields: {position: 1}}
             ).position;
           });
