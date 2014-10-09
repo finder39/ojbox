@@ -73,6 +73,7 @@ You can also chat with other logged in users on the Chat tab!
 user name, setting your user picture, file location for local music files
 - Either put in a list of connected users, or use the chat as a message log
 and say when users connect, disconnect, etc.
+- Import playlists from other services
 
 ## Notes
 Of course there is a limit to how much the SoundCloud API will allow
