@@ -9,12 +9,11 @@ accounts-password
 underscore
 mrt:highlight@0.0.1
 mrt:moment@2.8.1
-iron:router
-mrt:iron-router-progress
 appcache
 meteor-platform
 jquery
 mike:mocha
 meteorhacks:fast-render
 meteorhacks:kadira
+iron:router
 
