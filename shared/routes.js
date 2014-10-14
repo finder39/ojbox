@@ -8,5 +8,6 @@ Router.map(function() {
         Meteor.subscribe("playlist")
       ];
     },
+    fastRender: true,
   });
 });
