@@ -40,7 +40,7 @@ meteor-platform@1.1.2
 meteor@1.1.2
 meteorhacks:fast-render@1.1.2
 meteorhacks:kadira-binary-deps@1.2.0
-meteorhacks:kadira@2.11.9
+meteorhacks:kadira@2.11.11
 mike:mocha@0.3.12
 minifiers@1.1.1
 minimongo@1.0.4
