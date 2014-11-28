@@ -17,9 +17,7 @@ var soundManagerOptions = {
   autoPlay: false,
   stream: true,
   onconnect: function() {
-    if (this.connected) {
-      console.log("successfully connected");
-    } else {
+    if (!this.connected) {
       console.log("error connecting");
     }
   },
@@ -27,12 +25,12 @@ var soundManagerOptions = {
     //console.log("play called");
     $(".playpause > i").removeClass("fa-play").addClass("fa-pause");
     //console.log(hostplayerTemplateInstance.data);
-    OJPlayer.play(hostplayerTemplateInstance.data._id);
+    //OJPlayer.play(hostplayerTemplateInstance.data._id);
   },
   onpause: function() {
     //console.log("pause called");
     $(".playpause > i").removeClass("fa-pause").addClass("fa-play");
-    OJPlayer.pause(hostplayerTemplateInstance.data._id);
+    //OJPlayer.pause(hostplayerTemplateInstance.data._id);
   },
   onload: function(success) {
     //console.log("on load");
@@ -41,8 +39,7 @@ var soundManagerOptions = {
       OJPlayer.currentSound = null;
       OJPlayer.startingPosition = null;
       console.log("error loading, skipping track");
-      OJPlayer.nextSong(hostplayerTemplateInstance.data._id,
-                        hostplayerTemplateInstance.data.paused);
+      OJPlayer.nextSong(hostplayerTemplateInstance.data._id);
       updateSeekBarDisplay(0);
     }
   },
@@ -76,20 +73,16 @@ var soundManagerOptions = {
     this.destruct();
     OJPlayer.currentSound = null;
     OJPlayer.startingPosition = null;
-    OJPlayer.nextSong(hostplayerTemplateInstance.data._id,
-                      hostplayerTemplateInstance.data.paused);
+    OJPlayer.nextSong(hostplayerTemplateInstance.data._id);
     updateSeekBarDisplay(0);
   }
 }
 
 Template.player.helpers({
-  //mainPlayer: function() {
-    //return Meteor.connection._lastSessionId === Settings.findOne().playerId;
-  //},
   playingSong: function() {
     //console.log("playingsong called");
     return CurrentSong.findOne({
-      boxname: Meteor.user().profile.boxname.toLowerCase()
+      boxname: Meteor.user().profile.boxname
     });
   },
 });
@@ -97,13 +90,6 @@ Template.player.helpers({
 Template.player.created = function() {
   console.log("player created");
   // if it's the first run of the player, start off paused
-  var current = CurrentSong.findOne({
-    boxname: Meteor.user().profile.boxname.toLowerCase()
-  });
-  if (current) {
-    console.log("setting song to initially be paused");
-    OJPlayer.pause(current._id);
-  }
 }
 
 Template.hostPlayer.rendered = function() {
@@ -121,7 +107,7 @@ Template.hostPlayer.rendered = function() {
       console.log("autorun");
       // this should set up a reactive variable
       var id = CurrentSong.findOne(
-        {boxname: Meteor.user().profile.boxname.toLowerCase()},
+        {boxname: Meteor.user().profile.boxname},
         {fields: {_id: 1, stream_url: 1}}
       );
       //console.log(hostplayerTemplateInstance.data);
@@ -131,6 +117,7 @@ Template.hostPlayer.rendered = function() {
         SC.stream(
           id.stream_url, soundManagerOptions, function(sound) {
           console.log("streaming sound successful and created");
+          console.log(soundManager);
           OJPlayer.currentSound = sound;
           //console.log("getting paused value");
           //var paused = hostplayerTemplateInstance.data.paused;
@@ -139,7 +126,7 @@ Template.hostPlayer.rendered = function() {
           // context does not update yet
           Tracker.nonreactive(function() {
             OJPlayer.startingPosition = CurrentSong.findOne(
-              {boxname: Meteor.user().profile.boxname.toLowerCase()},
+              {boxname: Meteor.user().profile.boxname},
               {fields: {position: 1}}
             ).position;
           });
@@ -164,72 +151,15 @@ Template.hostPlayer.rendered = function() {
   });
 }
 
-Template.hostPlayer.helpers({
-  playerDisabled: function() {
-    //return this.loaded ? "" : "disabled";
-    return "";
-  },
-});
-
-Template.clientPlayer.helpers({
-  playingSong: function() {
-    return CurrentSong.findOne();
-  },
-  playPauseIcon: function() {
-    return this.paused ? "play" : "pause";
-  },
-  playerDisabled: function() {
-    //return this.loaded ? "" : "disabled";
-    return "";
-  },
-  updateSeekBar: function() {
-    updateSeekBarDisplay(this.position / this.duration);
-  }
-});
-
 Template.hostPlayer.events({
-  // use togglepause on this one (soundmanager2 library)
   "click .playpause, touchstart .playpause" : function(event) {
-    //event.preventDefault();
-    //if (this.loaded === false) {
-      //return;
-    //}
     OJPlayer.currentSound.togglePause();
-    //if ($(".playpause").has(".fa-play").length) {
-      //CurrentSong.update(this._id, {
-        //$set: {paused: false}
-      //});
-      //$(".fa-play").switchClass("fa-play", "fa-pause");
-    //} else {
-      //CurrentSong.update(this._id, {
-        //$set: {paused: true}
-      //});
-      //$(".fa-pause").switchClass("fa-pause", "fa-play");
-    //}
   },
   "touchend .playpause": function(event) {
     // click doubles as a touchend event, so prevent doubling up
     event.preventDefault();
   },
-  //"click .ff-next, touchstart .ff-next": function(event) {
-    ////event.preventDefault();
-    ////if (this.loaded === false) {
-      ////return;
-    ////}
-    //console.log("next clicked");
-    //var self = this;
-    //OJPlayer.currentSound.destruct();
-    //OJPlayer.nextSong(self._id, self.paused);
-    //updateSeekBarDisplay(0);
-  //},
-  //"touchend .ff-next": function(event) {
-    //event.preventDefault();
-  //},
   "click .backward-fifteen, touchstart .backward-fifteen": function(event) {
-    //event.preventDefault();
-    //if (this.loaded === false) {
-      //return;
-    //}
     // rewind 15 seconds
     OJPlayer.currentSound.setPosition(OJPlayer.currentSound.position - 15000);
   },
@@ -237,35 +167,11 @@ Template.hostPlayer.events({
     event.preventDefault();
   },
   "click .forward-fifteen, touchstart .forward-fifteen": function(event) {
-    //event.preventDefault();
-    //if (this.loaded === false) {
-      //return;
-    //}
     // skip ahead 15 seconds
     OJPlayer.currentSound.setPosition(OJPlayer.currentSound.position + 15000);
   },
   "touchend .forward-fifteen": function(event) {
     event.preventDefault();
-  },
-});
-
-Template.clientPlayer.events({
-  "click .playpause, touchstart .playpause": function(event) {
-    event.preventDefault();
-    if (this.loaded === false) {
-      return;
-    }
-    if ($(".playpause").has(".fa-play").length) {
-      CurrentSong.update(this._id, {
-        $set: {paused: false}
-      });
-      //$(".fa-play").switchClass("fa-play", "fa-pause");
-    } else {
-      CurrentSong.update(this._id, {
-        $set: {paused: true}
-      });
-      //$(".fa-pause").switchClass("fa-pause", "fa-play");
-    }
   },
 });
 

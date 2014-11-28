@@ -4,7 +4,7 @@ Meteor.insecureUserLogin = function(username, boxname, callback) {
     methodArguments: [{username: username, boxname: boxname}],
     userCallback: callback
   });
-};
+}
 
 Meteor.startup(function() {
   Session.setDefault("selectedTab", "playlist");

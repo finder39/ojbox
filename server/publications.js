@@ -1,9 +1,24 @@
 // Mongo collections
 Meteor.publish("playlist", function() {
-  return Playlist.find();
+  if (!this.userId) {
+    return false;
+  }
+  var user = Meteor.users.findOne({_id: this.userId}, {
+    $fields: {profile: 1}
+  });
+  return Playlist.find({boxname: user.profile.boxname});
 });
 Meteor.publish("currentSong", function() {
-  return CurrentSong.find();
+  if (!this.userId) {
+    return false;
+  }
+  var user = Meteor.users.findOne({_id: this.userId}, {
+    $fields: {profile: 1}
+  });
+  return CurrentSong.find({boxname: user.profile.boxname});
+});
+Meteor.publish("boxes", function() {
+  return Boxes.find({});
 });
 
 // Streams

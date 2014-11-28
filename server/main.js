@@ -1,5 +1,5 @@
 if (Meteor.isServer) {
-  FastRender.route("player", function(params) {
+  FastRender.route("/:box/player", function(params) {
     this.subscribe("currentSong");
     this.subscribe("playlist");
   });

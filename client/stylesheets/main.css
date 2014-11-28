@@ -548,6 +548,17 @@ dl {
   dl dd {
     margin: 0; }
 
+.login .error-message {
+  background: #f69988;
+  color: #470f05;
+  font-weight: bold;
+  margin-bottom: 0.75em;
+  padding: 0.75em; }
+  .login .error-message a {
+    color: #170502; }
+    .login .error-message a:hover {
+      color: black; }
+
 button,
 input[type="submit"] {
   -webkit-appearance: none;
@@ -781,6 +792,8 @@ input[type="submit"] {
   background-color: #d1c4e9;
   background-attachment: fixed;
   background-position-x: center; }
+  .login .error-message {
+    display: none; }
   .login form {
     text-align: center;
     max-width: 68em;

@@ -2,7 +2,7 @@
 var maxChats = 200;
 
 Chat = new Meteor.Stream("chat");
-ChatCollection = new Meteor.Collection(null);
+ChatCollection = new Mongo.Collection(null);
 
 var addChatMessage = function(message, username) {
   ChatCollection.insert({
@@ -17,7 +17,7 @@ var addChatMessage = function(message, username) {
 
 Chat.on("chat", function(message, username, boxname) {
   // only show the chats from the same box
-  if (boxname.toLowerCase() === Meteor.user().profile.boxname.toLowerCase()) {
+  if (boxname === Meteor.user().profile.boxname) {
     addChatMessage(message, username);
   }
 });

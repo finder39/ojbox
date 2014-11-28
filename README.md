@@ -63,6 +63,8 @@ You can also chat with other logged in users on the Chat tab!
 - UI improvements on voting
 - Test out the playlist changing when other people do it. Seems buggy
 - Put speaker on the side of the orange juice box in the logo
+- Get rid of box names. Instead, use user names as the box channel names
+- Require log in/sign up to chat
 
 ## Possible future features
 - Color theme

@@ -12,8 +12,6 @@ mrt:moment@2.8.1
 appcache
 meteor-platform
 jquery
-mike:mocha
 meteorhacks:fast-render
 meteorhacks:kadira
 iron:router
-

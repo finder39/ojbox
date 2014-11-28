@@ -8,7 +8,7 @@ var minSongLength = 120000;
 var maxSongLength = 600000;
 
 // collection for results. only a local collection
-SearchResults = new Meteor.Collection(null);
+SearchResults = new Mongo.Collection(null);
 // to track adds to the playlist
 PlaylistTracker = new Meteor.Stream("playlistTracker");
 PlaylistTracker.on("songAdded", function() {
@@ -30,7 +30,7 @@ var processSearchResults = function(tracks, query) {
     if (track.streamable) {
       if (Playlist.find({
         id: track.id,
-        boxname: Meteor.user().profile.boxname.toLowerCase()
+        boxname: Meteor.user().profile.boxname
       }).count()) {
         track.inPlaylist = true;
       } else {
@@ -116,7 +116,7 @@ Template.searchResult.helpers({
   inPlaylist: function() {
     if (Playlist.find({
       id: this.id,
-      boxname: Meteor.user().profile.boxname.toLowerCase()
+      boxname: Meteor.user().profile.boxname
     }).count()) {
       if (!this.inPlaylist) {
         SearchResults.update(this._id, {

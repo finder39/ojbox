@@ -1,32 +1,18 @@
 Playlist = new Mongo.Collection("playlist");
-CurrentSong = new Mongo.Collection("currentSong");
 
 Playlist.allow({
   'insert': function(userId, doc) {
     // if it's already in the playlist, don't allow
-    if (Playlist.findOne({uri: doc.uri})) {
+    if (Playlist.findOne({stream_url: doc.stream_url, boxname: doc.boxname})) {
       return false;
     }
-    return true;
+    return Meteor.user().profile.boxname === doc.boxname;
   },
   'update': function(userId, doc, fieldNames, modifier) {
-    return true;
+    return Meteor.user().profile.boxname === doc.boxname;
   },
   'remove': function(userId, doc) {
     // only allowed to remove the songs you added
     return doc.addedByUserId === userId;
   }
 });
-
-CurrentSong.allow({
-  'insert': function(userId, doc) {
-    return true;
-  },
-  'update': function(userId, doc, fieldNames, modifier) {
-    return true;
-  },
-  'remove': function(userId, doc) {
-    return true;
-  }
-});
-

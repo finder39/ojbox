@@ -22,6 +22,7 @@ $med-light-gray: hsl(0,0%,74%);
 $light-gray: hsl(0,0%,88%);
 $light-red: #FBE3E4;
 $red: #e51c23;
+$light-red: #f69988;
 $light-yellow: #FFF6BF;
 $yellow: #ffeb3b;
 $deep-orange: #ff5722;
@@ -51,7 +52,7 @@ $base-border-color: $light-gray;
 
 // Flash Colors
 $alert-color: $light-yellow;
-$error-color: $red;
+$error-color: $light-red;
 $notice-color: $amber;
 $success-color: $green;
 

@@ -1,12 +1,12 @@
 Template.playlist.helpers({
   currentSong: function() {
     return CurrentSong.findOne({
-      boxname: Meteor.user().profile.boxname.toLowerCase()
+      boxname: Meteor.user().profile.boxname
     });
   },
   song: function() {
     return Playlist.find(
-      {boxname: Meteor.user().profile.boxname.toLowerCase()},
+      {boxname: Meteor.user().profile.boxname},
       // sort by voteTotal, which is upvotes - downVotes,
       // breaking ties by time added
       {sort: [["voteTotal", "desc"], ["addedAt", "asc"]]}
@@ -41,7 +41,7 @@ Template.playlist.helpers({
   },
   noSongs: function() {
     return CurrentSong.find({
-      boxname: Meteor.user().profile.boxname.toLowerCase()
+      boxname: Meteor.user().profile.boxname
     }).count() === 0;
   },
   removeSongIcon: function() {

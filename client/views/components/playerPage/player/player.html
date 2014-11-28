@@ -1,10 +1,6 @@
 <template name="player">
   {{#with playingSong}}
-  <!--{{#if mainPlayer}}-->
     {{> hostPlayer}}
-  <!--{{else}}-->
-    <!--{{> clientPlayer}}-->
-  <!--{{/if}}-->
   {{/with}}
 </template>
 
@@ -26,20 +22,4 @@
       </li>
     </ul>
   <!--{{/with}}-->
-</template>
-
-<template name="clientPlayer">
-  {{#with playingSong}}
-    <ul class="player client-player {{playerDisabled}}">
-      <li class="ff-ten player-button">&nbsp;</li>
-      <li class="playpause player-button">
-        <i class="fa fa-{{playPauseIcon}} fa-fw fa-lg"></i>
-      </li>
-      <li class="ff-next player-button">&nbsp;</li>
-      <li class="seek-bar">
-        {{updateSeekBar}}
-        <span class="progress-bar"></span>
-      </li>
-    </ul>
-  {{/with}}
 </template>

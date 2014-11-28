@@ -8,6 +8,11 @@
     background-attachment: fixed;
     background-position-x: center;
 
+    .error-message {
+      display: none;
+      @extend %flash-error;
+    }
+
     form {
         // center horizontally
         text-align: center;
