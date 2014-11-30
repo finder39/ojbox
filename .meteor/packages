@@ -4,8 +4,6 @@
 # but you can also edit it by hand.
 
 arunoda:streams@0.1.17
-accounts-base
-accounts-password
 underscore
 mrt:highlight@0.0.1
 mrt:moment@2.8.1
@@ -15,3 +13,7 @@ jquery
 meteorhacks:fast-render
 meteorhacks:kadira
 iron:router
+accounts-facebook
+accounts-twitter
+accounts-base
+
