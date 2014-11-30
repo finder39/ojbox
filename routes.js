@@ -31,7 +31,4 @@ Router.route(':box', {
 Router.route('*', {
   template: 'home',
   name: 'home',
-  onBeforeAction: function() {
-    this.redirect('login');
-  }
 });
