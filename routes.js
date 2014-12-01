@@ -2,10 +2,10 @@
 // there don't seem to work.
 
 // Sign up / Log in page
-Router.route('start');
+Router.route('/start');
 
 // Player page
-Router.route(':box', {
+Router.route('/:box', {
   name: 'player',
   template: 'playerPage',
   waitOn: function() {
@@ -26,7 +26,7 @@ Router.route(':box', {
 });
 
 // Home page
-Router.route('*', {
+Router.route('/(.*)', {
   template: 'home',
   name: 'home',
 });
