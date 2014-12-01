@@ -1,0 +1,50 @@
+.hero {
+  $hero-color: $base-background-color;
+  $hero-background-color: $deep-orange;
+
+  background-color: $hero-background-color;
+  background-position: top;
+  background-size: cover;
+  padding-bottom: 4em;
+  @include linear-gradient(to bottom, $amber, $deep-orange, $fallback: $deep-orange);
+
+  img {
+    height: 12rem;
+    margin-bottom: 1.5em;
+  }
+
+  .hero-inner {
+    @include outer-container;
+    @include clearfix;
+    padding: 3em;
+    margin: auto;
+    text-align: center;
+    color: $hero-color;
+
+    .hero-copy {
+      text-align: center;
+
+      h1 {
+        font-size: 1.6em;
+        margin-bottom: .5em;
+
+        @include media($large-screen) {
+          font-size: 1.8em;
+        }
+      }
+
+      p {
+        font-family: $serif;
+        margin: auto;
+        margin-bottom: 3em; 
+        font-weight: 200;
+        line-height: 1.4em;
+
+        @include media($large-screen) {
+          font-size: 1.1em;
+          max-width: 40%;
+        }
+      }
+    }
+  }
+}

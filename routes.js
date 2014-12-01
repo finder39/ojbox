@@ -26,8 +26,7 @@ Router.route(':box', {
   //},
   fastRender: true,
 });
-// This is a placeholder route. there is no "home" page yet, but this is the
-// route for it when I add it in. Right now it just redirects
+Router.route('start');
 Router.route('*', {
   template: 'home',
   name: 'home',
