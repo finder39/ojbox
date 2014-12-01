@@ -1,12 +1,10 @@
 // None of the Iron Router 1.0 documents seem accurate. Most of the things in
 // there don't seem to work.
-Router.route('login', {
-  //onBeforeAction: function() {
-    //if (Meteor.userId()) {
-      //this.redirect('/' + Meteor.user().profile.boxname);
-    //}
-  //},
-});
+
+// Sign up / Log in page
+Router.route('start');
+
+// Player page
 Router.route(':box', {
   name: 'player',
   template: 'playerPage',
@@ -26,7 +24,8 @@ Router.route(':box', {
   //},
   fastRender: true,
 });
-Router.route('start');
+
+// Home page
 Router.route('*', {
   template: 'home',
   name: 'home',

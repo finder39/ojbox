@@ -2,11 +2,10 @@
   $hero-color: $base-background-color;
   $hero-background-color: $deep-orange;
 
-  background-color: $hero-background-color;
   background-position: top;
   background-size: cover;
   padding-bottom: 4em;
-  @include linear-gradient(to bottom, $amber, $deep-orange, $fallback: $deep-orange);
+  @include linear-gradient(to bottom, $amber, $deep-orange, $fallback: $hero-background-color);
 
   img {
     height: 12rem;
