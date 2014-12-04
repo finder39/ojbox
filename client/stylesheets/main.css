@@ -896,7 +896,7 @@ input[type="submit"] {
       font-size: 1.25rem; }
     .start form button {
       margin-top: 1rem;
-      text-align: left; }
+      text-align: center; }
       .start form button.facebook-login {
         background-color: #3b5998; }
       .start form button.twitter-login {
