@@ -48,7 +48,7 @@ Template.chat.events({
       message.val("");
     }
 
-    // prevent the default submit action
+    // prevent default form submit
     return false
   }
 });
